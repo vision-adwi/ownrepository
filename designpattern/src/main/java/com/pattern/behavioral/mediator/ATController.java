@@ -9,20 +9,17 @@ import java.util.concurrent.Semaphore;
 public class ATController {
 	List<Runway> runways = new ArrayList<>();
 	Map<Long, Runway> flightMap = new HashMap<>();
-	//Semaphore semaphore;
+
 	CustomSemaphore semaphore;
-	final int RUNWAYS_COUNT;
-	
+
 	public ATController(int runwayCount) {
-		RUNWAYS_COUNT = runwayCount;
-		semaphore = new CustomSemaphore(RUNWAYS_COUNT);
-		//semaphore = new Semaphore(RUNWAYS_COUNT);
+		semaphore = new CustomSemaphore(runwayCount);
 	}
 	
 
 	public void registerRunway(Runway runway) {
-		if (runways.size() == RUNWAYS_COUNT) {
-			System.out.println("Now new runway can be added. Registration of runway " + runway + " discarded.");
+		if (runways.size() >= semaphore.size()) {
+			System.out.println("No new runway can be added. Registration of runway " + runway + " discarded.");
 		} else {
 			runways.add(runway);
 		}

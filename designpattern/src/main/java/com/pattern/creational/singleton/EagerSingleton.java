@@ -10,6 +10,7 @@ public class EagerSingleton implements Cloneable{
 		return INSTANCE;
 	}
 	
+	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}

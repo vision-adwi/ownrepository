@@ -13,13 +13,13 @@ public abstract class HouseTemplate {
 	}
 
 	//Default implementation
-	public void buildWindows() {
+	protected void buildWindows() {
 		System.out.println("Building framed window.");
 		
 	}
 
-	public abstract void buildPillars(); 
-	public abstract void buildWalls();
+	protected abstract void buildPillars(); 
+	protected abstract void buildWalls();
 
 	//Invariant(or standard) step.
 	private final void buildFoundation() {

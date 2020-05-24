@@ -5,13 +5,13 @@ import com.pattern.behavioral.templatemethod.HouseTemplate;
 public class ConcreteHouse extends HouseTemplate {
 
 	@Override
-	public void buildPillars() {
+	protected void buildPillars() {
 		System.out.println("Pillars are made of concrete and iron rod.");
 
 	}
 
 	@Override
-	public void buildWalls() {
+	protected void buildWalls() {
 		System.out.println("Walls of bricks are made.");
 
 	}

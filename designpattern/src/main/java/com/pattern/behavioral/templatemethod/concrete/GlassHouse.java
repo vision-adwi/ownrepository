@@ -5,13 +5,13 @@ import com.pattern.behavioral.templatemethod.HouseTemplate;
 public class GlassHouse extends HouseTemplate {
 
 	@Override
-	public void buildPillars() {
+	protected void buildPillars() {
 		System.out.println("Pillars made of glass coating.");
 
 	}
 
 	@Override
-	public void buildWalls() {
+	protected void buildWalls() {
 		System.out.println("Glass walls built.");
 
 	}

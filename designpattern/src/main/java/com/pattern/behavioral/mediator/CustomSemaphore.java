@@ -34,5 +34,9 @@ public class CustomSemaphore {
 			}
 		}
 	}
+	
+	public int size() {
+		return SIZE;
+	}
 
 }
