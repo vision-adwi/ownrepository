@@ -1,5 +1,8 @@
 package com.algorithm.graph;
 
+import java.util.Stack;
+
+import com.algorithm.graph.util.Util;
 import com.datastructure.graph.AbstractGraph;
 import com.datastructure.graph.GraphNode;
 import com.datastructure.queue.CircularQueue;
@@ -8,29 +11,71 @@ public class SSShortestPathBFS {
 	AbstractGraph graph;
 
 	public SSShortestPathBFS(AbstractGraph theGraph) {
-		this(theGraph, 0);
+		this.graph = theGraph;
 	}
 
 	public SSShortestPathBFS(AbstractGraph theGraph, int from) {
-		this.graph = theGraph;
-		if (from != 0) {
-			shortestPathFrom(from);
-		}
+		this(theGraph);
+		from(from);
 	}
-
-	public void shortestPathFrom(int from) {
-		if (from < 1 || from > graph.vertices().size()) {
-			System.out.println("Please provide correct vertex number...");
+	
+	public void from(int from) {
+		Util.resetVertices(graph, true, true, false);
+		GraphNode fromNode = Util.getNode(graph, from);
+		if(fromNode == null)
 			return;
+
+		bfsNodes(fromNode, null);
+	}
+	
+	public Stack<GraphNode> pathTo(int to) {
+		GraphNode theNode = Util.getNode(graph, to);
+
+		Stack<GraphNode> path = new Stack<>();
+		while (theNode != null) {
+			path.push(theNode);
+			theNode = theNode.getParent();
 		}
-		GraphNode fromNode = graph.vertices().get(from - 1);
-		bfsNodes(fromNode);
+
+		return path;
 	}
 
-	private void bfsNodes(GraphNode node) {
+	public int pathHopsCount(int to) {
+		GraphNode theNode = Util.getNode(graph, to);
+		int i = -1;
+		while (theNode != null) {
+			theNode = theNode.getParent();
+			i++;
+		}
+
+		return i;
+	}
+	
+	public Stack<GraphNode> pathPair(int from, int to) {
+		pathFromTo(from, to);
+		return pathTo(to);
+	}
+	
+	public int pathHopsCountPair(int from, int to) {
+		pathFromTo(from, to);
+		return pathHopsCount(to);
+	}
+	
+	private void pathFromTo(int from, int to) {
+		Util.resetVertices(graph, true, true, false);
+		
+		GraphNode fromNode = Util.getNode(graph, from);
+		GraphNode toNode = Util.getNode(graph, to);
+		if(fromNode == null || toNode == null)
+			return;
+
+		bfsNodes(fromNode, toNode);
+	}
+
+	private void bfsNodes(GraphNode fromNode, GraphNode toNode) {
 		CircularQueue queue = new CircularQueue();
-		node.visit();
-		queue.enqueue(node);
+		fromNode.visit();
+		queue.enqueue(fromNode);
 
 		Object theNode;
 		while ((theNode = queue.dequeue()) != null) {
@@ -40,28 +85,10 @@ public class SSShortestPathBFS {
 					neighbour.setParent(currentVertex);
 					neighbour.visit();
 					queue.enqueue(neighbour);
+					if(neighbour == toNode)
+						return;
 				}
 			}
 		}
 	}
-
-	public int shortestPathTo(int to) {
-		if (to < 1 || to > graph.vertices().size()) {
-			System.out.println("Please provide correct vertex number...");
-			return -1;
-		}
-
-		GraphNode toNode = graph.vertices().get(to - 1);
-
-		GraphNode parentNode = toNode;
-		int i = -1;
-		while (parentNode != null) {
-			System.out.print(parentNode + " ");
-			parentNode = parentNode.getParent();
-			i++;
-		}
-
-		return i;
-	}
-
 }

@@ -15,7 +15,6 @@ public class BFSUtil {
 				vertex.visit();
 				queue.add(vertex);
 				traverse(queue);
-
 			}
 		}
 		System.out.println();
@@ -31,7 +30,6 @@ public class BFSUtil {
 					queue.add(neighbour);
 				}
 			}
-
 			traverse(queue);
 		}
 	}

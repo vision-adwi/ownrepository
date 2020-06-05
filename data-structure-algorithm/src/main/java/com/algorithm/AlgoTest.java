@@ -3,10 +3,11 @@ package com.algorithm;
 public class AlgoTest {
 
 	public static void main(String[] args) {
-		//numberFactorAlgo();
+		numberFactorAlgo();
 		//houseThiefAlgo();
 		//minCostArray();
-		stringToString();
+		//stringToString();
+		//palindromicSubstring();
 
 	}
 	
@@ -61,6 +62,17 @@ public class AlgoTest {
 		
 		stringToString = new com.algorithm.divideandconquer.StringToString();//
 		aop(System.nanoTime(), stringToString.minOperations(s1, s2), System.nanoTime() );
+	}
+	
+	private static void palindromicSubstring() {
+		String s = "oranggoutoro";
+
+		IPalindromicSubstring palindromicSubstring;
+		palindromicSubstring = new com.algorithm.dynamicprogramming.topdown.PalindromicSubstring();//
+		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime() );
+		
+		palindromicSubstring = new com.algorithm.divideandconquer.PalindromicSubstring();//
+		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime() );
 	}
 
 	private static void aop(long startTime, Object execution, long endTime) {

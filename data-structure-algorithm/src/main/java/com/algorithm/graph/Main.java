@@ -33,7 +33,10 @@ public class Main {
 		//totalPaths();
 		//transitiveClosure();
 		//kColorableTest();
-		arrDepTimeForVertex();
+		//arrDepTimeForVertex();
+		//dfsAllSourceSPath();
+		//dijkstraSSSPath();
+		dijkstraAllSSPath();
 	
 	}
 
@@ -152,8 +155,26 @@ public class Main {
 		AbstractGraph graph = Util.createUndirectedGraph();
 		
 		SSShortestPathBFS bfsShortestPath = new SSShortestPathBFS(graph);
-		bfsShortestPath.shortestPathFrom(10);
-		System.out.println("\n" + bfsShortestPath.shortestPathTo(8));
+		bfsShortestPath.from(10);
+		Stack<GraphNode> path = bfsShortestPath.pathTo(8);
+		Util.printStack(path, false);
+		System.out.println();
+		System.out.println(bfsShortestPath.pathHopsCount(8));
+	}
+	
+	private static void dfsAllSourceSPath() {
+		AbstractGraph graph = Util.createUndirectedGraph();
+		SSShortestPathBFS bfsShortestPath = new SSShortestPathBFS(graph);
+
+		for(int from = 0; from < graph.v(); from++) {
+			bfsShortestPath.from(from + 1);
+			for(int to = 0; to < graph.v(); to++) {
+				System.out.print(bfsShortestPath.pathHopsCount(to + 1) + " ");
+			}
+			System.out.println();
+		}
+
+
 	}
 	
 	private static void dijkstraSSSPath() {
@@ -162,22 +183,34 @@ public class Main {
 
 		SSShortestPathDijkstra dijkstraShortestPath = new SSShortestPathDijkstra(graph, 1);
 
-		Stack<GraphNode> pathStack = dijkstraShortestPath.shortestPathTo(4);
+		Stack<GraphNode> pathStack = dijkstraShortestPath.pathTo(6);
 		Util.printStack(pathStack, true);
 	}
 	
 	private static void dijkstraAllSSPath() {
 		AbstractGraph graph = Util.createWeightedUndirectedGraph();
 		System.out.println(graph);
+		
+		AllSourceShortestPathDijkstra allSortPathDijkstra = new AllSourceShortestPathDijkstra(graph);
+		
+		Stack<GraphNode> pathStack = allSortPathDijkstra.pathPair(2, 4);
+		Util.printStack(pathStack, false);
+		System.out.println(":" + allSortPathDijkstra.pathPairCost(2, 4));
+		
+		pathStack = allSortPathDijkstra.pathPair(2, 8);
+		Util.printStack(pathStack, false);
+		System.out.println(":" + allSortPathDijkstra.pathPairCost(2, 8));
+		
+		pathStack = allSortPathDijkstra.pathPair(1, 9);
+		Util.printStack(pathStack, false);
+		System.out.println(":" + allSortPathDijkstra.pathPairCost(1, 9));
+		
+		pathStack = allSortPathDijkstra.pathPair(3, 6);
+		Util.printStack(pathStack, false);
+		System.out.println(":" + allSortPathDijkstra.pathPairCost(3, 6));
+		
 
-		AllSourceShortestPathDijkstra dijkstraShortestPath;
-		try {
-			dijkstraShortestPath = new AllSourceShortestPathDijkstra(graph);
-			Stack<GraphNode> pathStack = dijkstraShortestPath.shortestPathPair(1, 4);
-			Util.printStack(pathStack, true);
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+
 	}
 
 }

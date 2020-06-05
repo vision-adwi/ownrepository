@@ -119,12 +119,40 @@ public class Util {
 		}
 	}
 	
-	private static boolean inputValidation(AbstractGraph graph, int value) {
-		if (value < 1 || value > graph.vertices().size()) 
+	public static boolean validateInput(AbstractGraph graph, int value) {
+		if (value < 1 || value > graph.vertices().size()) {
+			System.out.println("Index value is out of scope...!!!");
 			return false;
-		else
+		}
+		else {
 			return true;
+		}
 
+	}
+	
+	public static GraphNode getNode(AbstractGraph graph, int value) {
+		if (value < 1 || value > graph.vertices().size())  {
+			System.out.println("Index value is out of scope...!!!");
+			return null;
+		}
+		else {
+			return graph.vertices().get(value - 1);
+		}
+
+	}
+	
+	public static void resetVertices(AbstractGraph graph, boolean visit, boolean parent, boolean cost) {
+		for (GraphNode node : graph.vertices()) {
+			if(visit)
+				node.resetVisit();
+			
+			if(parent)
+				node.setParent(null);
+			
+			if(cost)
+				node.setCost(0);
+			
+		}
 	}
 
 }
