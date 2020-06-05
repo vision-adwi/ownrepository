@@ -1,22 +1,33 @@
 package com.learning.util.collection;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 
 public class QueueDemo {
 	/*
-	** offer	add 		put
-	** poll		remove		take
-	** peek		element
+	** offer 	-	true / false
+	** add 		-	true / IllegalStateException("Queue full")
+	** put		-	void / wait-state
+	*  
+	** poll		-	E / null
+	** remove	-	E / NoSuchElementException()	
+	** take		- 	E / wait-state
+	*
+	*
+	** peek		-	E / null	
+	** element	-	E / NoSuchElementException()
 	*/
 	public static void main(String[] args) {
 		priorityQueueTest();
 
 	}
 	
-	//Piority queue is implementation of heap data structure
+	//Priority queue is implementation of heap data structure
 	public static void priorityQueueTest() {
 		PriorityQueue<Integer> queue = new PriorityQueue<>();
 		
@@ -53,6 +64,15 @@ public class QueueDemo {
 	 */
 	public static void synchronousQueueTest() {
 		SynchronousQueue queue = new SynchronousQueue();
+	}
+	
+	/**
+	 * Resizable-array implementation of the {@link Deque} interface.  Array
+	 * deques have no capacity restrictions; they grow as necessary to support
+	 * usage.  They are not thread-safe;
+	 */
+	public static void arrayDequeueTest() {
+		Queue queue = new ArrayDeque();
 	}
 
 }

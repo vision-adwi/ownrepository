@@ -15,7 +15,7 @@ public class Base64Exercise {
 		
 		Encoder encoder = Base64.getEncoder();
 		Decoder decoder = Base64.getDecoder();
-		//encryptDecrypt(encoder, decoder, plainMsg);
+		encryptDecrypt(encoder, decoder, plainMsg);
 		
 		encoder = Base64.getUrlEncoder();
 		decoder = Base64.getUrlDecoder();
@@ -23,7 +23,7 @@ public class Base64Exercise {
 		
 		encoder = Base64.getMimeEncoder();
 		decoder = Base64.getMimeDecoder();
-		encryptDecrypt(encoder, decoder, mimeInput);
+		//encryptDecrypt(encoder, decoder, mimeInput);
 	}
 	
 	private static void encryptDecrypt(Encoder encoder, Decoder decoder, String message) {

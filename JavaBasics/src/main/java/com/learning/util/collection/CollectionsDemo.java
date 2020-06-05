@@ -1,6 +1,6 @@
 package com.learning.util.collection;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,16 +14,16 @@ import java.util.TreeSet;
 public class CollectionsDemo {
 
 	public static void main(String[] args) {
-		List<String> theList = new ArrayList<>();
-		theList.add("Ram");
-		theList.add("Shyam");
-		theList.add("Kanha");
-		
-		
+		List<String> theList = Arrays.asList("Ram", "Shyam", "Kanha");
+
 		List<String> synchronizedList = Collections.synchronizedList(theList);
+		System.out.println("1. synchronizedList - " + synchronizedList);
 		
-		List<String> unmodifiableList = Collections.unmodifiableList(theList);
-		//unmodifiableList.add("Ghanshyam");
+		Collections.swap(synchronizedList, 1, 2);
+		System.out.println("2. after swap()     - " + synchronizedList);
+		
+		List<String> unmodifiableList = Collections.unmodifiableList(theList);		//It provides collection with read only features
+		//unmodifiableList.add("Ghanshyam"); //This will throw java.lang.UnsupportedOperationException
 
 		Collections.sort(theList);
 		System.out.println(theList);
@@ -32,12 +32,14 @@ public class CollectionsDemo {
 		Collections.reverse(theList);
 		System.out.println(theList);
 		
-		hashTableSort();
+		List<Float> singletonList = Collections.singletonList(5.6f);
+		
+		hashMapSort();
 		hashSetSort();
 
 	}
 	
-	public static void hashTableSort() {
+	public static void hashMapSort() {
 		Map<Integer, String> hashMap = new HashMap<>();
 
 		hashMap.put(18, "Eighteen");

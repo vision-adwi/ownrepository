@@ -14,10 +14,9 @@ public class OptionalExercise {
 		if(value.isPresent()) {
 			System.out.println("The value is: " + value.get());
 		}
-		else {
-			System.out.println("null value");
-		}
 		
+		System.out.println(value.orElse("null value"));
+
 		value.ifPresent(System.out::println);
 
 

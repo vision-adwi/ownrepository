@@ -7,7 +7,7 @@ import com.pattern.behavioral.observer.concrete.HexObserver;
 import com.pattern.behavioral.observer.concrete.OctObserver;
 /*
 Observer pattern is used when there is one-to-many relationship between objects such as if one object is modified, 
-its depenedent objects are to be notified automatically.
+its dependent objects are to be notified automatically.
 */
 public class ObserverDemo {
 

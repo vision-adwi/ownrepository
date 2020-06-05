@@ -1,6 +1,6 @@
 package com.learning.java8.streams;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -27,18 +27,17 @@ class Product {
 public class StreamDemo {
 
 	public static void main(String[] args) {
-		List<Product> productsList = new ArrayList<Product>();
-
-		productsList.add(new Product(1, "HP Laptop", 25000f));
-		productsList.add(new Product(2, "Dell Laptop", 30000f));
-		productsList.add(new Product(3, "Lenevo Laptop", 28000f));
-		productsList.add(new Product(4, "Sony Laptop", 28000f));
-		productsList.add(new Product(5, "Apple Laptop", 90000f));
+		List<Product> productsList = Arrays.asList(new Product(1, "HP Laptop", 25000f),
+						new Product(2, "Dell Laptop", 30000f),
+						new Product(3, "Lenevo Laptop", 28000f),
+						new Product(4, "Sony Laptop", 28000f),
+						new Product(5, "Apple Laptop", 90000f));
+		
+		productsList.forEach(System.out::println);
 
 		//conventionalWay(productsList);
 		predicate(productsList);
 		map(productsList);
-
 	}
 	
 	private static void map(List<Product> productsList) {
@@ -101,3 +100,21 @@ public class StreamDemo {
 	}
 
 }
+
+/*
+1.
+public interface Consumer<T> {
+    void accept(T t);
+}
+
+2.
+public interface Predicate<T> {
+    boolean test(T t);
+}
+
+3.
+public interface Function<T, R> {
+    R apply(T t);
+}
+
+*/

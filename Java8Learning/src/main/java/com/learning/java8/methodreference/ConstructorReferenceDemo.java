@@ -23,7 +23,7 @@ public class ConstructorReferenceDemo {
 		messageable.getMessage("Conventional way - before java 8 ");
 		
 		//Lambda - after jave 8
-		Messageable messageable1 = str -> new Message(str);
+		Messageable messageable1 = y -> new Message(y);
 		messageable1.getMessage("Lambda - after jave 8 ");
 		
 		//Constructor reference - after jave 8

@@ -44,6 +44,8 @@ public class CollectionFrameworkDemo {
 		
 		hashMapTest();
 		treeMapTest();
+		
+		hashSetTest();
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -180,7 +182,7 @@ public class CollectionFrameworkDemo {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void hashSetTest() {
-		HashSet set = new HashSet();
+		HashSet<Integer> set = new HashSet<>();
 		System.out.println("Size: " + set.size() + " Empty? " + set.isEmpty());
 		set.add(10);
 		set.add(50);
@@ -189,7 +191,10 @@ public class CollectionFrameworkDemo {
 		set.add(20);
 		
 		//Conversion from Set to array
-		Object[] objects = set.toArray();
+		Integer[] objects = (Integer[])set.toArray();
+		
+		//Another way
+		set.toArray(objects);
 		for(Object data:objects) {
 			System.out.print(data + " ");
 		}
