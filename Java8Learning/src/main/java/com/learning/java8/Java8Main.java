@@ -2,7 +2,7 @@ package com.learning.java8;
 /*
 - Functional interfaces, Method references and Lambda expressions.
 - Default and Static methods in interface. 
-- Optional class and ForEach() method.
+- Optional class and forEach() method.
 - Stream and Collector.
 - New classes - Base64, StringJoiner, DateTime
 */
