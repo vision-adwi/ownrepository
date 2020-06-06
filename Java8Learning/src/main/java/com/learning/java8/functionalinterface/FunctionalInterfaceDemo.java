@@ -5,6 +5,7 @@ interface Echo {
 	default void sound() {
 		System.out.println("Wooooooo...");
 	}
+	void sayIt();
 }
 
 interface Drawable {
@@ -18,12 +19,15 @@ interface Drawable {
 }
 
 @FunctionalInterface
-interface Sayable extends Echo{ //Possible to extend any interface that doesn't have any abstract method.
-	void sayIt();
+interface Sayable extends Echo{ //Possible to extend any interface but resultant interface should have atmost one abstract method.
 	//void doIt(); //Not possible to have more than one abstract method declaration
 	String toString(); //Possible to have any method declared of Object class
 	default int calculate() { //Possible to declare any numbers of default methods
 		return 0;
+	}
+	
+	static String mesg() { //Possible to declare any numbers of static methods
+		return "salutation";
 	}
 	
 }
@@ -52,8 +56,8 @@ public class FunctionalInterfaceDemo {
  * 1. An Interface that contains exactly one abstract method is known as functional interface.
  * 2. It can have any number of default, static methods but can contain only one abstract method.
  * 3. It can also declare methods of object class.
- * 4. A functional interface can extends another interface only when it does not have any abstract method.
+ * 4. A functional interface can extends another interface if and only if total number of abstract method is not exceeding more than one.
  * 
  * 
- * Note - Functional Interface is also known as Single Abstract Method Interfaces or SAM Interfaces.
+ * Note - Functional Interface is also known as Single Abstract Method(SAM) Interfaces.
  * */
