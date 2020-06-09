@@ -10,19 +10,20 @@ public class DFSUtil {
 	public static void traversal(AbstractGraph graph) {
 		for (GraphNode vertex : graph.vertices()) {
 			if (!vertex.isVisited()) {
-				traverse(vertex);
+				traverse(vertex, true);
 			}
 		}
-		System.out.println("");
+		System.out.println();
 	}
 
-	private static void traverse(GraphNode vertex) {
+	private static void traverse(GraphNode vertex, boolean print) {
 		vertex.visit();
-		System.out.print(vertex + "  ");
+		if(print)
+			System.out.print(vertex + "  ");
 		
 		for (GraphNode neighbour : vertex.neighbours()) {
 			if (!neighbour.isVisited()) {
-				traverse(neighbour);
+				traverse(neighbour, print);
 			}
 		}
 	}
@@ -40,9 +41,9 @@ public class DFSUtil {
 	private static Integer inOutTime(GraphNode vertex, Integer timeCount) {
 		vertex.visit();
 		vertex.arrivaltime = timeCount++;
-		
-		for(GraphNode neighbour:vertex.neighbours()) {
-			if(!neighbour.isVisited()) {
+
+		for (GraphNode neighbour : vertex.neighbours()) {
+			if (!neighbour.isVisited()) {
 				timeCount = inOutTime(neighbour, timeCount);
 			}
 		}
@@ -68,20 +69,21 @@ public class DFSUtil {
 	}
 	
 	private static boolean isCyclicDirected(GraphNode vertex) {
-		if (vertex.isCyclic)
+		if (vertex.cyclic)
 			return true;
 
 		if (vertex.isVisited())
 			return false;
 
 		vertex.visit();
-		vertex.isCyclic = true;
+		vertex.cyclic = true;
 		for (GraphNode neighbour : vertex.neighbours()) {
 			if (isCyclicDirected(neighbour)) {
 				return true;
 			}
 		}
-		vertex.isCyclic = false;
+		vertex.cyclic = false;
+		
 		return false;
 	}
 	
@@ -90,13 +92,13 @@ public class DFSUtil {
 
 		for (GraphNode neighbour : vertex.neighbours()) {
 			if (!neighbour.isVisited()) {
-				if(isCyclicUndirected(neighbour, vertex))
+				if (isCyclicUndirected(neighbour, vertex))
 					return true;
-			}
-			else if(neighbour != parent) {
+			} else if (neighbour != parent) {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 	
@@ -105,13 +107,13 @@ public class DFSUtil {
 			System.out.println("Graph is cyclic, so path can not be counted.");
 			return Integer.MAX_VALUE;
 		}
-		GraphNode fromNode = graph.vertices().get(from - 1);
-		GraphNode toNode = graph.vertices().get(to - 1);
+		GraphNode sourceNode = Util.getNode(graph, from);
+		GraphNode destinationNode = Util.getNode(graph, to);
 		
-		return countPaths(fromNode, toNode, 0);
+		return countPaths(sourceNode, destinationNode, 0);
 	}
 	
-	private static int countPaths(GraphNode current, GraphNode destination,	int count) {
+	private static int countPaths(GraphNode current, GraphNode destination, int count) {
 		if (current == destination) {
 			count++;
 		} else {
@@ -123,33 +125,31 @@ public class DFSUtil {
 	}
 	
 	public static int[][] transitiveClosure(AbstractGraph graph) {
-		int size = graph.vertices().size();
+		int size = graph.v();
 		int[][] trans = new int[size][size];
-		
-		for(GraphNode node:graph.vertices()) {
-			tranClosure(node, node, trans);
+
+		for (int fromIdx = 0; fromIdx < size; fromIdx++) {
+			GraphNode fromNode = graph.vertices().get(fromIdx);
+			for (GraphNode toNode : fromNode.neighbours()) {
+				int toIdx = Util.parse(toNode.getName());
+				trans[fromIdx][toIdx] = 1;
+			}
+
 		}
+
 		return trans;
 	}
-	
-	private static void tranClosure(GraphNode from, GraphNode to, int[][] trans) {
-		trans[parse(from.getName())][parse(to.getName())] = 1;
 
-		for (GraphNode adjacent : to.neighbours()) {
-			if (trans[parse(from.getName())][parse(adjacent.getName())] == 0) {
-				tranClosure(from, adjacent, trans);
-			}
-		}
-	}
 	
 	public static AbstractGraph transpose(AbstractGraph graph) {
-		AbstractGraph transposeGraph = new DirectedGraph(graph.vertices().size());
+		int size = graph.v();
+		AbstractGraph transposeGraph = new DirectedGraph(size);
 
-		for (GraphNode fromNode : graph.vertices()) {
-			GraphNode trToNode = transposeGraph.vertices().get(parse(fromNode.getName()));
+		for(int fromIdx = 0; fromIdx < size; fromIdx++) {
+			GraphNode fromNode = graph.vertices().get(fromIdx);
 			for (GraphNode toNode : fromNode.neighbours()) {
-				GraphNode trFromNode = transposeGraph.vertices().get(parse(toNode.getName()));
-				trFromNode.addNeighbour(trToNode);
+				int toIdx = Util.parse(toNode.getName());
+				transposeGraph.addEdge(toIdx + 1 , fromIdx + 1);
 			}
 		}
 		
@@ -167,17 +167,6 @@ public class DFSUtil {
 		return stack;
 	}
 	
-	private static void topologicalOrder(GraphNode vertex, Stack<GraphNode> stack) {
-		for(GraphNode neighbour:vertex.neighbours()) {
-			if(!neighbour.isVisited()) {
-				topologicalOrder(neighbour, stack);
-			}
-		}
-		
-		stack.push(vertex);
-		vertex.visit();
-	}
-	
 	public static void kColorable(AbstractGraph graph) {
 		Colors[] colors = new Colors[]{Colors.BLACK, Colors.RED, Colors.GREEN};
 		kColorableNodes(graph, 0, colors);
@@ -185,7 +174,7 @@ public class DFSUtil {
 	
 	private static void kColorableNodes(AbstractGraph graph, int index,	Colors[] colors) {
 		//terminal condition(base condition)
-		if (index == graph.vertices().size()) {
+		if (index == graph.v()) {
 			for (GraphNode vertex : graph.vertices()) {
 				System.out.print(vertex + "(" + vertex.color + ")  ");
 			}
@@ -206,12 +195,6 @@ public class DFSUtil {
 		}
 	}
 	
-	
-	
-	private static int parse(String nodeName) {
-		return Integer.parseInt(nodeName.substring(1)) - 1;
-	}
-	
 	private static boolean colorable(GraphNode vertex, Colors color) {
 		for (GraphNode neighbour : vertex.neighbours()) {
 			if (neighbour.color == color) {
@@ -220,5 +203,51 @@ public class DFSUtil {
 		}
 		return true;
 	}
-
+	
+	public static int connectedComponents(AbstractGraph graph) {
+		AbstractGraph trGraph = DFSUtil.transpose(graph);
+		Stack<GraphNode> stack = DFSUtil.topologicalSort(graph);
+		
+		int count = 0;
+		while(!stack.isEmpty()) {
+			int idx = Util.parse(stack.pop().getName());
+			GraphNode pushedNode = trGraph.vertices().get(idx);
+			if(!pushedNode.isVisited()) {
+				traverse(pushedNode, true);
+				System.out.println(); count++;
+			}
+		}
+		
+		return count;
+	}
+	
+	public static boolean isStronglyConnectedGraph(AbstractGraph graph) {
+		AbstractGraph trGraph = DFSUtil.transpose(graph);
+		Stack<GraphNode> stack = DFSUtil.topologicalSort(graph);
+		
+		boolean traversedAll = false;
+		while(!stack.isEmpty()) {
+			int idx = Util.parse(stack.pop().getName());
+			GraphNode pushedNode = trGraph.vertices().get(idx);
+			if(!pushedNode.isVisited()) {
+				if(traversedAll)
+					return false;
+				traverse(pushedNode, false);
+				traversedAll = true;
+			}
+		}
+		
+		return true;
+	}
+	
+	private static void topologicalOrder(GraphNode vertex, Stack<GraphNode> stack) {
+		vertex.visit();
+		for(GraphNode neighbour:vertex.neighbours()) {
+			if(!neighbour.isVisited()) {
+				topologicalOrder(neighbour, stack);
+			}
+		}
+		
+		stack.push(vertex);
+	}
 }

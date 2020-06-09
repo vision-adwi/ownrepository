@@ -91,6 +91,28 @@ public class Util {
 		return graph;
 	}
 	
+	public static AbstractGraph unweighted_directed_graph4() {
+		AbstractGraph graph = new DirectedGraph(11);
+	
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 1);
+		graph.addEdge(2, 4);
+		graph.addEdge(4, 5);
+		graph.addEdge(5, 6);
+		graph.addEdge(6, 4);
+		graph.addEdge(7, 6);
+		
+		graph.addEdge(7, 8);
+		graph.addEdge(8, 9);
+		graph.addEdge(9, 10);
+		graph.addEdge(10, 7);
+		
+		graph.addEdge(10, 11);
+
+		return graph;
+	}
+	
 	public static AbstractGraph unweighted_undirected_graph2() {
 		AbstractGraph graph = new UndirectedGraph(6);
 	
@@ -141,6 +163,10 @@ public class Util {
 
 	}
 	
+	public static void resetVertices(AbstractGraph graph) {
+		Util.resetVertices(graph, true, true, true);
+	}
+	
 	public static void resetVertices(AbstractGraph graph, boolean visit, boolean parent, boolean cost) {
 		for (GraphNode node : graph.vertices()) {
 			if(visit)
@@ -153,6 +179,10 @@ public class Util {
 				node.setCost(0);
 			
 		}
+	}
+	
+	public static int parse(String nodeName) {
+		return Integer.parseInt(nodeName.substring(1)) - 1;
 	}
 
 }

@@ -29,12 +29,6 @@ public abstract class AbstractGraph implements Cloneable{
 		addEdge(from, to);
 	} 
 	
-	public void resetGraph() {
-		for (GraphNode node : adjacencyList) {
-			node.resetVisit();
-		}
-	}
-	
 	//Number of vertices
 	public int v() {
 		return this.adjacencyList.size();
