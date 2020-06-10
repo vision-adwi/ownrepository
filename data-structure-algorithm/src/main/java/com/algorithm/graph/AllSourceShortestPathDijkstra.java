@@ -24,10 +24,10 @@ public class AllSourceShortestPathDijkstra {
 	}
 	
 	private void execute() {
-		for(int from = 0; from < size; from++) {
-			ssShortestPathDijkstra.from(from + 1); //This line will fetch the single source shortest path
+		for (int from = 0; from < size; from++) {
+			ssShortestPathDijkstra.from(from + 1); // This line will fetch the single source shortest path
 			List<Stack<GraphNode>> paths = new ArrayList<>();
-			for(int to = 0; to < size; to++) {
+			for (int to = 0; to < size; to++) {
 				Stack<GraphNode> path = ssShortestPathDijkstra.pathTo(to + 1);
 				paths.add(path);
 

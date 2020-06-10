@@ -26,6 +26,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		//traversal();
+		//transpose();
 		//topologicalSort();
 		//singleSourceShortestPath();
 		//allSourceShortestPath();
@@ -36,13 +37,39 @@ public class Main {
 		//arrDepTimeForVertex();
 		//dfsAllSourceSPath();
 		//dijkstraSSSPath();
-		dijkstraAllSSPath();
+		//dijkstraAllSSPath();
+		kosarajuAlgorithm();
+		//stronglyConnectedGraph();
 	
 	}
 
 	private static void traversal() {
-		undirectedGraphTraversal();
+		//undirectedGraphTraversal();
 		directedGraphTraversal();
+	}
+	
+	private static void undirectedGraphTraversal() {
+		AbstractGraph graph = Util.createUndirectedGraph();
+
+		BFSUtil.traversal(graph);
+		Util.resetVertices(graph, true, false, false);
+		DFSUtil.traversal(graph);
+	}
+	
+	private static void directedGraphTraversal() {
+		AbstractGraph graph = Util.createDirectedGraph();
+
+		BFSUtil.traversal(graph);
+		Util.resetVertices(graph, true, false, false);
+		DFSUtil.traversal(graph);
+	}
+	
+	private static void transpose() {
+		AbstractGraph graph = Util.createDirectedGraph();
+		AbstractGraph traGraph = DFSUtil.transpose(graph);
+		
+		DFSUtil.traversal(graph);
+		DFSUtil.traversal(traGraph);
 	}
 	
 	private static void topologicalSort() {
@@ -135,22 +162,6 @@ public class Main {
 		
 	}
 	
-	private static void undirectedGraphTraversal() {
-		AbstractGraph graph = Util.createUndirectedGraph();
-
-		BFSUtil.traversal(graph);
-		graph.resetGraph();
-		DFSUtil.traversal(graph);
-	}
-	
-	private static void directedGraphTraversal() {
-		AbstractGraph graph = Util.createDirectedGraph();
-
-		BFSUtil.traversal(graph);
-		graph.resetGraph();
-		DFSUtil.traversal(graph);
-	}
-	
 	private static void dfsSSSPath() {
 		AbstractGraph graph = Util.createUndirectedGraph();
 		
@@ -211,6 +222,19 @@ public class Main {
 		
 
 
+	}
+	
+	private static void kosarajuAlgorithm() {
+		AbstractGraph graph = Util.unweighted_directed_graph4();
+
+		int connectedCmpCount = DFSUtil.connectedComponents(graph);
+		System.out.println("Total connected components - " + connectedCmpCount);
+	}
+	
+	private static void stronglyConnectedGraph() {
+		AbstractGraph graph = Util.unweighted_directed_graph4();
+
+		System.out.println(graph + "\nStrongly connected graph - " + DFSUtil.isStronglyConnectedGraph(graph));
 	}
 
 }

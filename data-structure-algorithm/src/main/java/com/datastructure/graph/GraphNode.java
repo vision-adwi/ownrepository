@@ -12,7 +12,7 @@ public class GraphNode {
 	private boolean visited;
 	private GraphNode parent;
 	private Integer cost;
-	public boolean isCyclic;
+	public boolean cyclic;
 	public Colors color;
 	public int arrivaltime;
 	public int departTime;

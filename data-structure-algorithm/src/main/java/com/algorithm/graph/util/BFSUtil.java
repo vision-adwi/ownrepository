@@ -13,7 +13,7 @@ public class BFSUtil {
 		for (GraphNode vertex : graph.vertices()) {
 			if (!vertex.isVisited()) {
 				vertex.visit();
-				queue.add(vertex);
+				queue.offer(vertex);
 				traverse(queue);
 			}
 		}
@@ -27,7 +27,7 @@ public class BFSUtil {
 			for (GraphNode neighbour : vertex.neighbours()) {
 				if (!neighbour.isVisited()) {
 					neighbour.visit();
-					queue.add(neighbour);
+					queue.offer(neighbour);
 				}
 			}
 			traverse(queue);
@@ -36,7 +36,7 @@ public class BFSUtil {
 	
 	public static void shortestPathSS(AbstractGraph graph, int source) {
 		Queue<GraphNode> queue = new ArrayDeque<>();
-		GraphNode sourceNode = graph.vertices().get(source - 1);
+		GraphNode sourceNode = Util.getNode(graph, source);
 		sourceNode.visit();
 		queue.add(sourceNode);
 		shortestPath(queue, null);
@@ -45,18 +45,25 @@ public class BFSUtil {
 	public static void shortestPathPair(AbstractGraph graph, int source, int destination) {
 		Queue<GraphNode> queue = new ArrayDeque<>();
 		
-		GraphNode sourceNode = graph.vertices().get(source - 1);
-		GraphNode destNode = graph.vertices().get(destination - 1);
+		GraphNode sourceNode = Util.getNode(graph, source);
+		GraphNode destNode = Util.getNode(graph, destination);
+		
+		if(sourceNode == null || destNode == null)
+			return;
+		
 		sourceNode.visit();
 		queue.add(sourceNode);
 		shortestPath(queue, destNode);
 	}
 	
 	public static int minEdgeCount(AbstractGraph graph, int source, int destination) {
+		GraphNode destNode = Util.getNode(graph, destination);
+		if(destNode == null)
+			return 0;
+		
 		shortestPathPair(graph, source, destination);
 		
 		int count = 0;
-		GraphNode destNode = graph.vertices().get(destination - 1);
 		GraphNode parent = destNode.getParent();
 		while(parent != null) {
 			count++;
