@@ -1,5 +1,6 @@
 package com.algorithm.graph;
 
+import java.util.List;
 import java.util.Stack;
 
 import com.algorithm.graph.mst.Kruskal;
@@ -91,6 +92,18 @@ public class Main {
 	private static void minSpanningTree() {
 		//kruskalTest();
 		primsTest();
+	}
+	
+	
+	private static void topologicalSortKahns() {
+		AbstractGraph graph = Util.createDirectedGraph();
+		System.out.println(graph);
+
+		KahnsAlgo kAlgo = new KahnsAlgo(graph);
+		List<GraphNode> sortedNodes = kAlgo.execute();
+		for(GraphNode node:sortedNodes) {
+			System.out.print(node.getName() + " ");
+		}
 	}
 	
 	private static void totalPaths() {
