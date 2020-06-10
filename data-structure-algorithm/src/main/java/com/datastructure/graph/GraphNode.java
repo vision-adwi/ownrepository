@@ -16,6 +16,7 @@ public class GraphNode {
 	public Colors color;
 	public int arrivaltime;
 	public int departTime;
+	public int indegree;
 
 	public GraphNode(String theName) {
 		name = theName;
@@ -32,6 +33,7 @@ public class GraphNode {
 	
 	public void addNeighbour(GraphNode toNode, int weight) {
 		neighbours.put(toNode, weight);
+		toNode.indegree++;
 	}
 	
 	public Set<GraphNode> neighbours() {
