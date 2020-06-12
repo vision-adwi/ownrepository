@@ -1,4 +1,4 @@
-package com.learning.java5.concurrency.callableandfuture;
+package com.learning.java5.concurrency.customfuture;
 
 public class FutureWork<T> implements Runnable {
 	private T obj;
@@ -12,8 +12,9 @@ public class FutureWork<T> implements Runnable {
 	@Override
 	public void run() {
 		obj = receivable.receive();
-		valueSet = true;
+		
 		synchronized (this) {
+			valueSet = true;
 			notifyAll();
 		}
 	}
