@@ -117,4 +117,10 @@ public interface Function<T, R> {
     R apply(T t);
 }
 
+4.
+@FunctionalInterface
+public interface Supplier<T> {
+    T get();
+}
+
 */

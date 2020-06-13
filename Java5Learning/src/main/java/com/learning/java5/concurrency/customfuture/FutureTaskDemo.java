@@ -1,4 +1,4 @@
-package com.learning.java5.concurrency.callableandfuture;
+package com.learning.java5.concurrency.customfuture;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
