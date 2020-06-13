@@ -1,13 +1,16 @@
 package com.algorithm;
 
+import com.algorithm.divideandconquer.SubsetSum;
+
 public class AlgoTest {
 
 	public static void main(String[] args) {
-		numberFactorAlgo();
+		//numberFactorAlgo();
 		//houseThiefAlgo();
 		//minCostArray();
 		//stringToString();
 		//palindromicSubstring();
+		subsetSumTest();
 
 	}
 	
@@ -26,7 +29,7 @@ public class AlgoTest {
 	}
 	
 	private static void houseThiefAlgo() {
-		int[] houses = {6, 7, 1, 30, 8, 2, 4, 3};
+		int[] houses = {6, 7, 1, 30, 8, 2, 4, 3, 19, 44, 8, 33, 1, 2, 99, 67};
 		
 		IHouseThief houseThief;
 		houseThief = new com.algorithm.dynamicprogramming.topdown.HouseThief();
@@ -73,6 +76,17 @@ public class AlgoTest {
 		
 		palindromicSubstring = new com.algorithm.divideandconquer.PalindromicSubstring();//
 		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime() );
+	}
+	
+	private static void subsetSumTest() {
+		int[] data = {7, 6, 9, 5, 19, 33, 104,7, 6, 9, 5, 19, 33, 104};
+		
+		SubsetSum subset = new SubsetSum();
+		long startTime = System.nanoTime();
+		System.out.println("Is subset sum(49) - " + subset.isSubsetSum(data, 49));
+		long endTime = System.nanoTime();
+		long timeTakenMS = (endTime - startTime) / 1000;
+		System.out.println("Time taken: " + timeTakenMS + " microseconds.");
 	}
 
 	private static void aop(long startTime, Object execution, long endTime) {

@@ -4,12 +4,12 @@ import com.algorithm.IHouseThief;
 
 public class HouseThief implements IHouseThief{
 	
-	public int getMaxValue(int[] houses, int start) {
+	public long getMaxValue(int[] houses, int start) {
 		if(start >= houses.length) {
-			return 0;
+			return 0L;
 		}
-		int choice1 = houses[start] + getMaxValue(houses, start + 2);
-		int choice2 = getMaxValue(houses, start + 1);
+		long choice1 = houses[start] + getMaxValue(houses, start + 2);
+		long choice2 = getMaxValue(houses, start + 1);
 		
 		return (choice1 > choice2) ? choice1 : choice2;
 	}

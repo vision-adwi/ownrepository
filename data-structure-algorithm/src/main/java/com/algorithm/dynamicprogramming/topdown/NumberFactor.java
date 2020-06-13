@@ -2,10 +2,6 @@ package com.algorithm.dynamicprogramming.topdown;
 
 import com.algorithm.INumberFactor;
 
-/*
-Problem Statement
-
-*/
 public class NumberFactor implements INumberFactor{
 	
 	public long waysToGet(int n, long[] memory) {

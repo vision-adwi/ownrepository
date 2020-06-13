@@ -2,10 +2,6 @@ package com.algorithm.divideandconquer;
 
 import com.algorithm.INumberFactor;
 
-/*
-Problem Statement
-
-*/
 public class NumberFactor implements INumberFactor{
 	
 	public long waysToGet(int n) {
@@ -19,7 +15,7 @@ public class NumberFactor implements INumberFactor{
 		long subtract2 = waysToGet(n - 3);
 		long subtract3 = waysToGet(n - 1);
 		
-		long sum = subtract1+ subtract2 + subtract3;
+		long sum = subtract1 + subtract2 + subtract3;
 		return sum;
 	}
 

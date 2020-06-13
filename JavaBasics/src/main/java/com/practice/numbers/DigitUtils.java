@@ -42,17 +42,16 @@ public class DigitUtils {
 	}
 	
 	public static int addFirstAndLastDigits(int number) {
-		return addFirstLastDigits((number / 10), (number % 10), 0);
+		return addFirstLastDigits((number / 10), (number % 10));
 	}
 	
-	private static int addFirstLastDigits(int dividend, int sum, int previous) {
-		if(dividend == 0)
+	private static int addFirstLastDigits(int dividend, int sum) {
+		if(dividend < 10) {
+			sum = sum + dividend;
 			return sum;
-		
-		int aDigit = dividend % 10;
-		sum = sum + aDigit - previous;
+		}
 
-		return addFirstLastDigits((dividend / 10), sum, aDigit);
+		return addFirstLastDigits((dividend / 10), sum);
 	}
 	
 	public static void evenOddDigitCount(int number) {

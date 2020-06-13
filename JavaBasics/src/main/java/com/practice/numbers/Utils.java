@@ -58,13 +58,13 @@ public class Utils {
 			
 		}
 	}
-/*	
+	
 	public static void main(String... s) {
 		//swap(215654565, 7);
 		//System.out.println(findMissingNumber(new int[]{1,2,3,4,5,6,8,9}));
-		//floydTriangle(99);
-		System.out.println("50 - " + isEven(50));
-		System.out.println("75 - " + isEven(75));
+		floydTriangle(99);
+		//System.out.println("50 - " + isEven(50));
+		//System.out.println("75 - " + isEven(75));
 	}
-*/
+
 }
