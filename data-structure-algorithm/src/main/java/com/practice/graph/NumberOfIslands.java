@@ -5,7 +5,7 @@ package com.practice.graph;
  * An island is surrounded by water and is formed by connecting adjacent lands horizontally
  * or vertically. You may assume all four edges of the grid are all surrounded by water.
  */
-public class Prob_NumberOfIslands {
+public class NumberOfIslands {
 	public static void main(String[] args) {
 		int[][] input = { 	{ 1, 1, 0, 1, 0 }, 
 							{ 1, 1, 0, 1, 0 }, 

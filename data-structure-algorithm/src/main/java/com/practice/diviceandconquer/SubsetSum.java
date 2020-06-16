@@ -1,4 +1,4 @@
-package com.algorithm.divideandconquer;
+package com.practice.diviceandconquer;
 
 public class SubsetSum {
 	public static void main(String[] s) {

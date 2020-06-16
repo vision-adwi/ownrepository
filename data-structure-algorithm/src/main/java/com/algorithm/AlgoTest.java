@@ -1,16 +1,17 @@
 package com.algorithm;
 
-import com.algorithm.divideandconquer.SubsetSum;
+import com.practice.diviceandconquer.SubsetSum;
 
 public class AlgoTest {
 
 	public static void main(String[] args) {
 		//numberFactorAlgo();
 		//houseThiefAlgo();
-		//minCostArray();
+		minCostArray();
 		//stringToString();
+		//palindromicSubsequence();
 		//palindromicSubstring();
-		subsetSumTest();
+		//subsetSumTest();
 
 	}
 	
@@ -65,6 +66,17 @@ public class AlgoTest {
 		
 		stringToString = new com.algorithm.divideandconquer.StringToString();//
 		aop(System.nanoTime(), stringToString.minOperations(s1, s2), System.nanoTime() );
+	}
+	
+	private static void palindromicSubsequence() {
+		/*String s = "oranggoutoro";
+
+		IPalindromicSubstring palindromicSubstring;
+		palindromicSubstring = new com.algorithm.dynamicprogramming.topdown.PalindromicSubstring();//
+		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime() );
+		
+		palindromicSubstring = new com.algorithm.divideandconquer.PalindromicSubstring();//
+		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime() );*/
 	}
 	
 	private static void palindromicSubstring() {

@@ -1,4 +1,4 @@
-package com.algorithm.divideandconquer;
+package com.practice.diviceandconquer;
 /*
 Leetcode #416. Partition Equal Subset Sum
 Given a non-empty array containing only positive integers, find if the array can be partitioned into 
