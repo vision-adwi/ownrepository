@@ -1,4 +1,4 @@
-package com.practice.dynamic;
+package com.practice.diviceandconquer;
 /*
 Problem statement
 Given N, count the number of ways to express N as the sum of 1, 3 and 5.

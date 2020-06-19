@@ -45,7 +45,11 @@ public class SingleLinkedList implements List{
 		for (int i = 0; i < position - 1 && tempNode != null; i++) {
 			tempNode = tempNode.nextNode;
 		}
-		if (null != tempNode) {
+		
+		if(tempNode == null) {
+			System.out.println("Position is out of linked-list size");
+		}
+		else {
 			// Insert at the end
 			if (tempNode.nextNode == null) {
 				insertAtEnd(theNode);
@@ -78,9 +82,13 @@ public class SingleLinkedList implements List{
 		for (int i = 0; i < position - 1 && tempNode.nextNode != null; i++) {
 			tempNode = tempNode.nextNode;
 		}
-		if (tempNode.nextNode != null) {
+		if (tempNode.nextNode == null) {
+			System.out.println("Position is out of linked-list size");
+			return;
+		}
+		else {
 			tempNode.nextNode = tempNode.nextNode.nextNode;
-			// If node to be deleted is the end node
+			// If node to be deleted is the last node
 			if (tempNode.nextNode == null) {
 				tail = tempNode;
 			}
@@ -90,44 +98,31 @@ public class SingleLinkedList implements List{
 	//Traversal - O(n)
 	@Override
 	public void traverse() {
-		// Check if Linked list is not empty
-		if (head == null) {
-			return;
-		}
-
 		int position = 0;
 		NodeLL tempNode = head;
-		while (true) {
+		while (tempNode != null) {
 			System.out.println(position++ + " " + tempNode.coachNumber);
-			if (tempNode == tail) {
-				return;
-			} else {
-				tempNode = tempNode.nextNode;
-			}
+			tempNode = tempNode.nextNode;
 		}
 	}
 	
 	//Search - O(n)
 	@Override
 	public int search(String theCoachNumber) {
-		// Check if Linked list is not empty
-		if (head == null) {
-			return Integer.MIN_VALUE;
-		}
+		int retPosition = Integer.MIN_VALUE;
 
 		int position = 0;
 		NodeLL tempNode = head;
-		while (true) {
+		while (tempNode != null) {
 			if (tempNode.coachNumber == theCoachNumber) {
-				return position;
-			}
-			if (tempNode == tail) {
-				return Integer.MIN_VALUE;
+				retPosition = position;
 			} else {
 				tempNode = tempNode.nextNode;
 				position++;
 			}
 		}
+		
+		return retPosition;
 	}
 	
 	@Override
