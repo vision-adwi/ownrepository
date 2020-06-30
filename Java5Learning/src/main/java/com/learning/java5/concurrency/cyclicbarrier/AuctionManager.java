@@ -15,7 +15,7 @@ public class AuctionManager {
 		List<Runnable> allBidders = new ArrayList<>();
 		allBidders.add(new Bidder("BidderA", 12, barrier));
 		allBidders.add(new Bidder("BidderB", 8, barrier));
-		allBidders.add(new Bidder("BidderC", 32, barrier));
+		allBidders.add(new Bidder("BidderC", 28, barrier));
 		allBidders.add(new Bidder("BidderD", 15, barrier));
 
 		ExecutorService executor = Executors.newFixedThreadPool(4);

@@ -1,12 +1,14 @@
 package com.learning.java5.concurrency.countdownlatch;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Phaser;
 
 abstract public class Service implements Runnable {
 
 	private String _service;
 	private boolean isUp;
 	private CountDownLatch _latch;
+	private Phaser _phaser;
 	
 	Service(String serviceName, CountDownLatch latch) {
 		_service = serviceName;
@@ -22,7 +24,8 @@ abstract public class Service implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {
-			_latch.countDown();
+			_latch.countDown(); //not a blocking call, just decrement counter
+			//_phaser.arrive(); //similar to above statement
 		}
 	}
 	
