@@ -41,6 +41,18 @@ public class DigitUtils {
 		return addAllDigits((dividend / 10), sum);
 	}
 	
+	public static int productDigits(int number) {
+		return productAllDigits(number, 1);
+	}
+	
+	private static int productAllDigits(int dividend, int product) {
+		if(dividend == 0)
+			return product;
+		
+		product = product * (dividend % 10);
+		return productAllDigits((dividend / 10), product);
+	}
+	
 	public static int addFirstAndLastDigits(int number) {
 		return addFirstLastDigits((number / 10), (number % 10));
 	}
@@ -68,6 +80,21 @@ public class DigitUtils {
 		}
 		System.out.println("Count of even digits : " + even);
 		System.out.println("Count of odd digits  : " + odd);
+	}
+	
+	public static boolean isSelfDivingNumber(int number) {
+		return isSelfDiving(number, number);
+	}
+	
+	private static boolean isSelfDiving(int number, int remainingDigits) {
+		if(remainingDigits == 0)
+			return true;
+		
+		int digit = remainingDigits % 10;
+		if( (digit == 0) || (number % digit) != 0 )
+			return false;
+
+		return isSelfDiving(number, number / 10);
 	}
 /*	
 	public static void main(String[] s) {

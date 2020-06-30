@@ -94,43 +94,21 @@ class BST {
     */
 }
 
-class TreeNode {
-    int value;
-    TreeNode left;
-    TreeNode right;
-    TreeNode parent;
-    
-    public TreeNode(int theValue, TreeNode theParent) {
-        this.value = theValue;
-        this.parent = theParent;
-    }
-    
-    public TreeNode getLeft() {
-        return this.left;
-    }
-    
-    public void setLeft(TreeNode theNode) {
-        this.left = theNode;
-    }
-    
-     public TreeNode getRight() {
-        return this.right;
-    }
-    
-    public void setRight(TreeNode theNode) {
-        this.right = theNode;
-    }
-    
-    public TreeNode getParent() {
-        return this.parent;
-    }
-    
-    public int getValue() {
-        return this.value;
-    }
-    
-    public void setValue(int theValue) {
-        this.value = theValue;
-    }
-    
-}
+/*public class TreeNode {
+	int val;
+	TreeNode left;
+	TreeNode right;
+
+	TreeNode() {
+	}
+
+	TreeNode(int val) {
+		this.val = val;
+	}
+
+	TreeNode(int val, TreeNode left, TreeNode right) {
+		this.val = val;
+		this.left = left;
+		this.right = right;
+	}
+}*/
