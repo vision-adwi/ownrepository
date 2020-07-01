@@ -13,7 +13,10 @@ public class CustomTask extends RecursiveTask<String> {
 	@Override
 	protected String compute() {
 		String resultant;
-		if(task > 2) {
+		if(task <= 2) {
+			resultant = msg + "!!! " + msg + "!!!\n";
+		}
+		else {
 			CustomTask task1 = new CustomTask(task/2);
 			CustomTask task2 = new CustomTask(task/2);
 			//Way-1
@@ -23,9 +26,6 @@ public class CustomTask extends RecursiveTask<String> {
 			task2.fork();
 			
 			resultant = task1.join() + task2.join();
-		}
-		else {
-			resultant = msg + "!!! " + msg + "!!!\n";
 		}
 
 		return resultant;

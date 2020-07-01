@@ -1,6 +1,7 @@
 package com.learning.java7.concurrency;
 
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveAction;
 /*
 A ForkJoinPool provides the entry point for submissions from non-ForkJoinTask clients, as well as management and monitoring operations.
@@ -32,6 +33,9 @@ public class ForkJoinDemo {
 		//Way-2
 		pool.execute(task);
 		System.out.println(task.join());
+		//Way-3
+		//ForkJoinTask<String> returnObj = pool.submit(task);
+		//System.out.println(returnObj.join());
 		
 	}
 
