@@ -14,11 +14,10 @@ public class ShiftingLetters {
     	for(byte c : S.getBytes()) {
     		ascii[index++] = c - 97;
     	}
-    	
-    	int sum = 0;
-    	for(int k = shifts.length - 1; k >= 0; k--) {
-    		sum = (sum + shifts[k]) % 26;
-    		shifts[k] = sum;
+
+    	shifts[shifts.length - 1] = shifts[shifts.length - 1] % 26;
+    	for(int k = shifts.length - 2; k >= 0; k--) {
+    		shifts[k] = (shifts[k + 1] + shifts[k]) % 26;
     	}
     	
     	for(int i = 0; i < shifts.length; i++) {
@@ -32,6 +31,6 @@ public class ShiftingLetters {
     		chars[index++] = (char)(res + 97);
     	}
         
-    	return new String(chars);
+    	return new String(chars); 
     }
 }
