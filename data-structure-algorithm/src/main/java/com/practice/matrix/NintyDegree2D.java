@@ -1,4 +1,4 @@
-package com.practice.array;
+package com.practice.matrix;
 /*
 Leetcode#48. Rotate Image
 You are given an n x n 2D matrix representing an image.
