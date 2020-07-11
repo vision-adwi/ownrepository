@@ -20,7 +20,7 @@ class BST {
     
     public void insert(int theValue) {
         if(this.root == null) {
-            this.root = new TreeNode(theValue, null);
+            this.root = new TreeNode(theValue);
         }
         else {
             insertInBST(this.root, theValue);
@@ -29,15 +29,15 @@ class BST {
     
     private void insertInBST(TreeNode theNode, int theValue) {
         TreeNode next = null;
-        if(theValue <= theNode.getValue()) {
-            if((next = theNode.getLeft()) == null) {
-                theNode.setLeft(new TreeNode(theValue, theNode));
+        if(theValue <= theNode.val) {
+            if((next = theNode.left) == null) {
+            	theNode.left = new TreeNode(theValue);
                 return;
             }
         }
         else {
-            if((next = theNode.getRight()) == null) {
-                theNode.setRight(new TreeNode(theValue, theNode));
+            if((next = theNode.right) == null) {
+            	theNode.right = new TreeNode(theValue);
                 return;
             }
         }
@@ -50,10 +50,10 @@ class BST {
     
     private int minCount(TreeNode theNode, int theValue, int count) {
 		if(theNode != null) {
-			count = minCount(theNode.getLeft(), theValue, count);
-			if(theNode.getValue() < theValue) {
+			count = minCount(theNode.left, theValue, count);
+			if(theNode.val < theValue) {
 				count++;
-				count = minCount(theNode.getRight(), theValue, count);
+				count = minCount(theNode.right, theValue, count);
 			}
 		}
 		return count;

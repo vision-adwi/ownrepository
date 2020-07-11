@@ -23,12 +23,12 @@ public class BstToGst {
 		if(theNode == null)
 			return value;
 		
-		int newRightValue = gstTraversal(theNode.getRight(), value);
-		theNode.setValue(theNode.getValue() + newRightValue);
-		
-		int newLeftValue = gstTraversal(theNode.getLeft(), theNode.getValue());
+		int newRightValue = gstTraversal(theNode.right, value);
+		theNode.val = theNode.val + newRightValue;
 
-		return theNode.getValue() + newLeftValue;
+		int newLeftValue = gstTraversal(theNode.left, theNode.val);
+
+		return theNode.val + newLeftValue;
 	}
 
 }

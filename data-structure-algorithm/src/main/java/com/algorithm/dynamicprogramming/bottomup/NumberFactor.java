@@ -3,7 +3,6 @@ package com.algorithm.dynamicprogramming.bottomup;
 import com.algorithm.INumberFactor;
 
 public class NumberFactor implements INumberFactor{
-	
 	public long waysToGet(int n, long[] memory) {
 		memory[0] = memory[1] = memory[2] = 1L;
 		memory[3] = 2L;

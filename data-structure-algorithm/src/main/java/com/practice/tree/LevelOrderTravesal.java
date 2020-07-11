@@ -16,10 +16,10 @@ public class LevelOrderTravesal {
 			Queue<TreeNode> queue = new LinkedList<>();
 			queue.offer(root);
 
-			List<Integer> levelValues = new ArrayList<>();
 			while (!queue.isEmpty()) {
 				int size = queue.size();
 
+				List<Integer> levelValues = new ArrayList<>();
 				while (size-- > 0) {
 					TreeNode theNode = queue.poll();
 					levelValues.add(theNode.val);
@@ -30,8 +30,8 @@ public class LevelOrderTravesal {
 					if (theNode.right != null)
 						queue.offer(theNode.right);
 				}
+				
 				result.add(levelValues);
-				levelValues = new ArrayList<>();
 			}
 		}
 

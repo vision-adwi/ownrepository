@@ -3,44 +3,128 @@ package com.algorithm;
 import com.practice.diviceandconquer.SubsetSum;
 
 public class AlgoTest {
+	private static final String DC = "Divide and Concquer";
+	private static final String MEM = "Memoization";
+	private static final String DP = "Dynamic Programming";
 
 	public static void main(String[] args) {
+		//fibonacciNumber();
 		//numberFactorAlgo();
 		//houseThiefAlgo();
-		minCostArray();
 		//stringToString();
+		//commonSubsequence();
 		//palindromicSubsequence();
-		//palindromicSubstring();
+		palindromicSubstring();
+		//minCostArray();
+		
+		
+		//
 		//subsetSumTest();
 
 	}
 	
+	private static void fibonacciNumber() {
+		int testNumber = 50;
+		
+		IFibonacciNumber fibonacci;
+		
+		fibonacci = new com.algorithm.dynamicprogramming.topdown.FibonacciNumber();
+		aop(System.nanoTime(), fibonacci.calculate(testNumber), System.nanoTime(), MEM );
+
+		fibonacci = new com.algorithm.dynamicprogramming.bottomup.FibonacciNumber();
+		aop(System.nanoTime(), fibonacci.calculate(testNumber), System.nanoTime(), DP );
+
+		fibonacci = new com.algorithm.divideandconquer.FibonacciNumber();
+		aop(System.nanoTime(), fibonacci.calculate(testNumber), System.nanoTime(), DC );
+	}
+	
 	private static void numberFactorAlgo() {
-		int testNumber = 48;
+		int testNumber = 50;
 
 		INumberFactor numberFactor;
+		
 		numberFactor = new com.algorithm.dynamicprogramming.topdown.NumberFactor();
-		aop(System.nanoTime(), numberFactor.solve(testNumber), System.nanoTime() );
+		aop(System.nanoTime(), numberFactor.solve(testNumber), System.nanoTime(), null );
 
 		numberFactor = new com.algorithm.dynamicprogramming.bottomup.NumberFactor();
-		aop(System.nanoTime(), numberFactor.solve(testNumber), System.nanoTime() );
+		aop(System.nanoTime(), numberFactor.solve(testNumber), System.nanoTime(), null );
 
 		numberFactor = new com.algorithm.divideandconquer.NumberFactor();
-		aop(System.nanoTime(), numberFactor.solve(testNumber), System.nanoTime() );
+		aop(System.nanoTime(), numberFactor.solve(testNumber), System.nanoTime(), null );
 	}
 	
 	private static void houseThiefAlgo() {
 		int[] houses = {6, 7, 1, 30, 8, 2, 4, 3, 19, 44, 8, 33, 1, 2, 99, 67};
 		
 		IHouseThief houseThief;
+		
 		houseThief = new com.algorithm.dynamicprogramming.topdown.HouseThief();
-		aop(System.nanoTime(), houseThief.maxStealth(houses), System.nanoTime() );
+		aop(System.nanoTime(), houseThief.maxStealth(houses), System.nanoTime(), null );
 		
 		houseThief = new com.algorithm.dynamicprogramming.bottomup.HouseThief();
-		aop(System.nanoTime(), houseThief.maxStealth(houses), System.nanoTime() );
+		aop(System.nanoTime(), houseThief.maxStealth(houses), System.nanoTime(), null );
 		
 		houseThief = new com.algorithm.divideandconquer.HouseThief();
-		aop(System.nanoTime(), houseThief.maxStealth(houses), System.nanoTime() );
+		aop(System.nanoTime(), houseThief.maxStealth(houses), System.nanoTime(), null );
+	}
+	
+	private static void stringToString() {
+		String s1 = "variablevariable";
+		String s2 = "finalizevariable";
+		
+		IStringToString stringToString;
+		
+		stringToString = new com.algorithm.dynamicprogramming.topdown.StringToString();
+		aop(System.nanoTime(), stringToString.minOperations(s1, s2), System.nanoTime(), null );
+		
+		stringToString = new com.algorithm.dynamicprogramming.bottomup.StringToString();
+		aop(System.nanoTime(), stringToString.minOperations(s1, s2), System.nanoTime(), null );
+		
+		stringToString = new com.algorithm.divideandconquer.StringToString();//
+		aop(System.nanoTime(), stringToString.minOperations(s1, s2), System.nanoTime(), null );
+	}
+	
+	private static void commonSubsequence() {
+		String s1 = "elbandazole";
+		String s2 = "elephantobia";
+		
+		ICommonSubsequence subsequence;
+		
+		subsequence = new com.algorithm.dynamicprogramming.topdown.CommonSubsequence();
+		aop(System.nanoTime(), subsequence.lcs(s1, s2), System.nanoTime(), MEM );
+		
+		subsequence = new com.algorithm.dynamicprogramming.bottomup.CommonSubsequence();
+		aop(System.nanoTime(), subsequence.lcs(s1, s2), System.nanoTime(), DP );
+		
+		subsequence = new com.algorithm.divideandconquer.CommonSubsequence();//
+		aop(System.nanoTime(), subsequence.lcs(s1, s2), System.nanoTime(), DC );
+	}
+	
+	private static void palindromicSubsequence() {
+		//String s = "ELRMENMET";
+		String s = "euazbipzncptldueeuechubrcourfpftcebikrxhybkymimgvldiwqvkszfycvqyvtiwfckexmowcxztkfyzqovbtmzpxojfofbvwnncajvrvdbvjhcrameamcfmcoxryjukhp";
+
+		IPalindromicSubsequence palindromicSubsequence;
+		
+		palindromicSubsequence = new com.algorithm.dynamicprogramming.topdown.PalindromicSubsequence();
+		aop(System.nanoTime(), palindromicSubsequence.lps(s), System.nanoTime(), MEM );
+		
+		palindromicSubsequence = new com.algorithm.dynamicprogramming.bottomup.PalindromicSubsequence();
+		aop(System.nanoTime(), palindromicSubsequence.lps(s), System.nanoTime(), DP );
+		
+		palindromicSubsequence = new com.algorithm.divideandconquer.PalindromicSubsequence();
+		aop(System.nanoTime(), palindromicSubsequence.lps(s), System.nanoTime(), DC );
+	}
+	
+	private static void palindromicSubstring() {
+		String s = "oranggoutoro";
+
+		IPalindromicSubstring palindromicSubstring;
+		palindromicSubstring = new com.algorithm.dynamicprogramming.topdown.PalindromicSubstring();//
+		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime(), MEM );
+		
+		palindromicSubstring = new com.algorithm.divideandconquer.PalindromicSubstring();//
+		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime(), DC );
 	}
 	
 	private static void minCostArray() {
@@ -53,42 +137,14 @@ public class AlgoTest {
 		IMinCost2D minCost2D;
 		minCost2D = new com.algorithm.divideandconquer.MinCostArray();
 		aop(System.nanoTime(), minCost2D.minCost(grid, grid.length - 1, grid[0].length - 1), 
-				System.nanoTime() );
+				System.nanoTime(), null );
 	}
 	
-	private static void stringToString() {
-		String s1 = "variablevariable";
-		String s2 = "finalizevariable";
-		
-		IStringToString stringToString;
-		stringToString = new com.algorithm.dynamicprogramming.topdown.StringToString();//
-		aop(System.nanoTime(), stringToString.minOperations(s1, s2), System.nanoTime() );
-		
-		stringToString = new com.algorithm.divideandconquer.StringToString();//
-		aop(System.nanoTime(), stringToString.minOperations(s1, s2), System.nanoTime() );
-	}
-	
-	private static void palindromicSubsequence() {
-		/*String s = "oranggoutoro";
 
-		IPalindromicSubstring palindromicSubstring;
-		palindromicSubstring = new com.algorithm.dynamicprogramming.topdown.PalindromicSubstring();//
-		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime() );
-		
-		palindromicSubstring = new com.algorithm.divideandconquer.PalindromicSubstring();//
-		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime() );*/
-	}
 	
-	private static void palindromicSubstring() {
-		String s = "oranggoutoro";
 
-		IPalindromicSubstring palindromicSubstring;
-		palindromicSubstring = new com.algorithm.dynamicprogramming.topdown.PalindromicSubstring();//
-		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime() );
-		
-		palindromicSubstring = new com.algorithm.divideandconquer.PalindromicSubstring();//
-		aop(System.nanoTime(), palindromicSubstring.maxSize(s), System.nanoTime() );
-	}
+	
+
 	
 	private static void subsetSumTest() {
 		int[] data = {7, 6, 9, 5, 19, 33, 104,7, 6, 9, 5, 19, 33, 104};
@@ -101,7 +157,8 @@ public class AlgoTest {
 		System.out.println("Time taken: " + timeTakenMS + " microseconds.");
 	}
 
-	private static void aop(long startTime, Object execution, long endTime) {
+	private static void aop(long startTime, Object execution, long endTime, String type) {
+		System.out.println(type);
 		long timeTakenMS = (endTime - startTime) / 1000;
 		System.out.println("Time taken: " + timeTakenMS + " microseconds.");
 		System.out.println("Result is  : " + execution);

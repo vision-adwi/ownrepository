@@ -2,7 +2,10 @@ package com.practice.tree;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+Leetcode#257. Binary Tree Paths
+Given a binary tree, return all root-to-leaf paths.
+*/		
 public class BinaryTreePaths {
     public List<String> binaryTreePaths(TreeNode root) {
     	List<String> paths = new ArrayList<>();

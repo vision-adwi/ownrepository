@@ -14,9 +14,8 @@ public class NumberFactor implements INumberFactor{
 		long subtract1 = waysToGet(n - 4);
 		long subtract2 = waysToGet(n - 3);
 		long subtract3 = waysToGet(n - 1);
-		
-		long sum = subtract1 + subtract2 + subtract3;
-		return sum;
+
+		return subtract1 + subtract2 + subtract3;
 	}
 
 	@Override

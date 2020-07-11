@@ -19,11 +19,11 @@ public class StringToString implements IStringToString{
 			return calculateMinOperations(source, destination, sIndex + 1, dIndex + 1);
 		}
 		else {
-			int o1 = 1 + calculateMinOperations(source, destination, sIndex + 1, dIndex); //If insert a character
-			int o2 = 1 + calculateMinOperations(source, destination, sIndex, dIndex + 1); //If delete a character
-			int o3 = 1 + calculateMinOperations(source, destination, sIndex + 1, dIndex + 1); //If replace a character
+			int o1 = calculateMinOperations(source, destination, sIndex + 1, dIndex); //If insert a character
+			int o2 = calculateMinOperations(source, destination, sIndex, dIndex + 1); //If delete a character
+			int o3 = calculateMinOperations(source, destination, sIndex + 1, dIndex + 1); //If replace a character
 		
-			return Math.min(o1, Math.min(o2, o3));
+			return 1 + Math.min(o1, Math.min(o2, o3));
 		}
 	}
 }
