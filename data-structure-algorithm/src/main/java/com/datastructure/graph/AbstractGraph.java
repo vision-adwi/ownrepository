@@ -38,14 +38,14 @@ public abstract class AbstractGraph implements Cloneable{
 	public int e() {
 		int count = 0;
 		for (GraphNode vertex : adjacencyList) {
-			count += vertex.neighbours().size();
+			count += vertex.neighbors().size();
 		}
 
 		return count;
 	}
 	
 	public Iterable<GraphNode> adj(int vertex) {
-		return adjacencyList.get(vertex - 1).neighbours();
+		return adjacencyList.get(vertex - 1).neighbors();
 	}
 	
 	@Override

@@ -1,4 +1,7 @@
-package com.practice.tree;
+package com.practice.tree.bst;
+
+import com.practice.tree.TreeNode;
+
 /*
 Leetcode#938. Range Sum of BST
 Given the root node of a binary search tree, return the sum of values of all nodes with value between L and R (inclusive).

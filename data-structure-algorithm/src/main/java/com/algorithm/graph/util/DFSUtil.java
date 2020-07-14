@@ -21,7 +21,7 @@ public class DFSUtil {
 		if(print)
 			System.out.print(vertex + "  ");
 		
-		for (GraphNode neighbour : vertex.neighbours()) {
+		for (GraphNode neighbour : vertex.neighbors()) {
 			if (!neighbour.isVisited()) {
 				traverse(neighbour, print);
 			}
@@ -42,7 +42,7 @@ public class DFSUtil {
 		vertex.visit();
 		vertex.arrivaltime = timeCount++;
 
-		for (GraphNode neighbour : vertex.neighbours()) {
+		for (GraphNode neighbour : vertex.neighbors()) {
 			if (!neighbour.isVisited()) {
 				timeCount = inOutTime(neighbour, timeCount);
 			}
@@ -77,7 +77,7 @@ public class DFSUtil {
 
 		vertex.visit();
 		vertex.cyclic = true;
-		for (GraphNode neighbour : vertex.neighbours()) {
+		for (GraphNode neighbour : vertex.neighbors()) {
 			if (isCyclicDirected(neighbour)) {
 				return true;
 			}
@@ -90,7 +90,7 @@ public class DFSUtil {
 	private static boolean isCyclicUndirected(GraphNode vertex, GraphNode parent) {
 		vertex.visit();
 
-		for (GraphNode neighbour : vertex.neighbours()) {
+		for (GraphNode neighbour : vertex.neighbors()) {
 			if (!neighbour.isVisited()) {
 				if (isCyclicUndirected(neighbour, vertex))
 					return true;
@@ -117,7 +117,7 @@ public class DFSUtil {
 		if (current == destination) {
 			count++;
 		} else {
-			for (GraphNode neighbour : current.neighbours()) {
+			for (GraphNode neighbour : current.neighbors()) {
 				count = countPaths(neighbour, destination, count);
 			}
 		}
@@ -130,7 +130,7 @@ public class DFSUtil {
 
 		for (int fromIdx = 0; fromIdx < size; fromIdx++) {
 			GraphNode fromNode = graph.vertices().get(fromIdx);
-			for (GraphNode toNode : fromNode.neighbours()) {
+			for (GraphNode toNode : fromNode.neighbors()) {
 				int toIdx = Util.parse(toNode.getName());
 				trans[fromIdx][toIdx] = 1;
 			}
@@ -147,7 +147,7 @@ public class DFSUtil {
 
 		for(int fromIdx = 0; fromIdx < size; fromIdx++) {
 			GraphNode fromNode = graph.vertices().get(fromIdx);
-			for (GraphNode toNode : fromNode.neighbours()) {
+			for (GraphNode toNode : fromNode.neighbors()) {
 				int toIdx = Util.parse(toNode.getName());
 				transposeGraph.addEdge(toIdx + 1 , fromIdx + 1);
 			}
@@ -196,7 +196,7 @@ public class DFSUtil {
 	}
 	
 	private static boolean colorable(GraphNode vertex, Colors color) {
-		for (GraphNode neighbour : vertex.neighbours()) {
+		for (GraphNode neighbour : vertex.neighbors()) {
 			if (neighbour.color == color) {
 				return false;
 			}
@@ -242,7 +242,7 @@ public class DFSUtil {
 	
 	private static void topologicalOrder(GraphNode vertex, Stack<GraphNode> stack) {
 		vertex.visit();
-		for(GraphNode neighbour:vertex.neighbours()) {
+		for(GraphNode neighbour:vertex.neighbors()) {
 			if(!neighbour.isVisited()) {
 				topologicalOrder(neighbour, stack);
 			}

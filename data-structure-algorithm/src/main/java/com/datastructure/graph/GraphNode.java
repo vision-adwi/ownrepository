@@ -8,7 +8,7 @@ import com.algorithm.graph.util.Colors;
 
 public class GraphNode {
 	private String name;
-	private Map<GraphNode, Integer> neighbours;
+	private Map<GraphNode, Integer> neighbors;
 	private boolean visited;
 	private GraphNode parent;
 	private Integer cost;
@@ -20,7 +20,7 @@ public class GraphNode {
 
 	public GraphNode(String theName) {
 		name = theName;
-		neighbours = new HashMap<>();
+		neighbors = new HashMap<>();
 	}
 	
 	public String getName() {
@@ -32,16 +32,16 @@ public class GraphNode {
 	}
 	
 	public void addNeighbour(GraphNode toNode, int weight) {
-		neighbours.put(toNode, weight);
+		neighbors.put(toNode, weight);
 		toNode.indegree++;
 	}
 	
-	public Set<GraphNode> neighbours() {
-		return neighbours.keySet();
+	public Set<GraphNode> neighbors() {
+		return neighbors.keySet();
 	}
 
 	public int getWeight(GraphNode toNode) {
-		return neighbours.get(toNode);
+		return neighbors.get(toNode);
 	}
 	
 	public void visit() {

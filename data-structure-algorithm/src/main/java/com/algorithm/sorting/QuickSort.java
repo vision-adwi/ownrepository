@@ -1,4 +1,4 @@
-package com.algorithm.sorting;
+ package com.algorithm.sorting;
 
 public class QuickSort extends AbstractSort {
 	public QuickSort(int[] unsorted) {

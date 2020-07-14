@@ -3,14 +3,13 @@ package com.datastructure.disjointset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.datastructure.graph.GraphNode;
 
-public class DisjointSets {
+public class UnionFind {
 	Map<String, DisjointSet> disjointSets = new HashMap<>();
 
-	public DisjointSets(List<GraphNode> nodes) {
+	public UnionFind(List<GraphNode> nodes) {
 		for (GraphNode node : nodes) {
 			DisjointSet element = new DisjointSet(node.getName());
 			disjointSets.put(node.getName(), element);
@@ -24,11 +23,10 @@ public class DisjointSets {
 		disjointSets.remove(source.getId());
 	}
 
-	public DisjointSet findSet(String ele) {
-		for (Entry<String, DisjointSet> entries : disjointSets.entrySet()) {
-			if (entries.getValue().containMember(ele)) {
-				return entries.getValue();
-			}
+	public DisjointSet find(String ele) {
+		for(DisjointSet set : disjointSets.values()) {
+			if(set.containMember(ele))
+				return set;
 		}
 
 		return null;

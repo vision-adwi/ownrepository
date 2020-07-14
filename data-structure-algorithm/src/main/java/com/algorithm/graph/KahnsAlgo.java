@@ -23,7 +23,7 @@ public class KahnsAlgo {
 		while (!nodes.isEmpty()) {
 			GraphNode current = nodes.remove(0);
 			sortedNodes.add(current);
-			for (GraphNode neighbour : current.neighbours()) {
+			for (GraphNode neighbour : current.neighbors()) {
 				neighbour.indegree--;
 				if (neighbour.indegree == 0) {
 					nodes.add(neighbour);

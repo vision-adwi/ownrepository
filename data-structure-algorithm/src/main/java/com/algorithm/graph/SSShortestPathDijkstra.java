@@ -39,7 +39,7 @@ public class SSShortestPathDijkstra {
 		
 		GraphNode current = null;
 		while ((current = minHeap.poll()) != null) {
-			for (GraphNode neighbour : current.neighbours()) {
+			for (GraphNode neighbour : current.neighbors()) {
 				int probableCost = current.getCost() +
 						current.getWeight(neighbour);
 				if (probableCost < neighbour.getCost()) {

@@ -80,7 +80,7 @@ public class SSShortestPathBFS {
 		Object theNode;
 		while ((theNode = queue.dequeue()) != null) {
 			GraphNode currentVertex = (GraphNode) theNode;
-			for (GraphNode neighbour : currentVertex.neighbours()) {
+			for (GraphNode neighbour : currentVertex.neighbors()) {
 				if (!neighbour.isVisited()) {
 					neighbour.setParent(currentVertex);
 					neighbour.visit();

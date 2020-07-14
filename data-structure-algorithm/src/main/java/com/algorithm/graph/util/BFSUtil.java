@@ -24,7 +24,7 @@ public class BFSUtil {
 		if (!queue.isEmpty()) {
 			GraphNode vertex = queue.poll();
 			System.out.print(vertex + "  ");
-			for (GraphNode neighbour : vertex.neighbours()) {
+			for (GraphNode neighbour : vertex.neighbors()) {
 				if (!neighbour.isVisited()) {
 					neighbour.visit();
 					queue.offer(neighbour);
@@ -76,7 +76,7 @@ public class BFSUtil {
 	private static void shortestPath(Queue<GraphNode> queue, GraphNode destination) {
 		if (!queue.isEmpty()) {
 			GraphNode vertex = queue.poll();
-			for (GraphNode neighbour : vertex.neighbours()) {
+			for (GraphNode neighbour : vertex.neighbors()) {
 				if (!neighbour.isVisited()) {
 					neighbour.setParent(vertex);
 					neighbour.visit();

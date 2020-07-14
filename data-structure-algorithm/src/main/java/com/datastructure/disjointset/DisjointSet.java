@@ -28,7 +28,7 @@ public class DisjointSet {
 		return this.id;
 	}
 	
-	public int getSize() {
+	public int size() {
 		return members.size();
 	}
 	

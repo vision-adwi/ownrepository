@@ -18,23 +18,23 @@ public class Prims {
 	}
 	
 	public void findMST() {
-		PriorityQueue<GraphNode> queue = new PriorityQueue<GraphNode>(graph
-				.vertices().size(), (p1, p2) -> p1.getCost().compareTo(p2.getCost()));
+		PriorityQueue<GraphNode> minHeap = new PriorityQueue<>(graph.vertices().size(),
+													(t1, t2) -> t1.getCost().compareTo(t2.getCost()));
 		for(int i = 1; i < graph.vertices().size(); i++) { 
 			graph.vertices().get(i).setCost(Integer.MAX_VALUE);
 		}
 		graph.vertices().get(0).setCost(0);
-		queue.offer(graph.vertices().get(0));
+		minHeap.offer(graph.vertices().get(0));
 		
 		GraphNode current = null;
-		while((current = queue.poll()) != null) {
-			for(GraphNode neighbour:current.neighbours()) {
+		while((current = minHeap.poll()) != null) {
+			for(GraphNode neighbour:current.neighbors()) {
 				if(!neighbour.isVisited()) {
 					int edgeWeight = current.getWeight(neighbour);
 					if(edgeWeight < neighbour.getCost()) {
 						neighbour.setCost(edgeWeight);
-						queue.remove(neighbour); //It should be removed before inserting again.
-						queue.offer(neighbour);
+						minHeap.remove(neighbour); //It should be removed before inserting again.
+						minHeap.offer(neighbour);
 					}
 				}
 			}

@@ -31,7 +31,7 @@ public class Main {
 		//topologicalSort();
 		//singleSourceShortestPath();
 		//allSourceShortestPath();
-		//minSpanningTree();
+		minSpanningTree();
 		//totalPaths();
 		//transitiveClosure();
 		//kColorableTest();
@@ -39,7 +39,7 @@ public class Main {
 		//dfsAllSourceSPath();
 		//dijkstraSSSPath();
 		//dijkstraAllSSPath();
-		kosarajuAlgorithm();
+		//kosarajuAlgorithm();
 		//stronglyConnectedGraph();
 	
 	}

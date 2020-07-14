@@ -1,18 +1,18 @@
 package com.algorithm.graph.mst;
 
 import com.datastructure.disjointset.DisjointSet;
-import com.datastructure.disjointset.DisjointSets;
+import com.datastructure.disjointset.UnionFind;
 import com.datastructure.graph.AbstractGraph;
 import com.datastructure.graph.GraphNode;
 
 public class Kruskal {
 	AbstractGraph graph;
-	DisjointSets sets;
+	UnionFind sets;
 	int mstCost;
 
 	public Kruskal(AbstractGraph theGraph) {
 		this.graph = theGraph;
-		this.sets = new DisjointSets(this.graph.vertices());
+		this.sets = new UnionFind(this.graph.vertices());
 	}
 
 	public int mst() {
@@ -26,7 +26,7 @@ public class Kruskal {
 	private int minimumSpanningTree(int minEdge) {
 		int nextMinEdge = Integer.MAX_VALUE;
 		for (GraphNode from : graph.vertices()) {
-			for (GraphNode to : from.neighbours()) {
+			for (GraphNode to : from.neighbors()) {
 				int edgeWeight = from.getWeight(to);
 				if (edgeWeight == minEdge) {
 					if(joinSets(from, to))
@@ -44,10 +44,10 @@ public class Kruskal {
 	}
 	
 	private boolean joinSets(GraphNode from, GraphNode to) {
-		DisjointSet fromSet = sets.findSet(from.getName());
-		DisjointSet toSet = sets.findSet(to.getName());
+		DisjointSet fromSet = sets.find(from.getName());
+		DisjointSet toSet = sets.find(to.getName());
 		if (fromSet != toSet) { //Elements found in 2 different sets
-			if (fromSet.getSize() > toSet.getSize()) {
+			if (fromSet.size() > toSet.size()) {
 				sets.union(fromSet, toSet);
 			} else {
 				sets.union(toSet, fromSet);
