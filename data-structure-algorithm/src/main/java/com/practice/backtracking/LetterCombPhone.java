@@ -29,13 +29,13 @@ public class LetterCombPhone {
 			for (Character ch : digits.toCharArray()) {
 				ints.add(Character.getNumericValue(ch));
 			}
-			combinations(letters, res, new StringBuilder(), 0, ints);
+			combinations(res, new StringBuilder(), 0, ints);
 		}
 
 		return res;
 	}
 	
-	private void combinations(char[][] letters, List<String> res, StringBuilder sb, int pos, List<Integer> ints) {
+	private void combinations(List<String> res, StringBuilder sb, int pos, List<Integer> ints) {
 		if(pos == ints.size()) {
 			System.out.println(sb);
 			res.add(sb.toString());
@@ -45,7 +45,7 @@ public class LetterCombPhone {
 		char[] letterSet = letters[ints.get(pos)];
 		for(int i = 0; i < letterSet.length; i++) {
 			sb.append(letterSet[i]);
-			combinations(letters, res, sb, pos + 1, ints);
+			combinations(res, sb, pos + 1, ints);
 			sb.setLength(sb.length() - 1);
 		}
 	}

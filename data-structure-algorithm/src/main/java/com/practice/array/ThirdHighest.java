@@ -1,5 +1,9 @@
-package com.practice.arrays;
-
+package com.practice.array;
+/*
+Leetcode#414. Third Maximum Number
+Given a non-empty array of integers, return the third maximum number in this array. If it does not exist,
+return the maximum number. The time complexity must be in O(n).
+*/
 public class ThirdHighest {
 	int highest = Integer.MIN_VALUE;
 	int secondHighest = Integer.MIN_VALUE;
@@ -9,13 +13,8 @@ public class ThirdHighest {
 	public void findHighest(int[] values) {
 		for (int value : values) {
 			if(count != 3) {
-				if(count == 0) {
-					count++;
-				}
-				if(count == 1 && value != highest) {
-					count++;
-				}
-				if(count == 2 && value != highest && value != secondHighest) {
+				if((count == 0) || (count == 1 && value != highest)
+						|| (count == 2 && value != highest && value != secondHighest)){
 					count++;
 				}
 			}
@@ -33,23 +32,7 @@ public class ThirdHighest {
 			}
 		}
 	}
-	
-	private void handleFirstCondition(int value) {
-		if(count == 0) {
-			count++;
-			return;
-		}
-		if(count == 1 && value != highest) {
-			count++;
-			return;
-		}
-		if(count == 2 && value != highest && value != secondHighest) {
-			count++;
-			return;
-		}
-			
-	}
-	
+
 	public void print() {
 		System.out.println("Highest: " + highest);
 		System.out.println("Second Highest: " + secondHighest);

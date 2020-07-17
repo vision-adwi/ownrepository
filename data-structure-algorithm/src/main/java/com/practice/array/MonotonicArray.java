@@ -6,31 +6,28 @@ An array A is monotone increasing if for all i <= j, A[i] <= A[j].  An array A i
 Return true if and only if the given array A is monotonic.
 */
 public class MonotonicArray {
-    public boolean isMonotonic(int[] A) {
-    	int len = A.length;
-    	if(len == 1)
-    		return true;
-    	
-    	int index = isIncreasing(A);
-    	if(index == 0)
-    		return true;
-    	
-    	if(index > 0) {
-    		for(int i = index; i < len - 1; i++) {
-    			if(A[i] > A[i+1])
-    				return false;
-    		}
-    	}
-    	else {
-    		for(int i = Math.abs(index); i < len - 1; i++) {
-    			if(A[i] < A[i+1])
-    				return false;
-    		}
-    		
-    	}
-        
-        return true;
-    }
+	public boolean isMonotonic(int[] A) {
+		if (A.length != 1) {
+			int index = isIncreasing(A);
+			if (index == 0)
+				return true;
+
+			if (index > 0) {
+				for (int i = index; i < A.length - 1; i++) {
+					if (A[i] > A[i + 1])
+						return false;
+				}
+			} else {
+				for (int i = Math.abs(index); i < A.length - 1; i++) {
+					if (A[i] < A[i + 1])
+						return false;
+				}
+
+			}
+		}
+
+		return true;
+	}
     
     private int isIncreasing(int[] A) {
     	int def = 0;

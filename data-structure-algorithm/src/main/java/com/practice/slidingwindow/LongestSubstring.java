@@ -1,30 +1,34 @@
 package com.practice.slidingwindow;
 
+//Leetcode#3. Longest Substring Without Repeating Characters
+
 public class LongestSubstring {
     public int lengthOfLongestSubstring(String s) {
-    	if(s.isEmpty())
-    		return 0;
-    	
-    	byte[] chars = new byte[26];
-    	byte[] sBytes = s.getBytes();
-    	
+    	int[] chars = new int[128];
+
     	int max = 0;
-    	int i = 0;
-    	int j = 0;
-    	
-    	while(j < sBytes.length) {
-    		int b = sBytes[j] - 97;
-    		if(chars[b] == 0) {
-    			chars[b] = 1;
-    			j++;
-    			max = Math.max(max, (j - i));
+    	for(int i =0, j = 0; j < s.length();) {
+    		char aChar = s.charAt(j);
+    		if(chars[aChar] == 0) {
+    			chars[aChar]++;
+    			max = Math.max(max, ((j - i) + 1));
     		}
     		else {
-    			b = sBytes[i++] - 97;
-    			chars[b] = 0;
+    			char bChar = s.charAt(i++);
+    			while(bChar != aChar) {
+    				chars[bChar]--;
+    				bChar = s.charAt(i++);
+    			}
     		}
+    		
+    		j++;
     	}
     	
     	return max;
+    }
+    
+    public static void main(String[] s) {
+    	LongestSubstring longest = new LongestSubstring();
+    	System.out.println(longest.lengthOfLongestSubstring(" "));
     }
 }
