@@ -7,19 +7,23 @@ Please note that the string does not contain any non-printable characters.
 public class SegmentCount {
     public int countSegments(String s) {
         char[] chars = s.toCharArray();
-        int count = 0;
-        int index = 0;
-        while(index < chars.length) {
+        int count = 0, index = 0;
+        while(true) {
             while(index < chars.length && chars[index] == ' ')
                 index++;
             
-            if(index < chars.length)
-                count++;
-                
-            while(index < chars.length && chars[index++] != ' ')
-                continue;
+            if(index == chars.length)
+            	break;
+   
+            while(index < chars.length && chars[index++] != ' ');
+            count++;
         }
         
         return count;
+    }
+    
+    public static void main(String[] s) {
+    	SegmentCount segmentCount = new SegmentCount();
+    	System.out.println(segmentCount.countSegments("    There are   so many words   "));
     }
 }

@@ -17,8 +17,7 @@ public class MaximumGold {
 		for(int row = 0; row < grid.length; row++) {
 			for(int column = 0; column < grid[0].length; column++) {
 				if(grid[row][column] != 0) {
-					int goldCollect = maxGold(cloneArray(grid), row, column, 0);
-					System.out.println(goldCollect);
+					int goldCollect = maxGold(grid, row, column);
 					maxGoldCollect = Math.max(maxGoldCollect, goldCollect);	
 				}
 			}
@@ -27,20 +26,21 @@ public class MaximumGold {
 		return maxGoldCollect;
     }
 	
-	private int maxGold(int[][] grid, int row, int column, int sum) {
+	private int maxGold(int[][] grid, int row, int column) {
 		if(row < 0 || row >= grid.length || column < 0 || column >= grid[0].length || grid[row][column] <= 0) {
-			return sum;
+			return 0;
 		}
-		
-		int newSum = sum + grid[row][column];
+
 		grid[row][column] = -grid[row][column];
 		
-		int left = maxGold(grid, row, column - 1, newSum);
-		int right = maxGold(grid, row, column + 1, newSum);
-		int top = maxGold(grid, row - 1, column, newSum);
-		int bottom = maxGold(grid, row + 1, column, newSum);
+		int left = maxGold(grid, row, column - 1);
+		int right = maxGold(grid, row, column + 1);
+		int top = maxGold(grid, row - 1, column);
+		int bottom = maxGold(grid, row + 1, column);
 		
-		return Math.max(left, Math.max(right, Math.max(top, bottom)));
+		grid[row][column] = Math.abs(grid[row][column]);
+		
+		return grid[row][column] + Math.max(left, Math.max(right, Math.max(top, bottom)));
 	}
 	
 	private int[][] cloneArray(int[][] source) {

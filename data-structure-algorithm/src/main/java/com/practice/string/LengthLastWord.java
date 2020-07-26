@@ -8,29 +8,23 @@ Note: A word is defined as a maximal substring consisting of non-space character
 */
 public class LengthLastWord {
 	public int lengthOfLastWord(String s) {
-        if(s.isEmpty())
-            return 0;
-        
-        char[] chars = s.toCharArray();
-        
-        int count = 0;
-        
-        int index = chars.length - 1;
-        while(index >= 0 && chars[index] == ' ')
-            index--;
-        
-        for(; index >= 0; index--) {
-            if(chars[index] != ' ')
-                count++;
-            else
-                break;
-        }
-        
-        return count;
-    }
+		int count = 0;
+
+		if (!s.isEmpty()) {
+			char[] chars = s.toCharArray();
+			int index = chars.length - 1;
+			while (index >= 0 && chars[index] == ' ')
+				index--;
+			
+			while (index >= 0 && chars[index--] != ' ')
+				count++;
+		}
+
+		return count;
+	}
 	
 	public static void main(String[] s) {
 		LengthLastWord length = new LengthLastWord();
-		length.lengthOfLastWord(" ");
+		System.out.println(length.lengthOfLastWord(""));
 	}
 }

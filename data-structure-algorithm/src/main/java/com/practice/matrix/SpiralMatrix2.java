@@ -1,7 +1,7 @@
 package com.practice.matrix;
 /*
 Leetcode#59. Spiral Matrix II
-Given a positive integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
+Given a positive integer n, generate a square matrix filled with elements from 1 to n*n in spiral order.
 */
 public class SpiralMatrix2 {
 	public int[][] generateMatrix(int n) {	

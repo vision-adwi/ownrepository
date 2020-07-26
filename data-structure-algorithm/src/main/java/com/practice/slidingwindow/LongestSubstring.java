@@ -7,7 +7,8 @@ public class LongestSubstring {
     	int[] chars = new int[128];
 
     	int max = 0;
-    	for(int i =0, j = 0; j < s.length();) {
+    	int i = 0, j = 0;
+    	while(j < s.length()) {
     		char aChar = s.charAt(j);
     		if(chars[aChar] == 0) {
     			chars[aChar]++;
@@ -29,6 +30,6 @@ public class LongestSubstring {
     
     public static void main(String[] s) {
     	LongestSubstring longest = new LongestSubstring();
-    	System.out.println(longest.lengthOfLongestSubstring(" "));
+    	System.out.println(longest.lengthOfLongestSubstring("abcabcbb"));
     }
 }

@@ -1,6 +1,4 @@
-package com.practice.graph;
-
-import java.util.PriorityQueue;
+package com.practice.matrix;
 
 /* Leetcode #695 Max Area of Island
 Given a non-empty 2D array grid of 0's and 1's, an island is a group of 1's (representing land) connected 4-directionally (horizontal or vertical.) 
@@ -22,38 +20,32 @@ public class IslandWithMaxArea {
 	}
 
 	private static int isLandWithMaxArea(int[][] input) {
-		PriorityQueue<Integer> islandArea = new PriorityQueue<Integer>(10, (a, b) -> b.compareTo(a));
-		islandArea.offer(0);
-		int row = input.length;
-		int column = input[0].length;
-		int[][] copy = input.clone();
-		int area;
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < column; j++) {
-				if (copy[i][j] == 1) {
-					area = 0;
-					area = islandAreaCalculation(copy, i, j, area);
-					islandArea.offer(area);
+		int max = 0;
+		for (int i = 0; i < input.length; i++) {
+			for (int j = 0; j < input[0].length; j++) {
+				if (input[i][j] == 1) {
+					max = Math.max(max, islandAreaCalculation(input, i, j));
 				}
 			}
 		}
-		return islandArea.poll();
+
+		return max;
 	}
 
-	private static int islandAreaCalculation(int[][] copy, int i, int j, int count) {
+	private static int islandAreaCalculation(int[][] copy, int i, int j) {
 		if (i < 0 || j < 0 || i >= copy.length || j >= copy[0].length || copy[i][j] != 1) {
-			return count;
+			return 0;
 		}
 
 		copy[i][j] = -1; //Processed
-		count++;
+		
+		int count = 0;
+		count = count + islandAreaCalculation(copy, i - 1, j);
+		count = count + islandAreaCalculation(copy, i + 1, j);
+		count = count + islandAreaCalculation(copy, i, j - 1);
+		count = count + islandAreaCalculation(copy, i, j + 1);
 
-		count = islandAreaCalculation(copy, i - 1, j, count);
-		count = islandAreaCalculation(copy, i + 1, j, count);
-		count = islandAreaCalculation(copy, i, j - 1, count);
-		count = islandAreaCalculation(copy, i, j + 1, count);
-
-		return count;
+		return 1 + count;
 	}
 
 }

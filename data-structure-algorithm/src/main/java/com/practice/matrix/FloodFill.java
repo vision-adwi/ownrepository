@@ -1,4 +1,4 @@
-package com.practice.graph;
+package com.practice.matrix;
 
 /*
 #733. Flood Fill

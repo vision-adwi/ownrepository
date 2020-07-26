@@ -1,35 +1,31 @@
 package com.practice.matrix;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
 /*
 Leetcode#73. Set Matrix Zeroes
 Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place.
 */
 public class SetMatrixZeros {
     public void setZeroes(int[][] matrix) {
-    	int rows = matrix.length;
-    	int columns = matrix[0].length;
-    	
-    	Set<Integer> rowSet = new HashSet<>();
-    	Set<Integer> columnSet = new HashSet<>();
-    	for(int i = 0; i < rows; i++) {
-    		for(int j = 0; j < columns; j++) {
-    			if(matrix[i][j] == 0) {
-    				rowSet.add(i);
-    				columnSet.add(j);
+    	boolean[] col_bits = new boolean[matrix[0].length];
+    	for(int row = 0; row < matrix.length; row++) {
+    		boolean setBit = false;
+    		for(int column = 0; column < matrix[0].length; column++) {
+    			if(matrix[row][column] == 0) {
+    				col_bits[column] = true;
+    				setBit = true;
     			}
     		}
+    		if(setBit)
+    			Arrays.fill(matrix[row], 0);
     	}
-    	
-    	for(Integer row : rowSet) {
-    		for(int j = 0; j < columns; j++)
-    			matrix[row][j] = 0;
-    	}
-    	
-    	for(Integer column : columnSet) {
-    		for(int i = 0; i < rows; i++)
-    			matrix[i][column] = 0;
+
+    	for(int j = 0; j < col_bits.length; j++) {
+    		if(col_bits[j]) {
+    			for(int row = 0; row < matrix.length; row++) {
+    				matrix[row][j] = 0;
+    			}
+    		}
     	}
         
     }

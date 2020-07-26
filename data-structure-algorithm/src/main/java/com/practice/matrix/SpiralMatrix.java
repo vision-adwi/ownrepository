@@ -2,7 +2,10 @@ package com.practice.matrix;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+Leetcode#54. Spiral Matrix
+Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+*/
 public class SpiralMatrix {
     public List<Integer> spiralOrder(int[][] matrix) {
     	List<Integer> result = new ArrayList<>();

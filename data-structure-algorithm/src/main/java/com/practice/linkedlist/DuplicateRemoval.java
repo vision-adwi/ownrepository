@@ -1,5 +1,8 @@
 package com.practice.linkedlist;
-
+/*
+Leetcode#83. Remove Duplicates from Sorted List
+Given a sorted linked list, delete all duplicates such that each element appear only once.
+*/
 public class DuplicateRemoval {
 	public ListNode deleteDuplicates(ListNode head) {
 		ListNode previous = head;

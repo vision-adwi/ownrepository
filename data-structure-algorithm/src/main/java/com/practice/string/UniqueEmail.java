@@ -17,25 +17,25 @@ public class UniqueEmail {
     
     private String normalize(String s) {
         char[] chars = s.toCharArray();
-        int index = 0; int newIdx = 0;
+        int sourceIndex = 0; int targetIndex = 0;
         boolean domainStarted = false;
-        while(index < chars.length) {
+        while(sourceIndex < chars.length) {
 			if (!domainStarted) {
-				while (chars[index] == '.') {
-					index++;
+				while (chars[sourceIndex] == '.') {
+					sourceIndex++;
 				}
-				if (chars[index] == '+') {
-					while (chars[index] != '@') 
-						index++;
+				if (chars[sourceIndex] == '+') {
+					while (chars[sourceIndex] != '@') 
+						sourceIndex++;
 				}
-				if(chars[index] == '@')
+				if(chars[sourceIndex] == '@')
 					domainStarted = true;
 			}
             
-            chars[newIdx++] = chars[index++];
+            chars[targetIndex++] = chars[sourceIndex++];
         }
-        
-        return new String(chars, 0, newIdx);
+
+        return new String(chars, 0, targetIndex);
     }
 
     public static void main(String[] s) {

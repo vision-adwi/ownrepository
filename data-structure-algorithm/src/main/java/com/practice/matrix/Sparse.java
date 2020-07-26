@@ -23,9 +23,7 @@ public class Sparse {
 		int threshold = (rows * columns) / 2;
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < columns; j++) {
-				if(intArray[i][j] == 0)
-					count++;
-				if(count > threshold)
+				if((intArray[i][j] == 0) && (++count > threshold))
 					return true;
 			}
 		}

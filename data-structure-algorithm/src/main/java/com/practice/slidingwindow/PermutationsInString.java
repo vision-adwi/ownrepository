@@ -6,42 +6,32 @@ In other words, one of the first string's permutations is the substring of the s
 */
 public class PermutationsInString {
     public boolean checkInclusion(String s1, String s2) {
-    	char[] s1Chars = s1.toCharArray();
-    	char[] s2Chars = s2.toCharArray();
+    	int[] frequency = new int[26];
+    	for(char ch : s1.toCharArray()) {
+    		frequency[ch-'a']++;
+    	}
     	
-    	int i = 0, j = 0, k = 0;
-    	while(i < s2Chars.length) {
-    		j = i;
-    		char[] s1Clone = s1Chars.clone();
-    		k = s1Clone.length;
+    	int i = 0, j = 0;
+    	while(j < s2.length()) {
+    		if(frequency[s2.charAt(j)-'a'] > 0) {
+    			frequency[s2.charAt(j++)-'a']--;
+    		}
+    		else if(i == j) {
+    			i++; j++;
+    		}
+    		else {
+    			frequency[s2.charAt(i++)-'a']++;
+    		}
     		
-    		while(j < s2Chars.length && isFound(s1Clone, s2Chars[j++])) {
-    			k--;
-    			if(k == 0)
-    				return true;
-    		}
-
-    		i++;
+    		if((j - i) == s1.length())
+    			return true;
     	}
     	
-    	return false;       
-    }
-    
-    private boolean isFound(char[] chars, char ch) {
-    	boolean found = false;
-    	for(int i = 0; i < chars.length; i++) {
-    		if(chars[i] == ch) {
-    			found = true;
-    			chars[i] = ' ';
-    			break;
-    		}
-    	}
-    	
-    	return found;
+    	return false;
     }
     
     public static void main(String[] s) {
     	PermutationsInString perm = new PermutationsInString();
-    	System.out.println(perm.checkInclusion("aboe", "eidbaooo"));
+    	System.out.println(perm.checkInclusion("ab", "eidbaooo"));
     }
 }

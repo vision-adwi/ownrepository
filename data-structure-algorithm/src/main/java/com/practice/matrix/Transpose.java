@@ -31,11 +31,9 @@ public class Transpose {
 	}
 	
 	private static void transInMemSquare(int[][] intArray) {
-		int rows = intArray.length;
-		int columns = intArray[0].length;
 		int tmp;
-		for(int i = 0; i < rows; i++) {
-			for(int j = i + 1; j < columns; j++) {
+		for(int i = 0; i < intArray.length; i++) {
+			for(int j = i + 1; j < intArray[0].length; j++) {
 				tmp = intArray[i][j];
 				intArray[i][j] = intArray[j][i];
 				intArray[j][i] = tmp;

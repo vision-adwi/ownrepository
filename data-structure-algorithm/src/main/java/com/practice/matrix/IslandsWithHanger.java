@@ -1,4 +1,4 @@
-package com.practice.graph;
+package com.practice.matrix;
 /*
 LendingKart interview questions. 
 */
@@ -18,13 +18,10 @@ public class IslandsWithHanger {
 
 	private static int isLandWithHanger(int[][] input) {
 		int hangers = 0;
-		int area = 0;;
 		for (int i = 0; i < input.length; i++) {
 			for (int j = 0; j < input[0].length; j++) {
 				if (input[i][j] == 1) {
-					area = 0;
-					area = islandAreaCalculation(input, i, j, area);
-					if((area % 2) == 0 )
+					if((islandAreaCalculation(input, i, j, 0) % 2) == 0 )
 						hangers++;
 				}
 			}

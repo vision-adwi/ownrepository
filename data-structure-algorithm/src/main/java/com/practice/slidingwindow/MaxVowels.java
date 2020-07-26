@@ -23,10 +23,10 @@ public class MaxVowels {
 					vowels--;
 			}
 			
-			maxVowels = vowels > maxVowels ? vowels : maxVowels;
+			maxVowels = Math.max(maxVowels, vowels);
 			
 			if(k == maxVowels)
-				return maxVowels;
+				break;
 		}
 
 		return maxVowels;

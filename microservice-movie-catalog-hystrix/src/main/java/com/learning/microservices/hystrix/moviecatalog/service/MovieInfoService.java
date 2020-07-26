@@ -14,11 +14,17 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 public class MovieInfoService {
 	@Autowired
 	RestTemplate restTemplate;
-	
-	@HystrixCommand(fallbackMethod="getCatalogItemFallback",
-			commandProperties= {
-					@HystrixProperty(name="", value="")
-			})
+
+	@HystrixCommand(fallbackMethod = "getCatalogItemFallback",
+	    commandProperties = {
+	        @HystrixProperty(name = "execution.isolation.strategy", value="SEMAPHORE"),
+	        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500"),
+	        @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "500"),
+	        @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value="60"),
+	        @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+	        @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")
+	    }
+	)
 	public CatalogItem getCatalogItem(Rating rating){
 		Movie theMovie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
 		return new CatalogItem(theMovie.getName(), "A non-fictional drama", rating.getRating());
