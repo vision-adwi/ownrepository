@@ -12,7 +12,7 @@ public class Max69Number {
 	
 	private int change(int remaining, int placeValue, int diff) {
 		if(remaining == 0)
-			return diff * 3;
+			return diff * (9 - 6);
 
 		if((remaining % 10) == 6)
 			diff = placeValue;

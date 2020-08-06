@@ -1,7 +1,5 @@
 package com.practice.math;
 
-import java.util.ArrayList;
-import java.util.List;
 /*
 Leetcode#1009. Complement of Base 10 Integer
 Every non-negative integer N has a binary representation.  For example, 5 can be represented as "101" in binary, 
@@ -28,41 +26,7 @@ public class ComplementInteger {
 		
 		return decimal;
     }
-	
-	private static List<Integer> toBinary(int N) {
-		List<Integer> binary = new ArrayList<>();
-		
-		int remaining = N;
-		while(remaining != 0) {
-			int bit = remaining % 2;
-			binary.add(0, bit);
-			remaining = remaining / 2;
-		}
-		
-		return binary;
-	}
-	
-	private static List<Integer> getComplement(List<Integer> binary) {
-		List<Integer> complement = new ArrayList<>();
-		for(int i : binary) {
-			if(i == 0)
-				complement.add(1);
-			else
-				complement.add(0);
-		}
-		
-		return complement;
-	}
-	
-	private static int toDecimal(List<Integer> binary) {
-		int decimal = 0, place = 0;
-		for(int i = binary.size() - 1; i >=0; i--) {
-			decimal = decimal + (binary.get(i) << place++);
-		}
-		
-		return decimal;
-	}
-	
+
 	public static void main(String[] s) {
 		System.out.println(bitwiseComplement(5));
 /*		System.out.println(toBinary(30));

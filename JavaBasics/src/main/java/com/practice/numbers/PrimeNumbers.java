@@ -17,7 +17,7 @@ public class PrimeNumbers {
 	}
 
 	public static void printPrimeNumber(int lastRange) {
-		for (int i = 1; i <= lastRange; i++) {
+		for (int i = 2; i <= lastRange; i++) {
 			if (isPrime(i)) {
 				System.out.print(i + " ");
 			}
@@ -62,11 +62,11 @@ public class PrimeNumbers {
 			isPrime[i] = true;
 		}
 		
-		for(int i = 2; i * i < n; i++) {
-			if(!isPrime(i)) 
-				continue;
-			for(int j = i * i; j < n; j += i) {
-				isPrime[j] = false;
+		for (int i = 2; i * i < n; i++) {
+			if (isPrime(i)) {
+				for (int j = i * i; j < n; j += i) {
+					isPrime[j] = false;
+				}
 			}
 		}
 		
@@ -77,14 +77,14 @@ public class PrimeNumbers {
 		
 		return count;
 	}
-/*
+
 	public static void main(String[] args) {
 		//printPrimeNumber(100);
 		long start = System.nanoTime();
 		System.out.println("Total prime numbers upto 1500000 : " + totalPrimeNumberInRange(15000000));
 		long end = System.nanoTime();
 		System.out.println("Time taken to find total prime numbers - " + (end - start) / 1000000 + " milliseconds.");
-		
+/*		
 		start = System.nanoTime();
 		System.out.println("Total prime numbers upto 1500000 : " + primeNumbersCount(15000000));
 		end = System.nanoTime();
@@ -93,6 +93,7 @@ public class PrimeNumbers {
 		numberFacts(15);
 		System.out.println("Perfect Square (999) - " + perfectSquare(999));
 		System.out.println("Perfect Square (1089) - " + perfectSquare(1089));
+		*/
 	}
-*/
+
 }

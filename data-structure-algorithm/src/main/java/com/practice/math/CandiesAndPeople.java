@@ -12,25 +12,20 @@ Return an array (of length num_people and sum candies) that represents the final
 public class CandiesAndPeople {
     public int[] distributeCandies(int candies, int num_people) {
     	int[] people = new int[num_people];
-    	
-    	int rem_candies = candies;
-    	int n = num_people;
-    	int candy = 1;
-    	for(int i = 0; i < n; i++) {
-    		if(rem_candies <= candy) {
-    			people[i] = people[i] + rem_candies;
-    			break;
-    		}
+    	int repeat = 0, index = 0;
+    	while(candies > 0) {
+    		int toDistribute = (index + 1) + (repeat * num_people);
+    		if(toDistribute > candies)
+    			toDistribute = candies;
     			
-    		people[i] = people[i] + candy;
-    		rem_candies = rem_candies - candy++;
-    		
-    		if(i == (n-1))
-    			i = -1;
+    		people[index] = people[index] + toDistribute;
+    		candies = candies - toDistribute;
+    		index = (index + 1) % num_people;
+    		if(index == 0)
+    			repeat++;
     	}
     	
     	return people;
-        
     }
 
 }

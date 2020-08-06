@@ -17,7 +17,7 @@ public class MinDepth {
     		return minDepth;
     	
     	if(theNode.left == null && theNode.right == null) {
-    		return (depth + 1) < minDepth ? (depth + 1) : minDepth;
+    		return Math.min((depth + 1), minDepth);
     	}
     	
     	minDepth = getMinDepth(theNode.left, depth + 1, minDepth);

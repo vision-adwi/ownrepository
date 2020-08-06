@@ -6,16 +6,12 @@ The maximum depth is the number of nodes along the longest path from the root no
 */
 public class DepthOfBinaryTree {
     public int maxDepth(TreeNode root) {
-        return findDepth(root, 0);
-    }
-    
-    private int findDepth(TreeNode theNode, int depth) {
-        if(theNode == null)
-            return depth;
+    	if(root == null)
+            return 0;
         
-        int leftDepth = findDepth(theNode.left, depth);
-        int rightDepth = findDepth(theNode.right, depth);
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
         
-        return ((leftDepth > rightDepth) ? leftDepth : rightDepth) + 1;
+        return Math.max(leftDepth, rightDepth) + 1;
     }
 }

@@ -8,14 +8,11 @@ public class SubsetSum {
 		System.out.println("Is subset sum(105) - " + subset.isSubsetSum(data, 20));
 	}
 	private boolean subset(int[] set, int sum, int index, int check) {
+		if(sum > check || index >= set.length)
+			return false;
+		
 		if(sum == check)
 			return true;
-		
-		if(sum > check)
-			return false;
-		
-		if(index >= set.length)
-			return false;
 
 		if(subset(set, (sum + set[index]), index + 1, check)) {
 			return true;

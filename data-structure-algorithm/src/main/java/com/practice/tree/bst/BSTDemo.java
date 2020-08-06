@@ -1,4 +1,4 @@
-package com.practice.tree;
+package com.practice.tree.bst;
 import java.util.Scanner;
 
 public class BSTDemo {

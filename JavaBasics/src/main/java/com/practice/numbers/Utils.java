@@ -37,25 +37,26 @@ public class Utils {
 	public static int findMissingNumber(int[] arr) {
 		int n = arr.length + 1;
 		int seriesTotal = (n * (n + 1)) / 2;
-		int count = 0;
 		for(int i : arr) {
-			count = count + i;
+			seriesTotal = seriesTotal - i;
 		}
 		
-		return seriesTotal - count;
+		return seriesTotal;
 	}
 	
 	public static void floydTriangle(int max) {
-		int j = 1;
-		int k = 0;
-		for(int i = 1; i <= max; i++) {
-			System.out.printf("%3s", i); k++;
-			if(k == j) {
-				System.out.println();
-				k = 0;
-				j++;
-			}
+		int limit = 1;
+		int line_breaker = limit;
+		
+		int num = 1;
+		while(num <= max) {
+			System.out.printf("%3s", num++);
+			--line_breaker;
 			
+			if(line_breaker == 0) {
+				System.out.println();
+				line_breaker = ++limit;
+			}
 		}
 	}
 	
