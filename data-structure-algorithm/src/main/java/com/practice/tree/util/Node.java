@@ -1,8 +1,8 @@
-package com.practice.tree;
+package com.practice.tree.util;
 
 import java.util.List;
 
-class Node {
+public class Node {
     public int val;
     public List<Node> children;
 

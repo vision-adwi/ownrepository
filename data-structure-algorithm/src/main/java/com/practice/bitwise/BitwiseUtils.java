@@ -1,0 +1,261 @@
+package com.practice.bitwise;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class BitwiseUtils {
+	/*
+	Leetcode#476. Number Complement
+	Given a positive integer num, output its complement number. The complement strategy is to flip the bits of its binary representation.
+	*/
+    public int findComplement(int num) {
+    	int result = 0;
+    	int setBit = 1;
+        while(num != 0) {
+        	if((num & 1) == 0) {
+        		result = result | setBit;
+        	}
+        	setBit = setBit << 1;
+        	num = num >> 1;
+        }
+         
+        return result;
+    }
+	
+	/*
+	Leetcode#190. Reverse Bits
+	Reverse bits of a given 32 bits unsigned integer.
+	*/
+	public int reverseBits(int n) {
+		int result = 0;
+		for(int i = 0; i < 32; i++) {
+			result = result << 1;
+			result = result | (n & 1);
+			n = n >> 1;
+		}
+        
+		return result;
+    }
+	
+	/*
+	Leetcode#191. Number of 1 Bits
+	Write a function that takes an unsigned integer and return the number of '1' bits it has (also known as the Hamming weight).
+    */
+	public int hammingWeight(int n) {
+        int count = 0;
+        while(n != 0) {
+            if((n & 1) == 1)
+                count++;
+            
+            n = n >> 1;
+        }
+        return count;
+    }
+	
+	/*
+	Leetcode#693. Binary Number with Alternating Bits
+	Given a positive integer, check whether it has alternating bits: namely, if two adjacent bits will always have different values.
+	*/
+    public boolean hasAlternatingBits(int n) {
+        int bit = n & 1;
+        n = n >> 1;
+        
+        while(n != 0) {
+            if(bit == (n & 1))
+                return false;
+            
+            bit = n & 1;
+            n = n >> 1;
+        }
+        
+        return true;
+    }
+    
+    /*
+    Leetcode#461. Hamming Distance
+    The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+    Given two integers x and y, calculate the Hamming distance.
+    */
+    public int hammingDistance(int x, int y) {
+        int count = 0;
+        while(x != 0 || y != 0) {
+            if((x & 1) != (y & 1))
+                count++;
+            
+            x = x >> 1;
+            y = y >> 1;
+        }
+        
+        return count;
+    }
+	
+	/*
+	Leetcode#231. Power of Two
+	Given an integer, write a function to determine if it is a power of two.
+	*/
+    public boolean isPowerOfTwo(int n) {
+        int count = 0;
+        for(int i = 0; i < 31; i++) {
+            if((n & 1) == 1) 	
+                count++;
+
+            n = n >>> 1;
+        }
+        
+        boolean isNegative = (n & 1) == 1;
+        return !isNegative && count == 1;
+    }
+    
+    /*
+    Leetcode#342. Power of Four
+    Given an integer (signed 32 bits), write a function to check whether it is a power of 4.
+    */
+    public boolean isPowerOfFour(int n) {
+        int count = 0;
+        for(int i = 0; i < 31; i++) {
+            if((n & 1) == 1) {
+            	count++;
+            	if(count > 1 || ((i % 2) != 0)) {
+            		count = 0; //Reset count to fail-fast
+            		break;
+            	}    
+            }
+            
+            n = n >>> 1;
+        }
+        
+        boolean isNegative = (n & 1) == 1;
+        return (count == 1) && !isNegative;
+    }
+    
+    /*
+    Leetcode#1342. Number of Steps to Reduce a Number to Zero
+    Given a non-negative integer num, return the number of steps to reduce it to zero. 
+    If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
+    */
+    public int numberOfSteps (int num) {
+    	int steps = 0;
+    	while(num != 0) {
+    		if((num & 1) == 1) { //Odd
+    			num = num >> 1;
+            	num = num << 1;
+    		}
+    		else {
+    			num = num >> 1;
+    		}
+    		steps++;
+    	}
+        
+    	return steps;
+    }
+    
+    /*
+    Leetcode#405. Convert a Number to Hexadecimal
+    Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used.
+    */
+    public String toHex(int num) {
+    	int octets = 8;
+    	char[] hex = new char[octets];
+    	
+    	int mask = 0b1111;
+    	while(--octets >= 0) {
+    		int val = num & mask;
+    		hex[octets] = (char)(((val / 10) == 1 ? 97 : 48) + (val % 10));
+    		num = num >> 4;
+    	}
+        
+    	int index = 0;
+    	while(index < 7 && hex[index] == '0') {
+    		index++;
+    	}
+    	
+    	return new String(hex, index, (8 - index));
+    }
+
+    /*
+    Leetcode#136. Single Number
+    Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+    */
+    public int singleNumber(int[] nums) {
+        int res = 0;
+        for(int num : nums) {
+            res = res ^ num;
+        }
+        
+        return res;
+    }
+    
+    /*
+    Leetcode#389. Find the Difference
+    Given two strings s and t which consist of only lowercase letters.
+    String t is generated by random shuffling string s and then add one more letter at a random position.
+    Find the letter that was added in t.
+    */
+    public char findTheDifference(String s, String t) {
+        int res = 0;
+        for(char c : s.toCharArray()) {
+            res = res ^ c;
+        }
+        
+        for(char c : t.toCharArray()) {
+            res = res ^ c;
+        }
+        
+        return (char) res;
+    }
+    
+    /*
+    Leetcode#1356. Sort Integers by The Number of 1 Bits
+    Given an integer array arr. You have to sort the integers in the array in ascending order by the number of 1's in their binary representation 
+    and in case of two or more integers have the same number of 1's you have to sort them in ascending order.
+    Return the sorted array.
+    */
+    public int[] sortByBits(int[] arr) {
+    	List<Integer>[] setBitsFrequency = new List[32];
+    	for(int value : arr) {
+    		int count = 0;
+    		int number = value;
+    		while(number != 0) {
+    			if((number & 1) == 1)
+    				count++;
+    			
+    			number = number >> 1;
+    		}
+    		if(setBitsFrequency[count] == null)
+    			setBitsFrequency[count] = new ArrayList<>();
+    		
+    		setBitsFrequency[count].add(value);
+    	}
+        
+    	int[] result = new int[arr.length];
+    	int index = 0;
+    	for(int i = 0; i < 32; i++) {
+    		if(setBitsFrequency[i] == null)
+    			continue;
+    		
+    		Collections.sort(setBitsFrequency[i]);
+    		for(Integer v : setBitsFrequency[i]) {
+    			result[index++] = v;
+    		}
+    	}
+    	
+    	return result;
+    }
+    
+    
+    public static void main(String[] s) {
+    	BitwiseUtils utils = new BitwiseUtils();
+    	System.out.println(utils.toHex(255));
+    }
+} 
+
+
+
+
+
+
+
+
+
+

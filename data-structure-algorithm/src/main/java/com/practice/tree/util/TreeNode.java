@@ -1,4 +1,4 @@
-package com.practice.tree;
+package com.practice.tree.util;
 
 public class TreeNode {
 	public int val;

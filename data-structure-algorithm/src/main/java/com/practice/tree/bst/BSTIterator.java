@@ -2,7 +2,7 @@ package com.practice.tree.bst;
 
 import java.util.Stack;
 
-import com.practice.tree.TreeNode;
+import com.practice.tree.util.TreeNode;
 
 class BSTIterator {
 	Stack<TreeNode> stack;

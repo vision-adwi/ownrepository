@@ -1,4 +1,7 @@
 package com.practice.tree;
+
+import com.practice.tree.util.TreeNode;
+
 /*
 Leetcode#111. Minimum Depth of Binary Tree
 Given a binary tree, find its minimum depth.

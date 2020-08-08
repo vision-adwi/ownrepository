@@ -1,6 +1,6 @@
 package com.practice.tree.bst;
 
-import com.practice.tree.TreeNode;
+import com.practice.tree.util.TreeNode;
 
 /*
 Leetcode#938. Range Sum of BST

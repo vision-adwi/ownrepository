@@ -1,5 +1,7 @@
 package com.practice.tree;
 
+import com.practice.tree.util.TreeNode;
+
 //Leetcode#226. Invert Binary Tree
 
 public class Invert {

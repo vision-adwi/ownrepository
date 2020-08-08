@@ -1,6 +1,6 @@
 package com.practice.tree.bst;
 
-import com.practice.tree.TreeNode;
+import com.practice.tree.util.TreeNode;
 /*
 Leetcode#700. Search in a Binary Search Tree
 Given the root node of a binary search tree (BST) and a value. You need to find the node in the BST that the 

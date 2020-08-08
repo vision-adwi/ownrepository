@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+import com.practice.tree.util.Node;
+import com.practice.tree.util.TreeNode;
+
 public class TraversalsUtil {
 	/*
 	Leetcode#144. Binary Tree Preorder Traversal

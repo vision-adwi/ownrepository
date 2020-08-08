@@ -1,6 +1,6 @@
 package com.practice.tree.bst;
 
-import com.practice.tree.TreeNode;
+import com.practice.tree.util.TreeNode;
 /*
 Leetcode#701. Insert into a Binary Search Tree
 Given the root node of a binary search tree (BST) and a value to be inserted into the tree, insert the value into the BST. 

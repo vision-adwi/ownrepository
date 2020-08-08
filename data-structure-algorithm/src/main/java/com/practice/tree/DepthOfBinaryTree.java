@@ -1,4 +1,7 @@
 package com.practice.tree;
+
+import com.practice.tree.util.TreeNode;
+
 /*
 Leetcode#104. Maximum Depth of Binary Tree
 Given a binary tree, find its maximum depth.

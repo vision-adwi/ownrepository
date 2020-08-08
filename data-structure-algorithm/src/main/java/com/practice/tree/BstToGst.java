@@ -1,8 +1,11 @@
 package com.practice.tree;
+
+import com.practice.tree.util.TreeNode;
+
 //#1038 leetcode
 public class BstToGst {
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		BST bst = new BST();
 		
 
@@ -29,6 +32,6 @@ public class BstToGst {
 		int newLeftValue = gstTraversal(theNode.left, theNode.val);
 
 		return theNode.val + newLeftValue;
-	}
+	}*/
 
 }

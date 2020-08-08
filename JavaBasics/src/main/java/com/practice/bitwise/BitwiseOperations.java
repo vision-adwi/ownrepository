@@ -14,10 +14,13 @@ public class BitwiseOperations {
 		System.out.println("value1 << 1    		: " + (value1 << 1) + "    " + Integer.toBinaryString(value1 << 1));
 		System.out.println("value1 >> 1    		: " + (value1 >> 1) + "    " + Integer.toBinaryString(value1 >> 1));
 		System.out.println("value1 >>> 1   		: " + (value1 >>> 1) + "    " + Integer.toBinaryString(value1 >>> 1));
+		System.out.println("-2147483648         : " + Integer.toBinaryString(-2147483648));
+		System.out.println("-2147483646         : " + Integer.toBinaryString(-2147483646));
 		//System.out.println(((value1 >> 1) >> 1) + "   " + Integer.toBinaryString(((value1 >> 1) >> 1)));
 		System.out.println((555 % 15) + " " + (555 & 14));
 		System.out.println((49 % 4) + " " + (49 & 3));
 		System.out.println((59 % 4) + " " + (59 & 3));
+		System.out.println("0 % 2 : " + (0 % 2));
 	}
 
 }

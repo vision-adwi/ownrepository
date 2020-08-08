@@ -1,4 +1,7 @@
-package com.practice.tree;
+package com.practice.tree.bst;
+
+import com.practice.tree.util.TreeNode;
+
 //#1365
 public class SmallerNumber {
     public static void main(String[] s) {
