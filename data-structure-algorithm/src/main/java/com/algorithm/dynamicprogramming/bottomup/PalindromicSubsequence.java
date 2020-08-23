@@ -17,7 +17,7 @@ public class PalindromicSubsequence implements IPalindromicSubsequence{
 				}
 				else {
 					if(word.charAt(row) == word.charAt(column)) {
-						mem[row][column] = Math.max((2 + mem[row + 1][column - 1]), Math.max(mem[row][column - 1], mem[row + 1][column]));
+						mem[row][column] = 2 + mem[row + 1][column - 1];
 					}
 					else {
 						mem[row][column] = Math.max(mem[row][column - 1], mem[row + 1][column]);

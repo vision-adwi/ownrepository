@@ -18,10 +18,8 @@ public class ValidIP {
 		if (!ipV4 && !ipV6)
 			return "Neither";
 
-		int index = 0;
-		while (index < tokens.size()) {
+		for(String token : tokens) {
 			int octet = 0;
-			String token = tokens.get(index++);
 			try {
 				if (ipV4) {
 					octet = Integer.parseInt(token);
@@ -40,7 +38,7 @@ public class ValidIP {
 		return ipV4 ? "IPv4" : "IPv6";
 	}
 	
-	private List<String> tokenizeIP(String s, char delim) {
+	private List<String> tokenizeIP_(String s, char delim) {
 		List<String> octets = new ArrayList<>();
 		int j = 0, i = 0;
 		for(; i < s.length(); i++) {
@@ -59,8 +57,33 @@ public class ValidIP {
 		return octets;
 	}
 	
+	private List<String> tokenizeIP(String s, char delim) {
+		List<String> octets = new ArrayList<>();
+		int j = 0, i = 0;
+		while(j < s.length()) {
+			if(s.charAt(j) == delim) {
+				if(i == j) { //to check if there is no consecutive delim
+					octets.add("Invalid");
+					return octets;
+				}				
+				octets.add(s.substring(i, j));
+				i = j + 1;
+			}			
+			j++;
+		}
+		
+		if(i == s.length()) { //to check if last char is not a delim
+			octets.add("invalid");
+		}
+		else {
+			octets.add(s.substring(i, j));
+		}
+		
+		return octets;
+	}
+	
 	public static void main(String[] s) {
 		ValidIP ip = new ValidIP();
-		System.out.println(ip.validIPAddress("256.256.256.256"));
+		System.out.println(ip.validIPAddress("172.16.254.1"));
 	}
 }

@@ -5,30 +5,31 @@ Given a string s, you are allowed to convert it to a palindrome by adding charac
 Find and return the shortest palindrome you can find by performing this transformation.
 */
 public class ShortestPalindrome {
-	public String shortestPalindrome(String s) {
-		int i = s.length();
-		while (i > 0) {
+	public String shortestPalindrome(String s) {	
+		int pivot = s.length();
+		while(true) {
 			int left = 0;
-			int right = i - 1;
-			while (left < right) {
-				if (s.charAt(left) != s.charAt(right))
+			pivot--;
+			while(pivot > 0 && s.charAt(left) != s.charAt(pivot))
+				pivot--;
+			
+			int right = pivot;
+			while(left < right) {
+				if(s.charAt(left) != s.charAt(right))
 					break;
-				
 				++left; --right;
 			}
 			if(left >= right)
 				break;
 			
-			--i;
 		}
 		
-		StringBuilder remaining = (i < s.length()) ? new StringBuilder(s.substring(i)) :
-			new StringBuilder("");
-		StringBuilder result = remaining.reverse().append(s);
+		StringBuilder aux = new StringBuilder(s.substring(pivot + 1)).reverse();
+		aux.append(s);
 		
-		return result.toString();
+		return aux.toString();	
 	}
-	
+
 	public static void main(String[] s) {
 		ShortestPalindrome palindrome = new ShortestPalindrome();
 		System.out.println(palindrome.shortestPalindrome("abcd"));

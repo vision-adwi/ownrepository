@@ -5,64 +5,28 @@ Write a function to find the longest common prefix string amongst an array of st
 If there is no common prefix, return an empty string "".
 */		
 public class LongestCommonPrefix {
-    public String longestCommonPrefix(String[] strs) {
-    	if(strs.length == 0)
+	public String longestCommonPrefix(String[] strs) {
+		if(strs.length == 0)
             return "";
-    
-    	StringBuilder prefix = new StringBuilder();
-    	boolean isExit = false;
-    	
-    	String firstString = strs[0];
-    	for(int i = 0; i < firstString.length(); i++) {
-    		prefix.append(firstString.charAt(i));
-    		String preString = prefix.toString();
-    		for(String s : strs) {
-    			if(!s.startsWith(preString)) {
-    				isExit = true;
-    				prefix.setLength(prefix.length() - 1);
-    				break;
-    			}
-    		}
-    		
-    		if(isExit)
-    			break;
-    	}
-    	
-    	return prefix.toString();
-        
-    }
-/*    
-    public String longestCommonPrefix(String[] strs) {
-    	String shortestString = strs[0];
-    	for(String str : strs) {
-    		if(str.length() < shortestString.length() ) {
-    			shortestString = str;
-    		}
-    	}
-    	
-    	String cachedPrefix = "";
-    	String prefix = "";
-    	
-    	for(int i = 0; i < shortestString.length(); i++) {
-    		prefix = prefix + shortestString.charAt(i);
-    		
-    		for(String s : strs) {
-    			if(s.indexOf(prefix) == -1) {
-    				if(prefix.length() > 1)
-    					--i;
-    				
-    				prefix = "";
-    				break;
-    			}
-    		}
-    		if(!prefix.isEmpty() && (cachedPrefix.length() < prefix.length())) {
-    			cachedPrefix = prefix;
-    		}
-    	}
-    	
-    	return cachedPrefix;
-        
-    }*/
+		
+		StringBuilder commonPrefix = new StringBuilder();
+		
+		boolean noExit = true;
+		int len = strs[0].length();
+		for(int i = 0; i < len && noExit; i++) {
+			char ch = strs[0].charAt(i);
+			for(String str : strs) {
+				if(i >= str.length() || str.charAt(i) != ch) {
+					noExit = false;
+					break;
+				}
+			}
+			if(noExit)
+				commonPrefix.append(ch);
+		}
+		
+		return commonPrefix.toString();		
+	}
     
     public static void main(String[] s) {
     	LongestCommonPrefix longPrefix = new LongestCommonPrefix();

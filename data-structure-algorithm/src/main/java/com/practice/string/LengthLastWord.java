@@ -11,12 +11,11 @@ public class LengthLastWord {
 		int count = 0;
 
 		if (!s.isEmpty()) {
-			char[] chars = s.toCharArray();
-			int index = chars.length - 1;
-			while (index >= 0 && chars[index] == ' ')
+			int index = s.length() - 1;
+			while (index >= 0 && s.charAt(index) == ' ')
 				index--;
 			
-			while (index >= 0 && chars[index--] != ' ')
+			while (index >= 0 && s.charAt(index--) != ' ')
 				count++;
 		}
 

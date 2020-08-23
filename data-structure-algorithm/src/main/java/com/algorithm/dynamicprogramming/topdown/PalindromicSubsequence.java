@@ -32,10 +32,4 @@ public class PalindromicSubsequence implements IPalindromicSubsequence{
 		return mem[front][rear];
 	}
 
-	public static void main(String[] args) {
-		String word = "AMEEWMEA";
-		//String word = "ELRMENMET";
-		//System.out.println(lpsCount(word, 0, word.length() - 1));
-	}
-
 }

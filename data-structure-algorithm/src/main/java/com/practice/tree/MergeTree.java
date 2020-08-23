@@ -13,45 +13,45 @@ public class MergeTree {
     	if(t1 == null && t2 == null)
     		return null;
         
-    	TreeNode resultNode = new TreeNode();
-        merge(t1, t2, resultNode, null);
+    	TreeNode mergedNode = new TreeNode();
+        merge(t1, t2, mergedNode, null);
         
-        return resultNode;
+        return mergedNode;
     }
     
-    private void merge(TreeNode nodeOne, TreeNode nodeTwo, TreeNode result, String arm) {
+    private void merge(TreeNode nodeOne, TreeNode nodeTwo, TreeNode merged, String arm) {
     	if(nodeOne == null && nodeTwo == null)
     		return;
     	
     	if(nodeOne == null && nodeTwo !=null) {
-    		setNode(arm, result, nodeTwo);
+    		setNode(arm, merged, nodeTwo);
     		return;
     	}
     	
     	if(nodeTwo == null && nodeOne !=null) {
-    		setNode(arm, result, nodeOne);
+    		setNode(arm, merged, nodeOne);
     		return;
     	}
     	
     	TreeNode newNode = new TreeNode(nodeOne.val + nodeTwo.val);
-    	setNode(arm, result, newNode);
+    	setNode(arm, merged, newNode);
     	if(arm != null)
-    		result = newNode;
+    		merged = newNode;
 
-    	merge(nodeOne.left, nodeTwo.left, result, "left");
-    	merge(nodeOne.right, nodeTwo.right, result, "right");
+    	merge(nodeOne.left, nodeTwo.left, merged, "left");
+    	merge(nodeOne.right, nodeTwo.right, merged, "right");
     	
     }
     
-    private void setNode(String arm, TreeNode result, TreeNode theNode) {
+    private void setNode(String arm, TreeNode mergedNode, TreeNode theNode) {
     	if("left".equals(arm)) {
-			result.left = theNode;
+			mergedNode.left = theNode;
 		}
 		else if("right".equals(arm)) {
-			result.right = theNode;
+			mergedNode.right = theNode;
 		}
 		else {
-			result.val = theNode.val;
+			mergedNode.val = theNode.val;
 		}
     }
 }

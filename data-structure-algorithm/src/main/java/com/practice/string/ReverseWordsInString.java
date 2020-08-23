@@ -5,35 +5,31 @@ Given an input string, reverse the string word by word.
 */
 public class ReverseWordsInString {
 	public String reverseWords(String s) {
-		char[] chars = s.toCharArray();
+		StringBuilder result = new StringBuilder();
 		
-		StringBuilder sentence = new StringBuilder();
-		StringBuilder word;
-		for(int i = 0; i < chars.length;) {
-			while(i < chars.length && chars[i] == ' ')
-				i++;
+		int index = s.length() - 1;
+		while(true) {
+			while(index >= 0 && s.charAt(index) == ' ')
+				index--;
 			
-			word = new StringBuilder();
-			while(i < chars.length && chars[i] != ' ') {
-				word.append(chars[i++]);
-			}
+			if(index < 0)
+				break;
 			
-			if(word.length() > 0) {
-				if(sentence.length() > 0) {
-					sentence.insert(0, ' ');
-				}
-				
-				sentence.insert(0, word.toString());
-			}
+			int j = index + 1;
+			while(index >= 0 && s.charAt(index) != ' ')
+				index--;
 			
+			if(result.length() > 0)
+				result.append(' ');
+			result.append(s.substring(index + 1, j));			
 		}
-        
-		return sentence.toString();
-    }
+		
+		return result.toString();
+	}
 	
 	public static void main(String[] s) {
 		ReverseWordsInString reverse = new ReverseWordsInString();
-		String s1 = "  Vande   Mataram!!  ";
+		String s1 = "the sky is blue";
 		System.out.println(reverse.reverseWords(s1));
 	}
 

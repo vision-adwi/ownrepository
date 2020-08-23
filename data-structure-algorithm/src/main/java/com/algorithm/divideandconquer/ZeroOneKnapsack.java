@@ -20,13 +20,4 @@ public class ZeroOneKnapsack implements IZeroOneKnapsack{
 		
 		return Math.max(t1, t2);
 	}
-	
-	
-	public static void main(String[] s) {
-		IZeroOneKnapsack knapsack = new ZeroOneKnapsack();
-		int[] profits = {31, 26, 72, 17};
-		int[] weights = {3, 1, 5, 2};
-		System.out.println(knapsack.maximize(weights, profits, 7));
-	}
-
 }

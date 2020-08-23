@@ -9,11 +9,19 @@ public class ReverseWordsInStringIII {
         char[] original = s.toCharArray();
 
         int i = 0; 
-        while(i < original.length) {
-        	int k = i;
-            while(i < original.length && original[i++] != ' ');
-            
-            int j = (i == original.length) ? (i - 1) : (i - 2);
+        while(true) {
+        	while(i < original.length && original[i] == ' ')
+            	i++;
+        	
+        	if(i >= original.length)
+        		break;
+        	
+        	int k = i;        	
+        	while(i < original.length && original[i] != ' ') {
+        		i++;
+        	}
+        	
+            int j = i - 1;
             while(j > k) {
             	char tmp = original[j];
             	original[j--] = original[k];
@@ -23,7 +31,7 @@ public class ReverseWordsInStringIII {
         
         return new String(original);
     }
-	
+ 
 	public static void main(String[] s) {
 		ReverseWordsInStringIII reverse = new ReverseWordsInStringIII();
 		String s1 = "Let's take LeetCode contest";

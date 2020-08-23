@@ -1,31 +1,28 @@
 package com.practice.tree;
 
-import java.util.Stack;
-
 import com.practice.tree.util.TreeNode;
-
+/*
+Leetcode#105. Construct Binary Tree from Preorder and Inorder Traversal
+Given preorder and inorder traversal of a tree, construct the binary tree.
+*/
 public class TreeFromInAndPreOrder {
 	public TreeNode buildTree(int[] preorder, int[] inorder) {
-		TreeNode tree = null;
-		TreeNode currNode = null;
-		Stack<Integer> stack = new Stack<>();
-		int preIndex = 0;
-		int inIndex = 0;
+        return subtree(0, inorder.length - 1, 0, preorder, inorder);
+    }	
+	
+	private TreeNode subtree(int inStart, int inEnd, int preIndex, int[] preorder, int[] inorder) {
+		if(inStart > inEnd)
+			return null;
 		
-		int current = preorder[preIndex];
-		
-		while(inorder[inIndex] != current) {
-			stack.push(inorder[inIndex++]);
+		int inOrderIndex = inStart;
+		while(preorder[preIndex] != inorder[inOrderIndex]) {
+			inOrderIndex++;
 		}
 		
-		if(tree == null) {
-			tree = new TreeNode(current);
-			currNode = tree;
-		}
+		TreeNode node = new TreeNode(preorder[preIndex]);
+		node.left = subtree(inStart, inOrderIndex - 1, preIndex + 1, preorder, inorder);
+		node.right = subtree(inOrderIndex + 1, inEnd, preIndex + (inOrderIndex - inStart) + 1, preorder, inorder);
 		
-		currNode.left = new TreeNode(current);
-		current = stack.pop();
-		
-        return tree;
-    }		
+		return node;
+	}
 }

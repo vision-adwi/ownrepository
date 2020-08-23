@@ -1,9 +1,18 @@
-package com.algorithm.dynamicprogramming.bottomup;
+ package com.algorithm.dynamicprogramming.bottomup;
 
 import com.algorithm.INumberFactor;
 
 public class NumberFactor implements INumberFactor{
-	public long waysToGet(int n, long[] memory) {
+	@Override
+	public long solve(int n) {
+		if(n == 0 || n == 1 || n == 2)
+			return 1;
+		
+		if(n == 3)
+			return 2;
+		
+		long[] memory = new long[n + 1];
+
 		memory[0] = memory[1] = memory[2] = 1L;
 		memory[3] = 2L;
 		
@@ -12,11 +21,5 @@ public class NumberFactor implements INumberFactor{
 		}
 		
 		return memory[n];
-	}
-
-	@Override
-	public long solve(int n) {
-		long[] memory = new long[n + 1];
-		return waysToGet(n, memory);
 	}
 }

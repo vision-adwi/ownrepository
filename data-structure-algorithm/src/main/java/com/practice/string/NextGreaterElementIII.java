@@ -1,9 +1,36 @@
 package com.practice.string;
 
 public class NextGreaterElementIII {
-	public int nextGreaterElement(int n) {
-		if(n == 2147483647)//have to handle later
+	public int nextGreaterElement_(int n) {
+		if(n == Integer.MAX_VALUE)//have to handle later
             return -1;
+		
+		int[] digits = new int[10];
+		
+		int digit = n % 10;
+		int remains = n;
+		int radix = 1;
+		int pivot = -1;
+		while(remains > 0) {
+			digits[digit]++;
+			
+			remains = remains / 10;
+			radix = radix * 10;
+			if((remains % 10) < digit) {
+				pivot = remains % 10;
+				break;
+			}
+			digit = remains % 10;
+		}
+		
+		
+		return 0;
+		
+	}
+	public int nextGreaterElement(int n) {
+		if(n == Integer.MAX_VALUE)//have to handle later
+            return -1;
+		
 		int[] numbers = new int[10];
 		int lastRemainder = n % 10; numbers[lastRemainder]++;
 		int divisor = n / 10;

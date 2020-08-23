@@ -9,28 +9,19 @@ Return the final string after all such shifts to S are applied.
 */
 public class ShiftingLetters {
     public String shiftingLetters(String S, int[] shifts) {
-    	int[] ascii = new int[S.length()];
-    	int index = 0;
-    	for(byte c : S.getBytes()) {
-    		ascii[index++] = c - 97;
-    	}
-
-    	shifts[shifts.length - 1] = shifts[shifts.length - 1] % 26;
-    	for(int k = shifts.length - 2; k >= 0; k--) {
+    	char[] chars = S.toCharArray();
+    	
+    	int len = chars.length;
+    	shifts[len - 1] = shifts[len - 1] % 26;
+    	for(int k = len - 2; k >= 0; k--) {
     		shifts[k] = (shifts[k + 1] + shifts[k]) % 26;
     	}
     	
-    	for(int i = 0; i < shifts.length; i++) {
-    		int shift = shifts[i];
-    		ascii[i] = (ascii[i] + shift) % 26;
+    	for(int i = 0; i < len; i++) {
+    		int newChar = ((chars[i] - 'a') + shifts[i]) % 26;
+    		chars[i] = (char)(newChar + 'a');
     	}
     	
-    	char[] chars = new char[S.length()];
-    	index = 0;
-    	for(int res : ascii) {
-    		chars[index++] = (char)(res + 97);
-    	}
-        
-    	return new String(chars); 
+    	return new String(chars);
     }
 }

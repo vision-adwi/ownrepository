@@ -8,24 +8,19 @@ Each letter in the magazine string can only be used once in your ransom note.
 */
 public class RansomNote {
 	public boolean canConstruct(String ransomNote, String magazine) {
-        char[] noteChars = ransomNote.toCharArray();
-        char[] magChars = magazine.toCharArray();
-        
-        for(int i = 0; i < noteChars.length; i++) {
-            boolean flag = false;
-            for(int j = 0; j < magChars.length; j++) {
-                if(noteChars[i] == magChars[j]) {
-                    magChars[j] = ' ';
-                    flag = true;
-                    break;
-                }
-            }
-            if(!flag)
-                return false;
-        }
-        
-        return true;
-    }
+		int[] alphabets = new int[26];
+		for(char ch : magazine.toCharArray()) 
+			alphabets[(ch - 'a')]++;
+		
+		for(char ch : ransomNote.toCharArray()) {
+			if(alphabets[(ch - 'a')] > 0)
+				alphabets[(ch - 'a')]--;
+			else 
+				return false;
+		}
+		
+		return true;
+	}
 	
 	public static void main(String[] s) {
 		RansomNote note = new RansomNote();

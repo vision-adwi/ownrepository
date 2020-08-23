@@ -6,16 +6,17 @@ Please note that the string does not contain any non-printable characters.
 */
 public class SegmentCount {
     public int countSegments(String s) {
-        char[] chars = s.toCharArray();
         int count = 0, index = 0;
         while(true) {
-            while(index < chars.length && chars[index] == ' ')
+            while(index < s.length() && s.charAt(index) == ' ')
                 index++;
             
-            if(index == chars.length)
+            if(index >= s.length())
             	break;
    
-            while(index < chars.length && chars[index++] != ' ');
+            while(index < s.length() && s.charAt(index) != ' ')
+            	index++;
+            
             count++;
         }
         
