@@ -10,48 +10,25 @@ Otherwise, the NOT null node will be used as the node of new tree.
 */
 public class MergeTree {
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
-    	if(t1 == null && t2 == null)
-    		return null;
-        
-    	TreeNode mergedNode = new TreeNode();
-        merge(t1, t2, mergedNode, null);
-        
-        return mergedNode;
-    }
-    
-    private void merge(TreeNode nodeOne, TreeNode nodeTwo, TreeNode merged, String arm) {
-    	if(nodeOne == null && nodeTwo == null)
-    		return;
-    	
-    	if(nodeOne == null && nodeTwo !=null) {
-    		setNode(arm, merged, nodeTwo);
-    		return;
+        if(t1 == null) {
+    		if(t2 == null) {
+    			return null;
+    		}
+    		else {
+    			return t2;
+    		}
     	}
-    	
-    	if(nodeTwo == null && nodeOne !=null) {
-    		setNode(arm, merged, nodeOne);
-    		return;
+    	else {
+    		if(t2 == null) {
+    			return t1;
+    		}
     	}
-    	
-    	TreeNode newNode = new TreeNode(nodeOne.val + nodeTwo.val);
-    	setNode(arm, merged, newNode);
-    	if(arm != null)
-    		merged = newNode;
 
-    	merge(nodeOne.left, nodeTwo.left, merged, "left");
-    	merge(nodeOne.right, nodeTwo.right, merged, "right");
-    	
-    }
-    
-    private void setNode(String arm, TreeNode mergedNode, TreeNode theNode) {
-    	if("left".equals(arm)) {
-			mergedNode.left = theNode;
-		}
-		else if("right".equals(arm)) {
-			mergedNode.right = theNode;
-		}
-		else {
-			mergedNode.val = theNode.val;
-		}
+    	TreeNode newNode = new TreeNode(t1.val + t2.val);
+
+    	newNode.left = mergeTrees(t1.left, t2.left);
+    	newNode.right = mergeTrees(t1.right, t2.right);
+
+    	return newNode; 
     }
 }

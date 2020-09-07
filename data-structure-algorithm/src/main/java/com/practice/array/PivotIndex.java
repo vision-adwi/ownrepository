@@ -1,4 +1,7 @@
 package com.practice.array;
+
+import java.util.stream.IntStream;
+
 /*
 Leetcode#724. Find Pivot Index
 Given an array of integers nums, write a method that returns the "pivot" index of this array.
@@ -7,31 +10,21 @@ If no such index exists, we should return -1. If there are multiple pivot indexe
 */
 public class PivotIndex {
     public int pivotIndex(int[] nums) {
-    	if(nums.length == 0)
-    		return -1;
-    	
-        int sum = 0;
-        for(int num : nums) {
-            sum = sum + num;
-        }
-        
-        int firstHalf = 0;
-        int pivot = nums[0];
-        for(int i = 1; i < nums.length; i++) {
-        	if((firstHalf * 2) == (sum - pivot))
-                return i - 1;
-        	
-        	pivot = nums[i];
-        	firstHalf = firstHalf + nums[i - 1];
-            
-        }
-        
-        if(firstHalf == 0)
-        	return nums.length - 1;
-        else
-        	return -1;
+		if (nums.length == 0)
+			return -1;
+
+		int sum = IntStream.of(nums).sum();
+
+		int left_sum = 0;
+		for(int i = 0; i < nums.length; i++) {
+			if ((2 * left_sum) == (sum - nums[i]))
+				return i;
+
+			left_sum += nums[i];
+		}
+		return -1;
     }
-    
+
     public static void main(String[] s) {
     	PivotIndex pivot = new PivotIndex();
     	System.out.println(pivot.pivotIndex(new int[] {-1,-1,0,1,1,0}));

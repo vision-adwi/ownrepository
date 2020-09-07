@@ -7,34 +7,24 @@ Leetcode#228. Summary Ranges
 Given a sorted integer array without duplicates, return the summary of its ranges.
 */
 public class SummaryRanges {
-    public List<String> summaryRanges(int[] nums) {
-    	List<String> result = new ArrayList<>();
-    	if(nums.length == 0)
-            return result;
-    	
-    	int left = nums[0];
-    	int right = nums[0];
-    	for(int i = 1; i < nums.length; i++) {
-    		if(nums[i] == right + 1) {
-    			right = nums[i];
-    		}
-    		else {
-    			addToList(result, left, right);
-    			left = right = nums[i];
-    		}
-    	}
-    	addToList(result, left, right);        
-    	return result;
-    }
-    
-    private void addToList(List<String> result, int left, int right) {
-    	if(left == right) {
-			result.add(String.valueOf(left));
-		}
-		else {
+	public List<String> summaryRanges(int[] nums) {
+		List<String> result = new ArrayList<>();
+
+		int i = 0;
+		while(i < nums.length) {
+			int start = nums[i++];
+			while(i < nums.length && nums[i] == (nums[i - 1] + 1))
+				i++;
+			
 			StringBuilder builder = new StringBuilder();
-			builder.append(String.valueOf(left)).append("->").append(String.valueOf(right));
+			builder.append(String.valueOf(start));
+			if(start != nums[i - 1]) {
+				builder.append("->").append(String.valueOf(nums[i - 1]));	
+			}
 			result.add(builder.toString());
 		}
-    }
+		
+		return result;
+	}
+
 }

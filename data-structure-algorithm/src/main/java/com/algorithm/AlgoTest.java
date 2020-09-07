@@ -11,7 +11,7 @@ public class AlgoTest {
 		//fibonacciNumber();
 		//numberFactorAlgo();
 		//houseThiefAlgo();
-		stringToString();
+		//stringToString();
 		//longestCommonSubsequence();
 		//longestPalindromicSubsequence();
 		//longestPalindromicSubstring();
@@ -19,7 +19,7 @@ public class AlgoTest {
 		
 		//subsetSumTest();
 
-		//zeroOneKnapsackTest();
+		zeroOneKnapsackTest();
 	}
 	
 	private static void fibonacciNumber() {

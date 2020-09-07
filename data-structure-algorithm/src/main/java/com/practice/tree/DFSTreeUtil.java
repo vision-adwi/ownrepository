@@ -16,11 +16,12 @@ public class DFSTreeUtil {
     	if(theNode == null)
     		return 0;
     	
+    	number = (number * 10) + theNode.val;
     	if((theNode.left == null) && (theNode.right == null)) //to check leaf node
-    		return (number * 10) + theNode.val;
-    	
-    	int leftNum = getSum(theNode.left, (number * 10) + theNode.val);
-    	int rightNum = getSum(theNode.right, (number * 10) + theNode.val);
+    		return number;
+
+    	int leftNum = getSum(theNode.left, number);
+    	int rightNum = getSum(theNode.right, number);
     	
     	return leftNum + rightNum;
     }
@@ -34,36 +35,36 @@ public class DFSTreeUtil {
     	if(theNode == null)
     		return false;
     	
+    	sum = sum - theNode.val;
     	if((theNode.left == null) && (theNode.right == null)) //to check leaf node
-    		return (sum - theNode.val) == 0;
+    		return sum == 0;
+
+    	if(hasPathSum(theNode.left, sum))
+    		return true;
     	
-    	boolean check = hasPathSum(theNode.left, sum - theNode.val);
-    	if(!check)
-    		check = hasPathSum(theNode.right, sum - theNode.val);
-    	
-    	return check;
+    	return hasPathSum(theNode.right, sum);
     }
     
     /*
     Leetcode#113. Path Sum II
     Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
     */
-    public static void checkSum(TreeNode theNode, int threshold, int sum, List<Integer> aPath, List<List<Integer>> paths) {
+    public static void checkSum(TreeNode theNode, int sum, List<Integer> aPath, List<List<Integer>> paths) {
     	if(theNode == null)
     		return;
     	
-    	if((theNode.left == null) && (theNode.right == null)) {
-    		if((sum + theNode.val) == threshold) {
-    			aPath.add(theNode.val);
+    	aPath.add(theNode.val);
+    	sum = sum - theNode.val;
+    	if((theNode.left == null) && (theNode.right == null)) {//to check leaf node
+    		if(sum == 0) {
     			paths.add(new ArrayList<>(aPath));
-    			aPath.remove(aPath.size() - 1);
     		}
+    		aPath.remove(aPath.size() - 1);
     		return;
     	}
-    	
-    	aPath.add(theNode.val);
-    	checkSum(theNode.left, threshold, sum + theNode.val, aPath, paths);
-    	checkSum(theNode.right, threshold, sum + theNode.val, aPath, paths);
+
+    	checkSum(theNode.left, sum, aPath, paths);
+    	checkSum(theNode.right, sum, aPath, paths);
     	aPath.remove(aPath.size() - 1);
     }
 
@@ -83,36 +84,7 @@ public class DFSTreeUtil {
 		int l2 = findNextLeaves(theNode.right, false);
 		
 		return l1 + l2;
-	}
-	
-	/*
-	Leetcode#1325. Delete Leaves With a Given Value
-	Given a binary tree root and an integer target, delete all the leaf nodes with value target.
-
-	Note that once you delete a leaf node with value target, if it's parent node becomes a leaf node and has the value target, 
-	it should also be deleted (you need to continue doing that until you can't).
-	*/
-	public static boolean delete(TreeNode theNode, int target) {
-		if(theNode == null)
-			return false;
-		
-		if((theNode.left == null) && (theNode.right == null) && (theNode.val == target)) {
-			return true;
-		}
-		
-		boolean toDelete = delete(theNode.left, target);
-		if(toDelete)
-			theNode.left = null;
-		
-		toDelete = delete(theNode.right, target);
-		if(toDelete)
-			theNode.right = null;
-		
-		if((theNode.left == null) && (theNode.right == null) && (theNode.val == target)) 
-			return true;
-		else
-			return false;
-	}
+	} 
 	
 	/*
 	Leetcode#257. Binary Tree Paths
@@ -122,14 +94,13 @@ public class DFSTreeUtil {
     	if(theNode == null)
     		return;
     	
-    	if(theNode.left == null && theNode.right == null) {
-    		current.add(theNode.val);
+    	current.add(theNode.val);
+    	if(theNode.left == null && theNode.right == null) {   		
     		result.add(buildString(current));
     		current.remove(current.size() - 1);
     		return;
     	}
-    	
-    	current.add(theNode.val);
+
     	allPaths(theNode.left, result, current);
     	allPaths(theNode.right, result, current);
     	current.remove(current.size() - 1);
@@ -157,13 +128,53 @@ public class DFSTreeUtil {
     	return isSame;
     }
     
+    /*
+    Leetcode#101. Symmetric Tree
+    */
+    public static boolean checkSymmetry(TreeNode left, TreeNode right) {
+        if(left == null)
+            return right == null;
+        else if(right == null)
+            return false;
+        else if(left.val != right.val)
+            return false;
+            
+        if(!checkSymmetry(left.left, right.right))
+            return false;
+        
+        return checkSymmetry(left.right, right.left);
+    }
+    
+	/*
+	Leetcode#1325. Delete Leaves With a Given Value
+	Given a binary tree root and an integer target, delete all the leaf nodes with value target.
+
+	Note that once you delete a leaf node with value target, if it's parent node becomes a leaf node and has the value target, 
+	it should also be deleted (you need to continue doing that until you can't).
+	*/
+	public TreeNode removeLeafNodes(TreeNode root, int target) {
+        if(root == null)
+			return null;
+		
+		if(root.left == null && root.right == null && root.val == target)
+			return null;
+				
+		root.left = removeLeafNodes(root.left, target);
+		root.right = removeLeafNodes(root.right, target);
+        
+        if(root.left == null && root.right == null && root.val == target)
+			return null;
+		
+		return root;
+    }
+    
     private static String buildString(List<Integer> paths) {
     	StringBuilder builder = new StringBuilder();
-    	for(Integer path : paths) {
-    		if(builder.length() != 0)
-    			builder.append("->");
-    		
-    		builder.append(path);
+    	
+    	builder.append(paths.get(0));
+    	for(int i = 1; i < paths.size(); i++) {
+    		builder.append("->");
+    		builder.append(paths.get(i));
     	}
     
     	return builder.toString();

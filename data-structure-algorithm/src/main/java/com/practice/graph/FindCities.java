@@ -1,9 +1,6 @@
 package com.practice.graph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
 /*
 Leetcode#1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance
 There are n cities numbered from 0 to n-1. Given the array edges where edges[i] = [fromi, toi, weighti] represents a bidirectional 
@@ -16,45 +13,57 @@ Notice that the distance of a path connecting cities i and j is equal to the sum
 */
 public class FindCities {
     public int findTheCity(int n, int[][] edges, int distanceThreshold) {
-    	List<Map<Integer, Integer>> graph = new ArrayList<>();
-    	for(int i = 0; i < n; i++) {
-    		graph.add(new HashMap<>());
-    	}
+    	int[][] floyd = prepareMatrix(n, edges);
     	
-    	for(int i = 0; i < edges.length; i++) {
-    		int[] edge = edges[i];
-    		graph.get(edge[0]).put(edge[1], edge[2]);
-    		graph.get(edge[1]).put(edge[0], edge[2]);
-    	}
-    	
-    	int minFound = Integer.MAX_VALUE;
-    	int city = 0;
-    	for(int i = 0; i < n; i++) {
-    		int count = getProximities(graph, i, new boolean[n], -1, 0, distanceThreshold);
-    		if(count <= minFound) {
-    			minFound = count;
-    			city = i;
-    		}
-    	}
+		for (int k = 0; k < n; k++) {
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < n; j++) {
+					if(i == j || i == k || j == k)
+						continue;
+					else {
+						if(floyd[i][k] == Integer.MAX_VALUE || floyd[k][j] == Integer.MAX_VALUE)
+							continue;
+						else if(floyd[i][j] > (floyd[i][k] + floyd[k][j]))
+							floyd[i][j] = floyd[i][k] + floyd[k][j];
+					}
+
+				}
+			}
+		}
+		
+		int minCount = Integer.MAX_VALUE;
+		int fromCity = 0;
+		for(int i = 0; i < n; i++) {
+			int count = -1;
+			for(int j = 0; j < n; j++) {
+				if(floyd[i][j] <= distanceThreshold) {
+					count++;
+				}
+			}
+			
+			if(count <= minCount) {
+				minCount = count;
+				fromCity = i;
+			}
+		}
         
-    	return city;
+    	return fromCity;
     }
-    
-    private int getProximities(List<Map<Integer, Integer>> graph, int vertex, boolean[] visited, int count, int distance, int threshold) {
-    	if(distance > threshold)
-    		return count;
+
+    private int[][] prepareMatrix(int n, int[][] edges) {
+    	int[][] floyd = new int[n][n];
+    	for(int i = 0; i < n; i++)
+    		Arrays.fill(floyd[i], Integer.MAX_VALUE);
     	
-    	visited[vertex] = true;
-    	count = count + 1;
+    	for(int i = 0; i < n; i++)
+    		floyd[i][i] = 0;
     	
-    	Map<Integer, Integer> neighbors = graph.get(vertex);
-    	for(Integer neighbor : neighbors.keySet()) {
-    		if(!visited[neighbor]) {	
-    			count = getProximities(graph, neighbor, visited, count, distance + neighbors.get(neighbor), threshold);
-    		}
+    	for(int[] edge : edges) {
+    		floyd[edge[0]][edge[1]] = edge[2];
+    		floyd[edge[1]][edge[0]] = edge[2];
     	}
     	
-    	return count;
+    	return floyd;
     }
     
     public static void main(String[] s) {

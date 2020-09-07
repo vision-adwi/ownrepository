@@ -22,16 +22,18 @@ public class DeleteInBST {
     		return root;
 
     	if((theNode.left != null) && (theNode.right != null)) {
+    		TreeNode pivot = theNode;
+    		
     		parent = theNode;
-    		TreeNode successor = theNode.right;
-    		while(successor.left != null) {
-    			parent = successor;
-    			successor = successor.left;
+    		theNode = theNode.right;
+    		while(theNode.left != null) {
+    			parent = theNode;
+    			theNode = theNode.left;
     		}
     		
-    		theNode.val = successor.val;
+    		theNode.val = pivot.val;
 
-    		deleteNode(parent, successor, successor.right);
+    		deleteNode(parent, theNode, theNode.right);
     		
     	}
     	else {

@@ -85,7 +85,7 @@ public class FaultToleranceExercise {
 ArrayIndexOutOfBoundException, ClassCastException, IllegalArgumentException etc.
 4. Checked exceptions - 
 5. Handling - Caller need not to handle exception if method throws unchecked exception(even explicitly), contrary to that all the
-checked exceptions should be handled by caller.
+checked exceptions must be handled by caller.
 6. Exception Handling - a) absorb it - caller can absorb it by surrounding it through try{ } catch() { } and do nothing in catch block;
 					    b) tunnel it - pass it on to the caller who is supposed to call this method by suffixing throws clause in the
 					    method.
@@ -96,13 +96,12 @@ checked exceptions should be handled by caller.
 					  II. Post java 7, in case of multiple catch, exceptions should not fall in the hierarchy. Only the most generalized one 
 					   should be considered. 
 					 III. In case of multiple catch, exception object is final. It can not be re assigned.
-8. Overriding - a) Overriding method can throw any exception(Runtime, Checked) if overridden method has thrown no exception.
+8. Overriding - a) Overriding method can throw only Runtime exception if overridden method has thrown no exception or Runtime exception.
     			b) If overridden method throws checked exception then overriding method has 4 options
     			   1. Can throw no exception
     			   2. Can throw same exception
-    			   3. Can throw super classes of the exception
-    			   4, Can throw any runtime exception
-    			c) If overridden method throws runtime exception then a) ie. no rule.
+    			   3. Can throw sub classes of the exception
+    			   4. Can throw any runtime exception
     			   
 9. Caveat - i) A method can throws any exception(checked or unchecked) even though it's body is not likely to throw any.
 		   ii) If you throw any unchecked exception in your body but not throwing in method that is absolutely fine but contrary to that
@@ -132,7 +131,7 @@ BEST PRACTICES
 */
 
 class ExceptionThrow {
-	public void maliciousJob() throws IOException, SQLException {
+	public void maliciousJob() throws Exception {//, SQLException {
 		//throw new IOException();
 		
 	}
@@ -146,17 +145,17 @@ class ExceptionThrow {
 	}
 }
 
-class ExceptionThrowChild {
-	public void maliciousJob() throws Exception{
+class ExceptionThrowChild extends ExceptionThrow{
+	public void maliciousJob()  throws IOException{
 		//throw new IOException();
 		
 	}
 	
-	public void softError() throws NullPointerException, IOException {
+	public void softError() {//throws NullPointerException, IOException {
 		//throw new NumberFormatException();
 	}
 	
-	public void simpleMsg() throws IOException, NullPointerException {
+	public void simpleMsg() {//throws IOException, NullPointerException {
 		System.out.println("Without exception !!!");
 	}
 }

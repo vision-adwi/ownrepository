@@ -7,6 +7,29 @@ Return true if and only if the given array A is monotonic.
 */
 public class MonotonicArray {
 	public boolean isMonotonic(int[] A) {
+		if(A.length <= 1)
+			return true;
+		
+		int i = 1;
+		while(i < A.length && A[i - 1] == A[i])
+			i++;
+		
+		int k = i;
+		while(i < A.length && A[i - 1] <= A[i])
+			i++;
+		
+		if(i == A.length)
+			return true;
+		if(i > k)
+			return false;
+		
+		while(i < A.length && A[i - 1] >= A[i])
+			i++;
+		
+		return i == A.length;
+	}
+	
+	public boolean isMonotonic_old(int[] A) {
 		if (A.length != 1) {
 			int index = isIncreasing(A);
 			if (index == 0)

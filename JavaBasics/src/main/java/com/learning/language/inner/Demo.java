@@ -29,11 +29,11 @@ public class Demo {
 
 /*
 Declaration - 1. Inner class(non-static) and local inner class can not define the static members.
-              2. ..but they can define static final.
+              2. ..but they can define static final.(because that is resolved at compile time)
               3. Inner class(non-static) can define the same name variable with the outer class(obviously non-static)
 
 Access rules - 1. Static inner(nested) class can only access static members of outer class.
-               2. Non-static member variables of outer class(in non-static inner) can be accessed like Outer.this.xxx.
+               2. Non-static member variables of outer class(in non-static inner class) can be accessed like Outer.this.xxx.
 
 Object creation - 1. Outer class object is needed to instantiate inner class object.
  */

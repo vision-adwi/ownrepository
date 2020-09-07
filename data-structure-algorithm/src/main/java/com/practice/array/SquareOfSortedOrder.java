@@ -4,7 +4,22 @@ Leetcode#977. Squares of a Sorted Array
 Given an array of integers A sorted in non-decreasing order, return an array of the squares of each number, also in sorted non-decreasing order.
 */
 public class SquareOfSortedOrder {
-    public int[] sortedSquares(int[] A) {
+	public int[] sortedSquares(int[] A) {
+    	int len = A.length;
+    	int[] square = new int[len];
+    	
+    	int i = 0;
+    	int j = len - 1;
+    	while(i <= j) {
+    		int number = Math.abs(A[i]) > Math.abs(A[j]) ? A[i++] : A[j--];
+    		square[len - 1] = number * number;
+    		len--;
+    	}
+    	
+    	return square;
+	}
+	
+    public int[] sortedSquares_old(int[] A) {
     	int len = A.length;
     	int[] square = new int[len];
 

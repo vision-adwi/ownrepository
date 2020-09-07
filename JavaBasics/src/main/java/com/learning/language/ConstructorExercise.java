@@ -15,7 +15,7 @@ Declaration rules: 1. If there is no constructors defined then a no-argument con
 					  If there is any constructor defined by user then no injection by compiler.
 				   2. Any access specifiers like public, protected, default or private can be provided to constructors. A constructor
 				      can not be abstract, final or synchronized.
-				   3. Constructor to be qualified to be called as constructor if they have the same name as Class they belong to 
+				   3. Constructor is qualified to be called as a constructor if they have the same name as Class they belong to 
 				      and there is no return type.
 				   4. Continuation to the point 3, if there is a return type associated then that (constructor) will be converted
 				      to an ordinary method. A constructor name with no return type(a valid constructor, infact) can be shared with a 
@@ -57,6 +57,9 @@ class Derived extends Parent{
 	Derived(int i) {
 		//int j = 5;
 		this();
+	}
+	void Derived() {
+		
 	}
 	
 }

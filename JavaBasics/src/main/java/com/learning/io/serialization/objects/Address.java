@@ -2,10 +2,9 @@ package com.learning.io.serialization.objects;
 
 import java.io.Serializable;
 /*
-All classes of object graph should implement serializable
+All classes of object graph must implement serializable
 */
 public class Address implements Serializable{
-	private static final long serialVersionUID = 1206521269530763135L;
 	private long zip;
 	private String doorNo;
 	private String street;

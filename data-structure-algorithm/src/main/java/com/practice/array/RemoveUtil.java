@@ -7,19 +7,14 @@ public class RemoveUtil {
 	Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
 	*/
     public static int removeDuplicates(int[] nums) {
-        if(nums.length == 0)
-            return 0;
-        
-        int num = nums[0];
-        int newIndex = 0;
-        for(int i = 1; i < nums.length; i++) {
-            if(num != nums[i]) {
-                nums[++newIndex] = nums[i]; 
-            }
-            num = nums[i];
-        }
-        
-        return newIndex + 1;
+    	int i = 0, j = 0;
+    	while(i < nums.length) {
+    		if((i == nums.length - 1) || nums[i] != nums[i + 1])
+    			nums[j++] = nums[i];
+    		i++;
+    	}
+    	
+    	return j;
     }
     /*
     Leetcode#27. Remove Element
@@ -28,13 +23,13 @@ public class RemoveUtil {
 	The order of elements can be changed. It doesn't matter what you leave beyond the new length.
     */
     public int removeElement(int[] nums, int val) {
-    	int newIndex = 0;
+    	int j = 0;
         for(int i = 0; i < nums.length; i++) {
         	if(nums[i] != val)
-        		nums[newIndex++] = nums[i];
+        		nums[j++] = nums[i];
         }
         
-    	return newIndex;
+    	return j;
     }
     
 	public static void main(String[] args) {

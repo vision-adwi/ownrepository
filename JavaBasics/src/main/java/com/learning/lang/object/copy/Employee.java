@@ -1,6 +1,6 @@
 package com.learning.lang.object.copy;
 
-public class Employee implements Cloneable{
+public class Employee extends BaseEmployee {//implements Cloneable{
 	private String id;
 	private transient int salary;
 	private Address address;

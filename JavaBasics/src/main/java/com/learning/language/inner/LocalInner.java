@@ -2,6 +2,7 @@ package com.learning.language.inner;
 
 public class LocalInner {
 	private String val = "Outer";
+	private static String str = "StaticStr";
 	
 	public String getData() {
 		class Local {
@@ -11,9 +12,16 @@ public class LocalInner {
 			private String getOuter() {
 				return val;
 			}
+			private String getStaticOuter() {
+				return str;
+			}
 			private int getLocalVar() {
 				return class_local;
 			}
+			/*
+			private static int stMethod() {
+				return 0;
+			}*/
 		}
 		
 		return new Local().getOuter();

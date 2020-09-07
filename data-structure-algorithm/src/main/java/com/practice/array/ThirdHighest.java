@@ -1,4 +1,7 @@
 package com.practice.array;
+
+import java.util.Arrays;
+
 /*
 Leetcode#414. Third Maximum Number
 Given a non-empty array of integers, return the third maximum number in this array. If it does not exist,
@@ -10,7 +13,7 @@ public class ThirdHighest {
 	int thirdHighest = Integer.MIN_VALUE;
 	int count = 0;
 
-	public void findHighest(int[] values) {
+	public void findHighest_(int[] values) {
 		for (int value : values) {
 			if(count != 3) {
 				if((count == 0) || (count == 1 && value != highest)
@@ -31,6 +34,31 @@ public class ThirdHighest {
 				}
 			}
 		}
+	}
+	
+	public int findHighest(int[] nums) {
+		int[] highest = new int[3];
+		Arrays.fill(highest, Integer.MIN_VALUE);
+		
+		for(int i = 0; i < nums.length; i++) {
+			for(int k = 0; k <= 2; k++) {
+				if(nums[i] == highest[k])
+					break;
+				
+				int j = 2;
+				if(nums[i] > highest[k]) {
+					while(j-- > k) {
+						highest[j] = highest[j - 1];
+					}
+					
+					highest[k] = nums[i];
+					break;
+				}
+				
+			}
+		}
+		
+		return highest[2] == Integer.MIN_VALUE ? highest[1] : highest[2];
 	}
 
 	public void print() {

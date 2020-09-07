@@ -2,7 +2,7 @@ package com.learning.lang.concurrency.producerconsumer;
 
 public class ProducerConsumerDemo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Queue resource = new Queue(5);
 		
 		Runnable producer = new Producer(resource);
@@ -13,8 +13,14 @@ public class ProducerConsumerDemo {
 
 		t1.setName("Producer");
 		t2.setName("Consumer");
-		
+		try {
 		t1.start();
+		}
+		catch(RuntimeException e) {
+			System.out.println("The exception is raised from producer thread.." + e.getMessage());
+		}
+		Thread.sleep(10 * 1000);
+		System.out.println("Main thread is still alive...");
 		t2.start();
 		
 		try {

@@ -1,38 +1,37 @@
 package com.practice.tree.bst;
-
-import java.util.Stack;
-
+import java.util.LinkedList;
 import com.practice.tree.util.TreeNode;
 
-class BSTIterator {
-	Stack<TreeNode> stack;
+/*
+Leetcode#173. Binary Search Tree Iterator
+Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
 
+Calling next() will return the next smallest number in the BST.
+*/
+class BSTIterator {
+	LinkedList<TreeNode> stack;
 	public BSTIterator(TreeNode root) {
-		stack = new Stack<>();
-		if (root != null) {
-			stack.push(root);
-			while (stack.peek().left != null)
-				stack.push(stack.peek().left);
-		}
+		stack = new LinkedList<>();
+		stackify(root);
 	}
     
     /** @return the next smallest number */
     public int next() {
-    	TreeNode current = stack.pop();
-    	int data = current.val;
-    	
-    	current = current.right;
-		if (current != null) {
-			stack.push(current);
-			while (stack.peek().left != null)
-				stack.push(stack.peek().left);
-		}
+    	TreeNode current = stack.pop();   	
+    	stackify(current.right);
 
-        return data;
+        return current.val;
     }
     
     /** @return whether we have a next smallest number */
     public boolean hasNext() {
         return !stack.isEmpty();
+    }
+    
+    private void stackify(TreeNode node) {
+    	while(node != null) {
+            stack.push(node);
+            node = node.left;
+        }
     }
 }

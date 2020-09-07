@@ -8,6 +8,24 @@ public class MaxIncreasingSubsequence {
 		if(nums.length == 0)
 			return 0;
 		
+		int i = 1;
+		int max = 1;
+		while(i < nums.length) {
+			int count = 1;
+			while(i < nums.length && nums[i - 1] < nums[i++])
+				count++;
+			
+			max = Math.max(count, max);
+		}
+		
+		return max;
+	}
+	
+	
+	public int findLengthOfLCIS_old(int[] nums) {
+		if(nums.length == 0)
+			return 0;
+		
         int base = nums[0];
         int max = 1;
         

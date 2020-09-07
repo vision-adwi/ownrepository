@@ -1,7 +1,5 @@
 package com.algorithm.dynamicprogramming.topdown;
 
-import java.util.Arrays;
-
 import com.algorithm.INumberOfPaths;
 
 public class NumberOfPaths implements INumberOfPaths{

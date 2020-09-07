@@ -1,6 +1,6 @@
 package com.practice.array;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 /*
 Leetcode#989. Add to Array-Form of Integer
@@ -9,7 +9,7 @@ Given the array-form A of a non-negative integer X, return the array-form of the
 */		
 public class AddToArray {
     public List<Integer> addToArrayForm(int[] A, int K) {
-    	List<Integer> result = new ArrayList<>();
+    	List<Integer> result = new LinkedList<>();
     	
     	int remainder = 0;
     	int index = A.length - 1;
@@ -18,13 +18,19 @@ public class AddToArray {
     		int arr = (index < 0) ? 0 : A[index];
     		int sum = remainder + digit + arr;
     		
+    		result.add(0, sum % 10);
+    		
     		remainder = sum / 10;
     		index--;
-    		K = K / 10;
-    		
-    		result.add(0, sum % 10);
+    		K = K / 10;    		
     	}
         
     	return result;
+    }
+    
+    public static void main(String[] s) {
+    	AddToArray arr = new AddToArray();
+    	arr.addToArrayForm(new int[] {1, 2,0,0}, 5);
+    	
     }
 }

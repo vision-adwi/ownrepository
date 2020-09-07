@@ -1,20 +1,30 @@
 package com.practice.array;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class RemoveSubfolders {
 	public List<String> removeSubfolders(String[] folder) {
-		List<String> result = new ArrayList<>();
-		Arrays.sort(folder);
-		for(int i = folder.length - 1; i > 0; i--) {
-			if(!folder[i].startsWith(folder[i-1])) {
-				result.add(folder[i]);
-			}
-			result.add(folder[0]);
+		char[][] folders = new char[folder.length][];
+		for(int i = 0; i < folder.length; i++) {
+			folders[i] = folder[i].toCharArray();
 		}
 		
+		List<String> result = new ArrayList<>();
+        for(int i = 0; i < folder.length; i++) {
+            for(int j = 0; j < folder.length; j++) {
+                if(i != j) {
+                    if(folders[i].length > folders[j].length) {
+                    	//folder[i].startsWith(folder[j] + "/"));
+
+                    	break;
+                    }
+                }
+                if(j == folder.length - 1)
+                    result.add(folder[i]);
+            }
+        }
+
 		return result;
 	}
 	

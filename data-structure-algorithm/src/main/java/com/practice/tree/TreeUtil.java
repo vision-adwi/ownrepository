@@ -59,7 +59,7 @@ public class TreeUtil {
     	
     	depth++;
     	if(theNode.left == null && theNode.right == null) {
-    		return Math.min((depth), minDepth);
+    		return Math.min(depth, minDepth);
     	}
     	
     	minDepth = getMinDepth(theNode.left, depth, minDepth);

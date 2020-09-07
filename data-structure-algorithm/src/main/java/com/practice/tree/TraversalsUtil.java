@@ -15,24 +15,22 @@ public class TraversalsUtil {
 	Given a binary tree, return the preorder traversal of its nodes' values.
 	*/	
 	public static List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        
-        if(root != null) {
-        	Stack<TreeNode> stack = new Stack<>();
-        	TreeNode current = root;
+		List<Integer> result = new ArrayList<>();
+		LinkedList<TreeNode> stack = new LinkedList<>();
 
-        	while(!stack.isEmpty() || current != null) {
-        		while(current != null) {
-        			result.add(current.val);
-        			stack.push(current);
-        			current = current.left;
-        		}
+		while(true) {
+			while(root != null) {
+				result.add(root.val);
+				stack.push(root);
+				root = root.left;
+			}
+			if(stack.isEmpty())
+				break;
+			
+			root = stack.pop().right;
+		}
 
-        		current = stack.pop().right;
-        	}
-        }
-
-        return result;
+		return result;
     }
 	
 	/*
@@ -40,51 +38,44 @@ public class TraversalsUtil {
 	Given a binary tree, return the inorder traversal of its nodes' values.
 	*/
 	public static List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> traversedNodes = new ArrayList<>();
-        
-        if(root != null) {
-        	Stack<TreeNode> stack = new Stack<>();
-        	TreeNode current = root;
+		List<Integer> result = new ArrayList<>();
+		LinkedList<TreeNode> stack = new LinkedList<>();
 
-        	while(!stack.isEmpty() || current != null) {
-        		while(current != null) {
-        			stack.push(current);
-        			current = current.left;
-        		}
-        		
-        		current = stack.pop();
-        		traversedNodes.add(current.val);
-        		current = current.right;
-        	}
-        }
+		while(true) {
+			while(root != null) {
+				stack.push(root);
+				root = root.left;
+			}
+			if(stack.isEmpty())
+				break;
+			
+            result.add(stack.peek().val);
+			root = stack.pop().right;
+		}
 
-        return traversedNodes;
+		return result;
     }
 	
 	/*
 	Leetcode#145. Binary Tree Postorder Traversal
 	Given a binary tree, return the postorder traversal of its nodes' values.
-	*/	
+	*/
 	public static List<Integer> postorderTraversal(TreeNode root) {
 		List<Integer> result = new LinkedList<>();
-		
-		if(root != null) {
-			Stack<TreeNode> stack = new Stack<>();
-			TreeNode current = root;
-			
-			while(!stack.isEmpty() || current != null) {
-				while(current != null) {
-					result.add(current.val);
-					stack.push(current);
-					current = current.right;
-				}
-				
-				current = stack.pop().left;
+		LinkedList<TreeNode> stack = new LinkedList<>();
+
+		while(true) {
+			while(root != null) {
+				result.add(0, root.val);
+				stack.push(root);
+				root = root.right;
 			}
-			
-			Collections.reverse(result);
+            if(stack.isEmpty())
+                break;
+            
+            root = stack.pop().left;
 		}
-        
+		
 		return result;
     }
 	
@@ -115,17 +106,15 @@ public class TraversalsUtil {
     public static List<Integer> postorder(Node root) {
     	List<Integer> result = new LinkedList<>();
     	if(root != null) {
-    		Stack<Node> stack = new Stack<>();
+    		LinkedList<Node> stack = new LinkedList<>();
     		stack.push(root);
     		while(!stack.isEmpty()) {
     			Node node = stack.pop();
-    			result.add(node.val);
+    			result.add(0, node.val);
     			for(Node child : node.children) {
     				stack.push(child);
     			}
     		}
-    		
-    		Collections.reverse(result);
     	}
     	
     	return result;       

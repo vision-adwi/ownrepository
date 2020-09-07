@@ -1,6 +1,10 @@
 package com.practice.graph;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 /*
 Leetcode#207. Course Schedule
@@ -10,6 +14,45 @@ Given the total number of courses and a list of prerequisite pairs, is it possib
 */
 public class CourseSchedule {
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
+		Map<Integer, Set<Integer>> graph = new HashMap<>();
+		int[] indegree = new int[numCourses];
+		
+		for(int i = 0; i < numCourses; i++)
+			graph.put(i, new HashSet<>());
+			
+		for(int[] edge : prerequisites) {
+			graph.get(edge[1]).add(edge[0]);
+			indegree[edge[0]]++;
+		}
+
+		List<Integer> noInDegree = new LinkedList<>();
+		for(int i = 0; i < numCourses; i++) {
+			if(indegree[i] == 0)
+				noInDegree.add(i);
+		}
+		
+		List<Integer> next = new LinkedList<>();	
+		while (!noInDegree.isEmpty()) {
+			numCourses = numCourses - noInDegree.size();
+			for (Integer node : noInDegree) {
+				for (Integer neighbor : graph.get(node)) {
+					indegree[neighbor]--;
+
+					if (indegree[neighbor] == 0) {
+						next.add(neighbor);
+					}
+				}
+				graph.remove(node);
+			}
+
+			noInDegree = next;
+			next = new LinkedList<>();
+		}
+		
+		return (numCourses == 0);
+	}
+
+	public boolean canFinish_(int numCourses, int[][] prerequisites) {
 		DirectedGraph graph = new DirectedGraph(numCourses);
 		for(int row = 0; row < prerequisites.length; row++) {
 			graph.addEdge(prerequisites[row][1], prerequisites[row][0]);
@@ -49,7 +92,7 @@ public class CourseSchedule {
 		int numCourses = 4;
 		int[][] prerequisites = { { 1, 0 }, { 2, 1 }, { 3, 2 } };
 		CourseSchedule completion = new CourseSchedule();
-		System.out.println(completion.canFinish(numCourses, prerequisites));
+		System.out.println(completion.canFinish(2, new int[][]{}));
 	}
 }
 

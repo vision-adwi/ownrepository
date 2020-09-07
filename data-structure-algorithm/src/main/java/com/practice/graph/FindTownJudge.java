@@ -14,17 +14,17 @@ If the town judge exists and can be identified, return the label of the town jud
 */	
 public class FindTownJudge {
     public int findJudge(int N, int[][] trust) {
-        int[] beingTrusted = new int[N];
-        int[] whoTrust = new int[N];
-        
+        int[] beingTrusted = new int[N + 1];
+        int[] whoTrust = new int[N + 1];
+
         for(int row = 0; row < trust.length; row++) {
-            whoTrust[trust[row][0] - 1]++;
-            beingTrusted[trust[row][1] - 1]++;
+            whoTrust[trust[row][0]]++;
+            beingTrusted[trust[row][1]]++;
         }
 
-        for(int index = 0; index < beingTrusted.length; index++) {
-            if((beingTrusted[index] == (N - 1)) && (whoTrust[index] == 0)){
-                return index+1;
+        for(int index = 1; index < beingTrusted.length; index++) {
+            if((beingTrusted[index] == (N-1)) && (whoTrust[index] == 0)){
+                return index;
             }
 
         }

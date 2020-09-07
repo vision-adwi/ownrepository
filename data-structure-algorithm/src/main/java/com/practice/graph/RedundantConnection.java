@@ -40,10 +40,9 @@ public class RedundantConnection {
 	}
 	
 	private Integer create(Integer element) {
-		Set<Integer> set = new HashSet<>();
-		set.add(element);
-		
-		disjointSet.put(element, set);
+		disjointSet.putIfAbsent(element, new HashSet<>());
+		disjointSet.get(element).add(element);
+
 		return element;
 	}
 	
@@ -57,18 +56,13 @@ public class RedundantConnection {
 	}
 	
 	private void union(Integer leader1, Integer leader2) {
-		if(disjointSet.get(leader1).size() > disjointSet.get(leader2).size()) {
-			for(Integer element : disjointSet.get(leader2)) {
-				disjointSet.get(leader1).add(element);
-			}
-			disjointSet.remove(leader2);
+		Integer from = (disjointSet.get(leader1).size() > disjointSet.get(leader2).size()) ? leader2 : leader1;
+		Integer to = (from == leader1) ? leader2 : leader1;
+
+		for (Integer element : disjointSet.get(from)) {
+			disjointSet.get(to).add(element);
 		}
-		else {
-			for(Integer element : disjointSet.get(leader1)) {
-				disjointSet.get(leader2).add(element);
-			}
-			disjointSet.remove(leader1);
-		}
+		disjointSet.remove(from);
 	}
 
 	public static void main(String[] s) {

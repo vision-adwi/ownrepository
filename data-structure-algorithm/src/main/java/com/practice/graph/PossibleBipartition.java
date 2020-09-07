@@ -34,6 +34,7 @@ public class PossibleBipartition {
 				colors[i] = 'R';
 				visited[i] = true;
 				queue.offer(i);
+				
 				if(!dfs(graph, queue, colors, visited))
 					return false;
 			}
@@ -53,7 +54,6 @@ public class PossibleBipartition {
 						colors[neighbor] = shade;
 						visited[neighbor] = true;
 						queue.offer(neighbor);
-						dfs(graph, queue, colors, visited);
 					}
 					else {
 						if(colors[vertex] == colors[neighbor])

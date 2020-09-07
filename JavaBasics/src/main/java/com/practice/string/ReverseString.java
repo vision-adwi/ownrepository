@@ -75,11 +75,11 @@ public class ReverseString {
 		return new String(targetArray);
 	}
 	
-	private static void reverseStream(String original) {
+	/*private static void reverseStream(String original) {
 		return IntStream.range(0, original.length())
 				.map(i -> original.charAt(original.length() - i - 1))
 				.collect(StringBuilder::new, (s, c) -> s.append((char) c), String(s));
 		
-	}
+	}*/
 
 }

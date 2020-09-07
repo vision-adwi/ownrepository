@@ -12,7 +12,7 @@ public class ObjectWriter {
 
 	public static void main(String[] args) {
 		Address address = new Address("B2-404", "Poetree", "12th Cross", "Bangalore", 560035);
-		Employee employee = new Employee("K9998", 155000, address);
+		Employee employee = new Employee("K9998", 155000, address, "Ghanshyam");
 		employee.setLocation("Cracko");
 		File file = new File("employee.ser");
 		ObjectOutputStream oos;

@@ -19,7 +19,7 @@ Assignment rules: 1. Final instance variable must either be initialized at decla
 				  5. When the static keyword is used with final modifier then the variable becomes a compile time constant.
 Access rules: 
 Inheritance rules: 1. Final class can not be extended(prevented from the 'power of inheritance'). Once you declare a class final
-					  all ite's methods declared final.
+					  all it's methods declared final.
 				   2. Final methods can not be overridden by sub-classes.
 Inner class rules: 
 Interface rules: 1. Member variable define here is final(implicitly), not assigning value during declaration will throw error.

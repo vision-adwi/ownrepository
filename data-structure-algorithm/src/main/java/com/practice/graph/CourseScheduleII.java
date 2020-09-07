@@ -1,8 +1,11 @@
 package com.practice.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 /*
@@ -14,6 +17,48 @@ There may be multiple correct orders, you just need to return one of them. If it
 */
 public class CourseScheduleII {
 	public int[] findOrder(int numCourses, int[][] prerequisites) {
+		Map<Integer, Set<Integer>> graph = new HashMap<>();
+		int[] indegree = new int[numCourses];
+		
+		for(int i = 0; i < numCourses; i++)
+			graph.put(i, new HashSet<>());
+			
+		for(int[] edge : prerequisites) {
+			graph.get(edge[1]).add(edge[0]);
+			indegree[edge[0]]++;
+		}
+
+		List<Integer> noInDegree = new LinkedList<>();
+		for(int i = 0; i < numCourses; i++) {
+			if(indegree[i] == 0)
+				noInDegree.add(i);
+		}
+		
+		int[] order = new int[numCourses]; 
+		int index = 0;
+		List<Integer> next = new LinkedList<>();	
+		while (!noInDegree.isEmpty()) {
+			numCourses = numCourses - noInDegree.size();
+			for (Integer node : noInDegree) {
+				for (Integer neighbor : graph.get(node)) {
+					indegree[neighbor]--;
+
+					if (indegree[neighbor] == 0) {
+						next.add(neighbor);
+					}
+				}
+				order[index++] = node;
+				graph.remove(node);
+			}
+
+			noInDegree = next;
+			next = new LinkedList<>();
+		}
+		
+		return (numCourses == 0) ? order : new int[]{};
+	}
+	
+	public int[] findOrder_(int numCourses, int[][] prerequisites) {
 		DirectedGraph graph = new DirectedGraph(numCourses);
 		for(int row = 0; row < prerequisites.length; row++) {
 			graph.addEdge(prerequisites[row][1], prerequisites[row][0]);

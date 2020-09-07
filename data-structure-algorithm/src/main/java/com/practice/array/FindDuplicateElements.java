@@ -16,8 +16,9 @@ public class FindDuplicateElements {
             int index = Math.abs(data) - 1;
             if(nums[index] < 0)
                 result.add(index + 1);
-            
-            nums[index] = - nums[index];
+            else {
+            	nums[index] = - nums[index];
+            }
         }
         
         return result;

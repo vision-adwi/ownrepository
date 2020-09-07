@@ -1,8 +1,5 @@
 package com.practice.tree.bst;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.practice.tree.util.TreeNode;
 /*
 Leetcode#235. Lowest Common Ancestor of a Binary Search Tree
@@ -14,38 +11,17 @@ Given binary search tree:  root = [6,2,8,0,4,7,9,null,null,3,5]
 	*/	
 public class LCABST {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        List<TreeNode> pathP = new ArrayList<>();
-        List<TreeNode> pathQ = new ArrayList<>();
-        search(root, p, pathP);
-        search(root, q, pathQ);
-        
-        TreeNode ancestor = null; 
-        int index = 0;
-        for(TreeNode path : pathP) {
-        	if(index >= pathQ.size() || path != pathQ.get(index++))
-        		break;
-        	
-        	ancestor = path;
-        }
-        
-        return ancestor;
+        if (root == null)
+			return null;
+
+		if ((p.val < root.val) && (q.val < root.val)) {
+			return lowestCommonAncestor(root.left, p, q);
+		} else if ((p.val > root.val) && (q.val > root.val)) {
+			return lowestCommonAncestor(root.right, p, q);
+		} else {
+			return root;
+		}
     }
-	
-	private void search(TreeNode theNode, TreeNode target, List<TreeNode> path) {
-		if(theNode == null)
-			return;
-		
-		path.add(theNode);
-		if(theNode == target) {
-			return;
-		}
-		if(target.val < theNode.val) {
-			search(theNode.left, target, path);
-		}
-		else {
-			search(theNode.right, target, path);
-		}
-	}
 	
 	public static void main(String[] s) {
 		TreeNode root = new TreeNode(6);

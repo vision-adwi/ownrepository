@@ -31,7 +31,7 @@ public class DFSClient {
 	*/
 	public List<List<Integer>> pathSum(TreeNode root, int sum) {
     	List<List<Integer>> result = new ArrayList<>();
-    	DFSTreeUtil.checkSum(root, sum, 0, new ArrayList<>(), result);
+    	DFSTreeUtil.checkSum(root, sum, new ArrayList<>(), result);
     	return result;
     }
 	
@@ -41,21 +41,6 @@ public class DFSClient {
 	*/
 	public int sumOfLeftLeaves(TreeNode root) {
         return DFSTreeUtil.findNextLeaves(root, true);
-    }
-	
-	/*
-	Leetcode#1325. Delete Leaves With a Given Value
-	Given a binary tree root and an integer target, delete all the leaf nodes with value target.
-
-	Note that once you delete a leaf node with value target, if it's parent node becomes a leaf node and has the value target, 
-	it should also be deleted (you need to continue doing that until you can't).
-	*/
-	public TreeNode removeLeafNodes(TreeNode root, int target) {
-        TreeNode modifiedRoot = root;
-        if(DFSTreeUtil.delete(root, target))
-        	modifiedRoot = null;
-        
-        return modifiedRoot;
     }
 
 	/*
@@ -67,5 +52,15 @@ public class DFSClient {
     	DFSTreeUtil.allPaths(root, paths, new ArrayList<>());
         
     	return paths;
+    }
+	
+    /*
+    Leetcode#101. Symmetric Tree
+    */
+	public boolean isSymmetric(TreeNode root) {
+        if(root == null)
+            return true;
+        
+        return DFSTreeUtil.checkSymmetry(root.left, root.right);
     }
 }

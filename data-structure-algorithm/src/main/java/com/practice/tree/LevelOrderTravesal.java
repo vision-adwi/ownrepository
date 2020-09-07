@@ -25,8 +25,7 @@ public class LevelOrderTravesal {
 
 				List<Integer> levelValues = new ArrayList<>();
 				while (size-- > 0) {
-					TreeNode theNode = queue.poll();
-					
+					TreeNode theNode = queue.poll();					
 					levelValues.add(theNode.val);
 
 					if (theNode.left != null)
@@ -92,10 +91,8 @@ public class LevelOrderTravesal {
 
 				int largest = Integer.MIN_VALUE;
 				while (size-- > 0) {
-					TreeNode theNode = queue.poll();
-
-					if (theNode.val > largest)
-						largest = theNode.val;
+					TreeNode theNode = queue.poll();					
+					largest = Math.max(largest, theNode.val);
 
 					if (theNode.left != null)
 						queue.offer(theNode.left);
@@ -119,18 +116,13 @@ public class LevelOrderTravesal {
 		Queue<TreeNode> queue = new LinkedList<>();
 		queue.offer(root);
 
-		int bottomLeftMost = root.val;
+		int leftMostNode = root.val;
 		while (!queue.isEmpty()) {
 			int size = queue.size();
 
-			boolean captured = false;
+			leftMostNode = queue.peek().val;
 			while (size-- > 0) {
 				TreeNode theNode = queue.poll();
-
-				if (!captured) {
-					bottomLeftMost = theNode.val;
-					captured = true;
-				}
 
 				if (theNode.left != null)
 					queue.offer(theNode.left);
@@ -140,7 +132,7 @@ public class LevelOrderTravesal {
 			}
 		}
 
-		return bottomLeftMost;
+		return leftMostNode;
 	}
 	
 	/*

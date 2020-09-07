@@ -8,12 +8,12 @@ public class ValidateBinaryTree {
     	Queue<Integer> queue = new LinkedList<>();
     	boolean[] visited = new boolean[n];
     	
-    	int pointer = 0;
+    	//int pointer = 0;
     	
     	queue.offer(0);
     	visited[0] = true;
     	while(!queue.isEmpty()) {
-    		queue.poll();
+    		int pointer = queue.poll();
     		int leftNode = leftChild[pointer];
     		if(leftNode != -1) {
     			if(visited[leftNode]) {
@@ -31,11 +31,10 @@ public class ValidateBinaryTree {
     			queue.offer(rightNode);
     			visited[rightNode] = true;
     		}
-    		
-    		pointer++;
     	}
     	
-    	return pointer < n;
+    	return false;
+    	//return pointer < n;
         
     }
     

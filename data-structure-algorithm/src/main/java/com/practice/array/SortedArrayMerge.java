@@ -9,29 +9,20 @@ You may assume that nums1 has enough space (size that is greater or equal to m +
 */
 public class SortedArrayMerge {
 	public void merge(int[] nums1, int m, int[] nums2, int n) {
-		int j = 0;
-		int pos = 0;
-		for(; pos < m; pos++) {
-			if(j >= n)
+		int index = nums1.length - 1;
+		while(true) {
+			if(m == 0 && n == 0)
 				break;
 			
-			int ele = nums2[j];
-			if(nums1[pos] <= ele)
-				continue;
-			
-			int idx = m;
-			while(idx > pos) {
-				nums1[idx] = nums1[idx - 1];
-				
-				idx--;
+			if((n == 0) || (m > 0) && nums1[m - 1] > nums2[n - 1]) {
+				nums1[index--] = nums1[m - 1];
+				m--;
 			}
-			nums1[pos] = ele;
-			m++; j++;
+			else {
+				nums1[index--] = nums2[n - 1];
+				n--;
+			}
 		}
 		
-		while(j < n) {
-			nums1[pos++] = nums2[j++]; 
-		}
-    
 	}
 }

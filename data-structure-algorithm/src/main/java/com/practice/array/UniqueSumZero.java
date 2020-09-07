@@ -24,4 +24,19 @@ public class UniqueSumZero {
         return result;
  
     }
+    
+    public int[] sumZero_new(int n) {
+        boolean even = (n % 2) == 0;
+        int end = n / 2;
+        
+        int[] result = new int[n];
+        for(int i = n - 1; i >= 0; i--) {
+            if(even && (end == 0))
+                end--;
+            
+            result[i] = end--;
+        }
+        
+        return result;
+    }
 }

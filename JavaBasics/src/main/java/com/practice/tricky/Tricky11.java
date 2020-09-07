@@ -10,6 +10,9 @@ public class Tricky11 {
 		double diff = 1.1 - 1.0;
 		System.out.println("1.1 - 1.0 = " + diff);
 		
+		float diff1 = 1.1f - 1.0f;
+		System.out.println("1.1f - 1.0f = " + diff1);
+		
 		//Solution - Use BigDecimal
 		BigDecimal minuend = new BigDecimal("1.1");
 		BigDecimal difference = minuend.subtract(new BigDecimal("1.0"));
