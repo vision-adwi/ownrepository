@@ -15,13 +15,8 @@ public class CountNegativeNumbers {
 				count = count + ((rows - i) * columns);
 				break;
 			}
-			for(int j = columns - 1; j >= 0; j--) {
-				if(grid[i][j] < 0) {
-					count++;
-				}
-				else {
-					break;
-				}
+			for(int j = columns - 1; j >= 0 && grid[i][j] < 0; j--) {
+				count++;
 			}
 		}
         

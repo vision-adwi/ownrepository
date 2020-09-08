@@ -8,6 +8,15 @@ A row i is weaker than row j, if the number of soldiers in row i is less than th
 or they have the same number of soldiers but i is less than j. Soldiers are always stand in the frontier of a row, that is, always ones may appear first and then zeros.
 */
 import java.util.stream.IntStream;
+/*
+Leetcode#1337. The K Weakest Rows in a Matrix
+Given a m * n matrix mat of ones (representing soldiers) and zeros (representing civilians), return the indexes of 
+the k weakest rows in the matrix ordered from the weakest to the strongest.
+
+A row i is weaker than row j, if the number of soldiers in row i is less than the number of soldiers in row j, 
+or they have the same number of soldiers but i is less than j. Soldiers are always stand in the frontier of a row, 
+that is, always ones may appear first and then zeros.
+*/
 
 public class WeakestRows {
 	public int[] kWeakestRows(int[][] mat, int k) {
@@ -22,8 +31,8 @@ public class WeakestRows {
 			}
 		}
 
-		for (int row = 0; row < mat.length && i < k; row++) {
-			if (mat[row][mat[0].length-1] == 1)
+		for (int row = 0; row < mat.length && i < k; row++) { //If the result can not be filled
+			if (mat[row][0] == 1)
 				result[i++] = row;
 		}
 

@@ -21,18 +21,14 @@ public class LuckyNumbers {
                     min = j;
                 }
             }
-            
-            boolean isLucky = true;
+
             for(int k = 0; k < matrix.length; k++) {
                 if(matrix[k][min] > matrix[i][min]) {
-                    isLucky = false;
                     break;
-                }   
+                } 
+                if(k == matrix.length - 1)
+                	lucky.add(matrix[i][min]);
             }
-            
-            if(isLucky)
-                lucky.add(matrix[i][min]);
-            
         }
         
         return lucky;
