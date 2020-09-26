@@ -18,7 +18,7 @@ public class SubsetsDuplicate {
     }
 	
 	private void find(List<List<Integer>> res, List<Integer> curr, int[] nums, int index) {
-		if(index == nums.length) {
+		if(index >= nums.length) {
 			System.out.println(curr);
 			res.add(new ArrayList<>(curr));
 			return;

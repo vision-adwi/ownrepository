@@ -8,16 +8,18 @@ Write an efficient algorithm that searches for a value in an m x n matrix. This 
 */
 public class Search2DMatrix {
     public static boolean searchMatrix(int[][] matrix, int target) {
-		if (matrix.length != 0) {
+    	int rows = matrix.length;
+    	int cols = matrix[0].length;
+    	
+		if (rows != 0) {
 			int lower = 0;
-			int upper = (matrix.length * matrix[0].length) - 1;
+			int upper = (rows * cols) - 1;
 
-			int col = matrix[0].length;
 			while (lower <= upper) {
 				int mid = (lower + upper) / 2;
-				if (matrix[mid / col][mid % col] == target) {
+				if (matrix[mid / cols][mid % cols] == target) {
 					return true;
-				} else if (matrix[mid / col][mid % col] > target) {
+				} else if (matrix[mid / cols][mid % cols] > target) {
 					upper = mid - 1;
 				} else {
 					lower = mid + 1;

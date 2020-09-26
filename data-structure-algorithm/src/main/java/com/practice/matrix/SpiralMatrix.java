@@ -9,45 +9,41 @@ Given a matrix of m x n elements (m rows, n columns), return all elements of the
 public class SpiralMatrix {
     public List<Integer> spiralOrder(int[][] matrix) {
     	List<Integer> result = new ArrayList<>();
+    	
     	if(matrix.length == 0)
     		return result;
     	
-    	int elements = matrix.length * matrix[0].length;
-
     	int right = matrix[0].length;
     	int bottom = matrix.length;
-    	int left = 0;
-    	int top = 1;
+    	int left = -1;
+    	int top = 0;
     	
-    	int row = -1, column = -1; 
-		while (true) {
-			row++; column++;
-			while (column < right) 
-				result.add(matrix[row][column++]);
-
-			if(result.size() == elements) break;
-			
-			column--; row++;
-			while (row < bottom) 
-				result.add(matrix[row++][column]);
-			
-			if(result.size() == elements) break;
-			
-			row--; column--;
-			while (column >= left) 
-				result.add(matrix[row][column--]);
-
-			if(result.size() == elements) break;
-			
-			column++; row--;
-			while (row >= top) 
-				result.add(matrix[row--][column]);
-			
-			if(result.size() == elements) break;
-
-			right--; bottom--; left++; top++;
-		}
-
+    	while(true) {
+    		for(int col = left + 1; col < right; col++) {
+    			result.add(matrix[top][col]); 
+    		}
+    		right--;
+    		if(left >= right) break;
+    		
+    		for(int row = top + 1; row < bottom; row++) {
+    			result.add(matrix[row][right]);
+    		}
+    		bottom--;
+    		if(top >= bottom) break;
+    		
+    		for(int col = right - 1; col > left; col--) {
+    			result.add(matrix[bottom][col]);
+    		}
+    		left++;
+    		if(left >= right) break;
+    		
+    		for(int row = bottom - 1; row > top; row--) {
+    			result.add(matrix[row][left]);
+    		}
+    		top++;
+    		if(top >= bottom) break;
+    	}
+    	
     	return result;
     }
 }

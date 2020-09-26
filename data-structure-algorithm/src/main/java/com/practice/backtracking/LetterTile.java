@@ -16,15 +16,14 @@ public class LetterTile {
 	
 	private int possibilities(int[] frequency) {
 		int count = 0;
-		for(int i = 0; i < 26; i++) {
-			if(frequency[i] == 0)
-				continue;
-			
-			count++;
-			frequency[i]--;
-			
-			count = count + possibilities(frequency);
-			frequency[i]++;
+		for (int i = 0; i < 26; i++) {
+			if (frequency[i] > 0) {
+				count++;
+
+				frequency[i]--;
+				count = count + possibilities(frequency);
+				frequency[i]++;
+			}
 		}
 		
 		return count;	

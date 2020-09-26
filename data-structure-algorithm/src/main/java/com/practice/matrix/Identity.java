@@ -17,21 +17,19 @@ public class Identity {
 	private static boolean isIdentityMatrix(int[][] intArray) {
 		int rows = intArray.length;
 		int columns = intArray[0].length;
-		
-		boolean isIdentity = true;
+
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
 				if (i == j) {
 					if (intArray[i][i] != 1) {
-						isIdentity = false;
-						break;
+						return false;
 					}
 				} else if (intArray[i][j] != 0) {
-					isIdentity = false;
-					break;
+					return false;
 				}
 			}
 		}
-		return isIdentity;
+		
+		return true;
 	}
 }

@@ -27,24 +27,24 @@ public class QueueUsingStack {
     
     /** Removes the element from in front of queue and returns that element. */
 	public int pop() {
-		if (popStack.isEmpty()) {
-			while (!pushStack.isEmpty()) {
-				popStack.push(pushStack.pop());
-			}
-		}
+		pour();
 
 		return popStack.pop();
 	}
     
     /** Get the front element. */
     public int peek() {
-		if (popStack.isEmpty()) {
+		pour();
+
+		return popStack.peek();
+    }
+    
+    private void pour() {
+    	if (popStack.isEmpty()) {
 			while (!pushStack.isEmpty()) {
 				popStack.push(pushStack.pop());
 			}
 		}
-
-		return popStack.peek();
     }
     
     /** Returns whether the queue is empty. */

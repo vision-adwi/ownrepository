@@ -1,5 +1,9 @@
 package com.practice.linkedlist;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import com.practice.util.ListNode;
 
 public class LLUtils {
@@ -105,6 +109,70 @@ public class LLUtils {
 		}
 		
 		return result;
+	}
+	
+	/*
+	Leetcode#1019. Next Greater Node In Linked List
+	We are given a linked list with head as the first node.  Let's number the nodes in the list: node_1, node_2, node_3, ... etc.
+
+	Each node may have a next larger value: for node_i, next_larger(node_i) is the node_j.val such that j > i, node_j.val > node_i.val, 
+	and j is the smallest possible choice.  If such a j does not exist, the next larger value is 0.
+	Return an array of integers answer, where answer[i] = next_larger(node_{i+1}).
+
+	Note that in the example inputs (not outputs) below, arrays such as [2,1,5] represent the serialization of a linked list 
+	with a head node value of 2, second node value of 1, and third node value of 5.
+	*/
+	public int[] nextLargerNodes(ListNode head) {
+		List<Integer> list = new ArrayList<>();
+		LinkedList<Integer> stack = new LinkedList<>();
+		
+		while(head != null) {
+			list.add(head.val);
+			head = head.next;
+		}
+		
+		int[] result = new int[list.size()];
+		for(int i = list.size() - 1; i >= 0; i--) {
+			while(!stack.isEmpty() && list.get(i) >= stack.peek())
+				stack.poll();
+			
+			if(stack.isEmpty())
+				result[i] = 0;
+			else
+				result[i] = stack.peek();
+			
+			stack.push(list.get(i));
+		}
+		
+		return result;
+	}
+	
+	public ListNode removeFromCircularList(ListNode head) {
+		ListNode slow = head;
+		ListNode fast = head;
+		
+		while(fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+			if(slow == fast) {
+				if(fast == head) {
+					head = head.next;
+					fast.next = null;
+					break;
+				}
+				fast = head;
+				ListNode previous = null;
+				while(slow != fast) {
+					previous = slow;
+					fast = fast.next;
+					slow = slow.next;
+				}
+				previous.next = null;
+				break;
+			}
+		}
+		
+		return head;
 	}
 
 }

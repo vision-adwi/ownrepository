@@ -2,7 +2,7 @@ package com.practice.linkedlist;
 
 import com.practice.util.ListNode;
 
-public class LinkedListOrdering {
+public class Ordering {
 	/*
 	Leetcode#143. Reorder List
 	*/
@@ -104,4 +104,56 @@ public class LinkedListOrdering {
     	return preHead.next;
     }
 	
+    /*
+    Leetcode#147. Insertion Sort List
+    Sort a linked list using insertion sort.
+    */
+	public ListNode insertionSortList(ListNode head) {
+		ListNode preHead = new ListNode(0);
+
+		ListNode tmp;
+		while (head != null) {
+			ListNode previous = preHead;
+			ListNode current = previous.next;
+
+			while (current != null && current.val <= head.val) {
+				previous = current;
+				current = previous.next;
+			}
+			previous.next = head;
+			tmp = head.next;
+			head.next = current;
+
+			head = tmp;
+		}
+
+		return preHead.next;
+	}
+	
+	/*
+	Leetcode#328. Odd Even Linked List
+	Given a singly linked list, group all odd nodes together followed by the even nodes. 
+	Please note here we are talking about the node number and not the value in the nodes.
+
+	You should try to do it in place. The program should run in O(1) space complexity and O(nodes) time complexity.
+	*/
+	public ListNode oddEvenList(ListNode head) {
+		if(head == null || head.next == null || head.next.next == null)
+			return head;
+		
+		ListNode odd = head;
+		ListNode even = odd.next;
+		ListNode evenHead = even;
+		
+		while (even != null && even.next != null) {
+			odd.next = even.next;
+			odd = odd.next;
+
+			even.next = odd.next;
+			even = even.next;
+		}
+		
+		odd.next = evenHead;
+		return head;
+	}
 }

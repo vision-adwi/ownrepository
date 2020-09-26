@@ -9,10 +9,10 @@ public class LongestSubstring {
     	int max = 0;
     	int i = 0, j = 0;
     	while(j < s.length()) {
-    		char aChar = s.charAt(j);
+    		char aChar = s.charAt(j++);
     		if(chars[aChar] == 0) {
     			chars[aChar]++;
-    			max = Math.max(max, ((j - i) + 1));
+    			max = Math.max(max, (j - i));
     		}
     		else {
     			char bChar = s.charAt(i++);
@@ -21,8 +21,6 @@ public class LongestSubstring {
     				bChar = s.charAt(i++);
     			}
     		}
-    		
-    		j++;
     	}
     	
     	return max;

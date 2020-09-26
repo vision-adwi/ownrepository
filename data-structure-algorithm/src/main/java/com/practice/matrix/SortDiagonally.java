@@ -5,9 +5,12 @@ Given a m * n matrix mat of integers, sort it diagonally in ascending order from
 */	
 public class SortDiagonally {
 	public int[][] diagonalSort(int[][] mat) {
-		for (int threshold = mat[0].length - 1; threshold > 0; threshold--) {
-			for (int row = 0; row < mat.length - 1; row++) {
-				for (int column = threshold; column > 0; column--) {
+		int rowThreshold = mat.length - 1;
+		int colThreshold = mat[0].length - 1;
+		
+		while(rowThreshold > 0 && colThreshold > 0) {
+			for (int row = 0; row < rowThreshold; row++) {
+				for (int column = colThreshold; column > 0; column--) {
 					if (mat[row + 1][column] < mat[row][column - 1]) {
 						int tmp = mat[row + 1][column];
 						mat[row + 1][column] = mat[row][column - 1];
@@ -15,6 +18,8 @@ public class SortDiagonally {
 					}
 				}
 			}
+			
+			rowThreshold--; colThreshold--;
 		}
 
 		return mat;

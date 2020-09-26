@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 /*
 Leetcode# 77. Combinations
-Given two integers n and k, return all possible combinations of k numbers out of 1 ... n.
+Given two integers n and k, return all possible unique combinations of k numbers out of 1 ... n.
 */
 public class Combination {
 	public List<List<Integer>> combine(int n, int k) {
@@ -30,7 +30,7 @@ public class Combination {
 	
 	public static void main(String[] s) {
 		Combination com = new Combination();
-		com.combine(4, 3);
+		com.combine(4, 2);
 	}
 
 }

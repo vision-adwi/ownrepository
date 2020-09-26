@@ -5,6 +5,10 @@ public abstract class Observer {
 	
 	protected Observer(Subject theSubject) {
 		subject = theSubject;
+		selfReistry();
+	}
+	
+	private void selfReistry() {
 		subject.addObserver(this);
 	}
 	

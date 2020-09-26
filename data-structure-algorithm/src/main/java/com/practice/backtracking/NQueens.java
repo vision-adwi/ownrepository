@@ -2,6 +2,7 @@ package com.practice.backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 /*
 Leetcode#51. N-Queens
@@ -10,54 +11,59 @@ The n-queens puzzle is the problem of placing n queens on an n×n chessboard such
 public class NQueens {
 	public List<List<String>> solveNQueens(int n) {
 		List<List<String>> result = new ArrayList<>();
-		positionQueens(n, 0, new ArrayList<>(), result);
+		position(n, new boolean[n][n], 0, result);
 		return result;
     }
-	
-	private void positionQueens(int N, int row, List<List<Integer>> positions, List<List<String>> result) {
-		if(positions.size() == N) {
-			result.add(stringConversion(positions));
+
+	private void position(int N, boolean[][] board, int row, List<List<String>> result) {
+		if(row >= N) {
+			result.add(toString(board));
 			return;
 		}
-		for(int column = 0; column < N; column++) {
-			if(!isSafePosition(row, column, positions))
+		
+		for(int col = 0; col < N; col++) {
+			if(row > 0 && !isSafe(board, row - 1, col))
 				continue;
 			
-			positions.add(Arrays.asList(row, column));
-			positionQueens(N, row + 1, positions, result);
-			positions.remove(positions.size() - 1);
-		}
+			board[row][col] = true;
+			position(N, board, row + 1, result);
+			board[row][col] = false;
+		}		
 	}
 	
-	private boolean isSafePosition(int qRow, int qColumn, List<List<Integer>> positions) {
-		for(List<Integer> position : positions) {
-			int row = position.get(0);
-			int column = position.get(1);
-			if(column == qColumn)
+	private boolean isSafe(boolean[][] board, int row, int col) {
+		int j = 1;
+		while(row >= 0) {
+			if(board[row][col]) 
 				return false;
-			
-			int diff = qRow - row;
-			if(Math.abs(column - qColumn) == diff)
+			if((col + j) < board.length && board[row][col + j])
 				return false;
+			if((col - j) >= 0 && board[row][col - j])
+				return false;
+
+			row--; j++;
 		}
 		
 		return true;
 	}
 	
-	private List<String> stringConversion(List<List<Integer>> positions) {
-		List<String> possibility = new ArrayList<>();
-		
-		char[] placement;
-		for(List<Integer> position : positions) {
-			placement = new char[positions.size()];
-			Arrays.fill(placement, '.');
-			placement[position.get(1)] = 'Q';
-			possibility.add(new String(placement));
+	private List<String> toString(boolean[][] board) {
+		List<String> position = new LinkedList<>();
+		StringBuilder sb;
+		for(boolean[]row : board) {
+			sb = new StringBuilder();
+			for(boolean col : row) {
+				if(col)
+					sb.append("Q");
+				else
+					sb.append(".");
+			}
+			position.add(sb.toString());
 		}
 		
-		return possibility;
+		return position;
 	}
-	
+
 	public static void main(String[] s) {
 		NQueens nQueeens = new NQueens();
 		System.out.println(nQueeens.solveNQueens(4));

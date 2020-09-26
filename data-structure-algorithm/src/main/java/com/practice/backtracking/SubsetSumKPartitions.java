@@ -4,6 +4,8 @@ import java.util.stream.IntStream;
 /*
 Leetcode #698. Partition to K Equal Sum Subsets
 Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into k non-empty subsets whose sums are all equal.
+
+Leetcode#473. Matchsticks to Square - Similar
 */
 public class SubsetSumKPartitions {
 	public static void main(String[] s) {
@@ -33,7 +35,7 @@ public class SubsetSumKPartitions {
 			return true;
 		
 		if(sum == target)
-			return fillBucket(nums, picked, 0, 0, target, k - 1);;
+			return fillBucket(nums, picked, 0, 0, target, k - 1);
 
 		for(int i = next; i < nums.length; i++) {
 			if(!picked[i]) {

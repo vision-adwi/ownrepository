@@ -11,7 +11,31 @@ The bookstore owner knows a secret technique to keep themselves not grumpy for X
 Return the maximum number of customers that can be satisfied throughout the day.
 */
 public class GrumpyStores {
-    public int maxSatisfied(int[] customers, int[] grumpy, int X) {
+	public int maxSatisfied(int[] customers, int[] grumpy, int X) {
+		int i = 0, j = 0;
+		
+		int max = Integer.MIN_VALUE;
+		int window = 0;
+		int total = 0;
+		int disatisfied = 0;
+		while(j < customers.length) {
+			total += customers[j];
+			disatisfied += customers[j] * grumpy[j];
+			
+			window += customers[j] * grumpy[j];
+			if(j >= X) {
+				window -= customers[i] * grumpy[i];
+				i++;
+			}
+			
+			max = Math.max(max, window);
+			j++;
+		}
+		
+		return (total - disatisfied + max);
+	}
+	
+    public int maxSatisfied_(int[] customers, int[] grumpy, int X) {
     	int i = 0, j = 0;
     	int unsatisfied_window = 0;
     	int unsatisfied_window_max = 0;

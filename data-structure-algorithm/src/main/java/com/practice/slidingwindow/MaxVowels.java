@@ -7,29 +7,25 @@ Return the maximum number of vowel letters in any substring of s with length k.
 */
 public class MaxVowels {
 	public int maxVowels(String s, int k) {
-		char[] chars = s.toCharArray();
+		int i = 0;
+		int j = 0;
 		
-		int i = 0, j = 0;
-		int vowels = 0;
-		int maxVowels = 0;
-		int len = k;
-		while(i < chars.length) {
-			len--;
-			if(isVowel(chars[i++]))
-				vowels++;
-			
-			if(len < 0) {
-				if(isVowel(chars[j++]))
-					vowels--;
+		int count = 0;
+		int max = 0;
+		while(j < s.length()) {
+			if(isVowel(s.charAt(j++))) {
+				count++;	
 			}
 			
-			maxVowels = Math.max(maxVowels, vowels);
+			if((j - i) > k) {
+				if(isVowel(s.charAt(i++)))
+					count--;
+			}
 			
-			if(k == maxVowels)
-				break;
+			max = Math.max(max, count);
 		}
-
-		return maxVowels;
+		
+		return max;
 	}
 	
 	private boolean isVowel(char ch) {
@@ -38,7 +34,7 @@ public class MaxVowels {
 	
 	public static void main(String[] s) {
 		MaxVowels vow = new MaxVowels();
-		System.out.println(vow.maxVowels("abciiidef", 3));
+		System.out.println(vow.maxVowels("aeiou", 2));
 	}
 
 }

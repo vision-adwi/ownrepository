@@ -6,33 +6,34 @@ public class OddEven {
 		Runnable odd = new OddGenerator(resource);
 		Runnable even = new EvenGenerator(resource);*/
 		NumberGenerator generator = new NumberGenerator();
-
+		
+		new Thread(generator::run).start();
+		new Thread(() -> generator.run()).start(); //2 flavors of calling(through lambda)
+		
+/*
 		Thread t1 = new Thread(generator);
 		t1.setName("Even");
 		Thread t2 = new Thread(generator);
 		t2.setName("Odd");
 		
 		t1.start();
-		t2.start();
+		t2.start();*/
 	}
 
 }
 
-class NumberGenerator implements Runnable {
-	Repository num;
-
-	NumberGenerator() {
-		num = new Repository();
-	}
+class NumberGenerator {
+	private volatile int num;
 
 	public void run() {
-		while (num.i < 10) {
-			synchronized (num) {
-				System.out.print(Thread.currentThread().getName() + ":" + num.i + " ");
-				num.i = num.i + 1;
-				num.notifyAll();
+		while (num < 20) {
+			synchronized (this) {
+				System.out.print(num + " "); //Thread.currentThread().getName() + ":" + 
+				num = num + 1;
+				notifyAll();
 				try {
-					num.wait();
+					Thread.sleep(2 * 1000);
+					wait();
 				} catch (InterruptedException e) {
 				}
 			}

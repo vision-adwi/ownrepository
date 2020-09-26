@@ -9,6 +9,23 @@ If there is no substring from s that can be changed to its corresponding substri
 */
 public class SubstringWithBudget {
 	public int equalSubstring(String s, String t, int maxCost) {
+		int i = 0;
+		int j = 0;
+		
+		int sum = 0;
+		int max = 0;
+		while(j < s.length()) {
+			sum = sum + Math.abs(s.charAt(j) - t.charAt(j++));
+			while(sum > maxCost) {
+				sum = sum - Math.abs(s.charAt(i) - t.charAt(i++));
+			}
+			
+			max = Math.max(max, (j - i));
+		}
+		return max;
+	}
+	
+	public int equalSubstring_(String s, String t, int maxCost) {
 		int[] diffs = new int[s.length()];
 		for (int k = 0; k < diffs.length; k++) {
 			diffs[k] = Math.abs(s.charAt(k) - t.charAt(k));

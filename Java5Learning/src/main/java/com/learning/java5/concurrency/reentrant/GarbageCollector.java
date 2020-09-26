@@ -22,6 +22,7 @@ public class GarbageCollector implements Runnable{
 			e.printStackTrace();
 		} finally {
 			reentrantLock.unlock();
+			//System.out.println("Lock count:" + reentrantLock.getHoldCount());
 		}
 
 	}

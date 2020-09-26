@@ -9,17 +9,17 @@ public class Reverses {
 	*/
 	public static ListNode reverseList(ListNode head) {
 		if (head != null) {
-			ListNode current = null;
-			ListNode nextNode = head;
+			ListNode previous = null;
+			ListNode current = head;
 
 			ListNode tmp;
-			while (nextNode != null) {
-				tmp = nextNode.next;
-				nextNode.next = current;
-				current = nextNode;
-				nextNode = tmp;
+			while (current != null) {
+				tmp = current.next;
+				current.next = previous;
+				previous = current;
+				current = tmp;
 			}
-			head = current;
+			head = previous;
 		}
 		
 		return head;
@@ -66,7 +66,7 @@ public class Reverses {
     	
     	while(tmp != null && tmp.next != null) {
     		prev = tmp;
-    		curr = prev.next;
+    		curr = tmp.next;
     		if(head == tmp)
     			head = curr;
     		

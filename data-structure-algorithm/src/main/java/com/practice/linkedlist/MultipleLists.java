@@ -107,12 +107,10 @@ public class MultipleLists {
         
         ListNode current = preHead;
         while(true) {
-            boolean allDone = true;
-            int minIndex = 0;
+            int minIndex = -1;
             for(int i = 0; i < lists.length; i++) {
                 if(lists[i] != null) {
-                    if(allDone){
-                        allDone = false;
+                    if(minIndex < 0){
                         minIndex = i;
                         continue;
                     }
@@ -122,7 +120,7 @@ public class MultipleLists {
                     }
                 }
             }
-            if(allDone)
+            if(minIndex < 0)
                 break;
             
             current.next = lists[minIndex];
@@ -133,4 +131,48 @@ public class MultipleLists {
         
         return preHead.next;
     }
+    
+    /*
+    Leetcode#430. Flatten a Multilevel Doubly Linked List
+    You are given a doubly linked list which in addition to the next and previous pointers, it could have a child pointer, 
+    which may or may not point to a separate doubly linked list. These child lists may have one or more children of their own, 
+    and so on, to produce a multilevel data structure, as shown in the example below.
+    Flatten the list so that all the nodes appear in a single-level, doubly linked list. You are given the head of the first level of the list.
+    */
+    public Node flatten(Node head) {
+        if(head != null)
+        	recursiveTraversal(head);
+        
+        return head;
+    }
+    
+    private Node recursiveTraversal(Node theNode) {
+    	Node previous = null;
+    	while(theNode != null) {
+    		Node tmp = theNode.next;
+    		if(theNode.child != null) {
+    			theNode.next = theNode.child;
+    			theNode.next.prev = theNode;
+    			theNode.child = null;
+    			
+    			Node node = recursiveTraversal(theNode.next);
+    			node.next = tmp;
+    			if(tmp != null)
+    				tmp.prev = node;
+    			else
+    				theNode = node;
+    		}
+    		previous = theNode;
+    		theNode = tmp;
+    	}
+    	
+    	return previous;
+    }
+}
+
+class Node {
+    public int val;
+    public Node prev;
+    public Node next;
+    public Node child;
 }

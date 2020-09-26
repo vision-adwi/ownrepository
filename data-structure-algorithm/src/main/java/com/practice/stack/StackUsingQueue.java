@@ -32,12 +32,24 @@ public class StackUsingQueue {
     }
     
     private int upsideDown() {
-    	Queue<Integer> tmp = new ArrayDeque<>();
-    	while(queue.size() > 1) {
-    		tmp.offer(queue.poll());
+    	int size = queue.size();
+    	while(size-- > 1) {
+    		queue.offer(queue.poll());
     	}
-    	int top = queue.poll();
-    	queue = tmp;
-    	return top;
+    	
+    	return queue.poll();
+    }
+    
+    public static void main(String[] s) {
+    	StackUsingQueue stack = new StackUsingQueue();
+    	
+    	stack.push(1);
+    	stack.push(2);
+    	stack.push(3);
+    	stack.push(4);
+    	stack.push(5);
+    	
+    	System.out.println(stack.pop());
+    	System.out.println(stack.pop());
     }
 }

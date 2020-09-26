@@ -17,11 +17,10 @@ public class ComplementInteger {
 			return 1;
 		
 		int decimal = 0, pos = 0;
-		int remaining = N;
-		while(remaining != 0) {
-			int bit = remaining % 2;
+		while(N != 0) {
+			int bit = N % 2;
 			decimal = decimal + ( (bit ^ 1) << pos++);
-			remaining = remaining / 2;
+			N = N / 2;
 		}
 		
 		return decimal;

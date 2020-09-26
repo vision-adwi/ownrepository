@@ -24,9 +24,8 @@ public class MinStack {
 			minElement = x;
 			stack[++top] = x;
 		} else if (x < minElement) {
-			long newItem = (2 * x) - minElement;
+			stack[++top] = (2 * x) - minElement;
 			minElement = x;
-			stack[++top] = newItem;
 		} else {
 			stack[++top] = x;
 		}

@@ -8,7 +8,27 @@ In one operation, you can choose any character of the string and change it to an
 Find the length of the longest sub-string containing all repeating letters you can get after performing the above operations.
 */
 public class LongestRepeatCharReplacement {
-    public int characterReplacement(String s, int k) {
+	public int characterReplacement(String s, int k) {
+		int[] frequency = new int[26];
+		
+		int i = 0;
+		int j = 0;
+		int maxFrequency = 0;
+		while(j < s.length()) {
+			char ch = s.charAt(j++);
+			frequency[ch - 'A']++;
+			maxFrequency = Math.max(maxFrequency, frequency[ch - 'A']);
+			
+			if(((j - i) - maxFrequency) > k) {
+				ch = s.charAt(i++);
+				frequency[ch - 'A']--;
+			}
+			
+		}
+		
+		return (j - i);
+	}
+    public int characterReplacement_(String s, int k) {
     	char[] chars = s.toCharArray();
     	boolean[] presence = new boolean[26];
     	for(char ch : chars)

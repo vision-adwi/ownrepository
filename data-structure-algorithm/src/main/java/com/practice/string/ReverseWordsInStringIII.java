@@ -34,7 +34,7 @@ public class ReverseWordsInStringIII {
  
 	public static void main(String[] s) {
 		ReverseWordsInStringIII reverse = new ReverseWordsInStringIII();
-		String s1 = "Let's take LeetCode contest";
+		String s1 = " Let's take LeetCode contest ";
 		System.out.println(reverse.reverseWords(s1));
 	}
 

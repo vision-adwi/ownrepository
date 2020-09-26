@@ -4,43 +4,40 @@ Leetcode#59. Spiral Matrix II
 Given a positive integer n, generate a square matrix filled with elements from 1 to n*n in spiral order.
 */
 public class SpiralMatrix2 {
-	public int[][] generateMatrix(int n) {	
-    	int[][] matrix = new int[n][n];
+    public int[][] generateMatrix(int n) {
+        int[][] matrix = new int[n][n];
     	int num = 1;
 
-    	int right = n;
-    	int bottom = n;
-    	int left = 0;
-    	int top = 1;
+    	int right = matrix[0].length;
+    	int bottom = matrix.length;
+    	int left = -1;
+    	int top = 0;
     	
-    	int row = -1, column = -1; 
-		while (true) {
-			row++; column++;
-			while (column < right) 
-				matrix[row][column++] = num++;
-
-			if(num > (n*n)) break;
-			
-			column--; row++;
-			while (row < bottom) 
-				matrix[row++][column] = num++;
-			
-			if(num > (n*n)) break;
-			
-			row--; column--;
-			while (column >= left) 
-				matrix[row][column--] = num++;
-
-			if(num > (n*n)) break;
-			
-			column++; row--;
-			while (row >= top) 
-				matrix[row--][column] = num++;
-			
-			if(num > (n*n)) break;
-
-			right--; bottom--; left++; top++;
-		}
+    	while(true) {
+    		for(int col = left + 1; col < right; col++) {
+    			matrix[top][col] = num++; 
+    		}
+    		right--;
+    		if(left >= right) break;
+    		
+    		for(int row = top + 1; row < bottom; row++) {
+    			matrix[row][right] = num++;
+    		}
+    		bottom--;
+    		if(top >= bottom) break;
+    		
+    		for(int col = right - 1; col > left; col--) {
+    			matrix[bottom][col] = num++;
+    		}
+    		left++;
+    		if(left >= right) break;
+    		
+    		for(int row = bottom - 1; row > top; row--) {
+    			matrix[row][left] = num++;
+    		}
+    		top++;
+    		if(top >= bottom) break;
+    	}
 
     	return matrix;
     }

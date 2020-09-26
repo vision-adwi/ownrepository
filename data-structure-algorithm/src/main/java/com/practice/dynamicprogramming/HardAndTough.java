@@ -11,19 +11,16 @@ public class HardAndTough {
 
 		for(int col = 0; col < size; col++) {
 			for(int row = size - 1; row >= 0; row--) {
-				if(row == col) {
+				if(row == col) { 
 					mem[row][col] = 1;
 				}
 				else if(row > col) {
 					mem[row][col] = 0;
 				}
 				else {
-					if(s.charAt(row) == s.charAt(col)) {
-						int l1 = 0;
-						if((col - row - 1) == mem[row + 1][col - 1]) {
-							l1 = 2 + mem[row + 1][col - 1];
-						}
-						mem[row][col] = Math.max(l1, Math.max(mem[row + 1][col], mem[row][col - 1]));
+					boolean found = (col - row - 1) == mem[row + 1][col - 1];
+					if(s.charAt(row) == s.charAt(col) && found) {
+						mem[row][col] = 2 + mem[row + 1][col - 1];
 					}
 					else {
 						mem[row][col] = Math.max(mem[row + 1][col], mem[row][col - 1]);

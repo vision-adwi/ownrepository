@@ -79,7 +79,7 @@ public class BitwiseUtils {
     */
     public int hammingDistance(int x, int y) {
         int count = 0;
-        while(x != 0 || y != 0) {
+        while(x != y) {
             if((x & 1) != (y & 1))
                 count++;
             
@@ -149,29 +149,6 @@ public class BitwiseUtils {
         
     	return steps;
     }
-    
-    /*
-    Leetcode#405. Convert a Number to Hexadecimal
-    Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used.
-    */
-    public String toHex(int num) {
-    	int octets = 8;
-    	char[] hex = new char[octets];
-    	
-    	int mask = 0b1111;
-    	while(--octets >= 0) {
-    		int val = num & mask;
-    		hex[octets] = (char)(((val / 10) == 1 ? 97 : 48) + (val % 10));
-    		num = num >> 4;
-    	}
-        
-    	int index = 0;
-    	while(index < 7 && hex[index] == '0') {
-    		index++;
-    	}
-    	
-    	return new String(hex, index, (8 - index));
-    }
 
     /*
     Leetcode#136. Single Number
@@ -230,15 +207,14 @@ public class BitwiseUtils {
         
     	int[] result = new int[arr.length];
     	int index = 0;
-    	for(int i = 0; i < 32; i++) {
-    		if(setBitsFrequency[i] == null)
-    			continue;
-    		
-    		Collections.sort(setBitsFrequency[i]);
-    		for(Integer v : setBitsFrequency[i]) {
-    			result[index++] = v;
-    		}
-    	}
+		for (int i = 0; i < 32; i++) {
+			if (setBitsFrequency[i] != null) {
+				Collections.sort(setBitsFrequency[i]);
+				for (Integer v : setBitsFrequency[i]) {
+					result[index++] = v;
+				}
+			}
+		}
     	
     	return result;
     }
@@ -246,7 +222,6 @@ public class BitwiseUtils {
     
     public static void main(String[] s) {
     	BitwiseUtils utils = new BitwiseUtils();
-    	System.out.println(utils.toHex(255));
     }
 } 
 

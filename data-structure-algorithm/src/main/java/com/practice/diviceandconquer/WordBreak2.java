@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/*
+Leetcode#140. Word Break II
+Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, 
+add spaces in s to construct a sentence where each word is a valid dictionary word. Return 
+all such possible sentences.
+*/
 public class WordBreak2 {
 	public List<String> wordBreak(String s, List<String> wordDict) {
 		Map<String, List<String>> mem = new HashMap<>();

@@ -17,23 +17,24 @@ public class Removals {
 	Remove all elements from a linked list of integers that have value val.
 	*/
 	public ListNode removeElements(ListNode head, int val) {
-		while (head != null && head.val == val) {
-			head = head.next;
-		}
+		ListNode preHead = new ListNode(0);
+		preHead.next = head;
 
-		ListNode current = head;
-		ListNode successor;
-		while (current != null) {
-			successor = current;
-			while (successor.next != null && successor.next.val == val) {
-				successor = successor.next;
-			}
+		ListNode previous = preHead;
+		ListNode current = previous.next;
+		while (true) {
+			while (current != null && current.val == val)
+				current = current.next;
 
-			current.next = successor.next;
+			previous.next = current;
+			if(current == null)
+				break;
+			
+			previous = current;
 			current = current.next;
 		}
 
-		return head;
+		return preHead.next;
 	}
 	
 	/*
@@ -47,7 +48,7 @@ public class Removals {
 		ListNode pointerOne = preNode;
 		ListNode pointerTwo = preNode;
 		
-		for(int i = 1; i <= n + 1; i++) {
+		for(int i = 0; i <= n; i++) {
 			pointerOne = pointerOne.next;
 		}
 		
@@ -66,20 +67,26 @@ public class Removals {
 	Given a sorted linked list, delete all duplicates such that each element appear only once.
 	*/
 	public ListNode deleteDuplicates(ListNode head) {
-		ListNode predecessor = head;
-		ListNode successor;
-		while (predecessor != null && predecessor.next != null) {
-			successor = predecessor.next;
-			while (successor != null && predecessor.val == successor.val) {
-				successor = successor.next;
-			}
-			predecessor.next = successor;
-			predecessor = successor;
+		ListNode preHead = new ListNode(0);
+		preHead.next = head;
+		
+		ListNode previous = preHead;
+		ListNode current = previous.next;
+		while(true) {
+			while(current != null && current.next != null && current.val == current.next.val)
+				current = current.next;
+			
+			previous.next = current;
+			if(current == null)
+				break;
+			
+			previous = current;
+			current = previous.next;
 		}
-
-		return head;
+		
+		return preHead.next;
 	}
-	
+
 	/*
 	Leetcode#82. Remove Duplicates from Sorted List
 	Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.
@@ -88,9 +95,10 @@ public class Removals {
 	*/
 	public ListNode deleteDuplicates2(ListNode head) {
 		ListNode preHead = new ListNode(0);
+		preHead.next = head;
 
-		ListNode pred = preHead;
-		ListNode current = head;
+		ListNode previous = preHead;
+		ListNode current = previous.next;
 		while(current != null) {
 			boolean unique = true;
 			while(current.next != null && current.val == current.next.val) {
@@ -99,13 +107,13 @@ public class Removals {
 			}
 			
 			if(unique) {
-				pred.next = current;
-				pred = pred.next;
+				previous.next = current;
+				previous = previous.next;
 			}
 
 			current = current.next;
-			pred.next = null;
 		}
+		previous.next = null;
 
 		return preHead.next;
 	}

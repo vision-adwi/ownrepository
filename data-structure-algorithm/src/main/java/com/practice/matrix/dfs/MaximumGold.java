@@ -1,4 +1,4 @@
-package com.practice.backtracking;
+package com.practice.matrix.dfs;
 /*
 Leetcode#1219. Path with Maximum Gold
 In a gold mine grid of size m * n, each cell in this mine has an integer representing the amount of gold in that cell, 0 if it is empty.
@@ -13,17 +13,19 @@ You can start and stop collecting gold from any position in the grid that has so
 */
 public class MaximumGold {
 	public int getMaximumGold(int[][] grid) {
-		int maxGoldCollect = 0;
-		for(int row = 0; row < grid.length; row++) {
-			for(int column = 0; column < grid[0].length; column++) {
+		int rows = grid.length;
+		int cols = grid[0].length;
+		
+		int max = 0;
+		for(int row = 0; row < rows; row++) {
+			for(int column = 0; column < cols; column++) {
 				if(grid[row][column] != 0) {
-					int goldCollect = maxGold(grid, row, column);
-					maxGoldCollect = Math.max(maxGoldCollect, goldCollect);	
+					max = Math.max(max, maxGold(grid, row, column));	
 				}
 			}
 		}
         
-		return maxGoldCollect;
+		return max;
     }
 	
 	private int maxGold(int[][] grid, int row, int column) {
@@ -43,15 +45,6 @@ public class MaximumGold {
 		return grid[row][column] + Math.max(left, Math.max(right, Math.max(top, bottom)));
 	}
 	
-	private int[][] cloneArray(int[][] source) {
-		int[][] destination = source.clone();
-		for(int row = 0; row < source.length; row++) {
-			destination[row] = source[row].clone();
-		}
-
-		return destination;
-	}
-	
 	public static void main(String[] s) {
 		//int[][] input = {{0,6,0},{5,8,7},{0,9,0}};
 		int[][] input = {
@@ -66,8 +59,7 @@ public class MaximumGold {
 			{19,10,0,0,34,0,2,0,0,27},
 			{0,0,0,0,0,34,0,0,0,0}
 		};
-		
-		
+			
 		MaximumGold maxGold = new MaximumGold();
 		System.out.println(maxGold.getMaximumGold(input));
 	}

@@ -6,6 +6,10 @@ Rotate the image by 90 degrees (clockwise).
 
 Note:
 You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.
+
+90  Degree - Row to col, vertical swap
+270 Degree - Row to col, horizontal swap
+180 Degree = horizontal swap, vertical swap
 */
 public class NintyDegree2D {
     public void rotate(int[][] matrix) {
@@ -18,13 +22,17 @@ public class NintyDegree2D {
         		matrix[j][i] = tmp;
         	}
         }
-        
-        for(int i = 0, j = dimension - 1; i < j; i++, j--) {
-        	for(int k = 0; k < dimension; k++) {
-        		int tmp = matrix[k][i];
-        		matrix[k][i] = matrix[k][j];
-        		matrix[k][j] = tmp;
+
+        int j = 0;
+        int k = dimension - 1;
+        while(j < k) {
+        	for(int i = 0; i < dimension; i++) {
+        		int tmp = matrix[i][k];
+        		matrix[i][k] = matrix[i][j];
+        		matrix[i][j] = tmp;
         	}
+        	
+        	j++; k--;
         }
     }
 }

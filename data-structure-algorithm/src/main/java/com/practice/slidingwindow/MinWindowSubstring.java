@@ -7,7 +7,31 @@ Leetcode#76. Minimum Window Substring
 Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
 */
 public class MinWindowSubstring {
-    public String minWindow(String s, String t) {
+	public String minWindow(String s, String t) {
+		int i = 0, j = 0;
+		CharSets charSets = new CharSets(t);
+		
+		int min = Integer.MAX_VALUE;
+		String result = "";
+		while(j < s.length()) {
+			char c = s.charAt(j++);
+			charSets.remove(c);
+			
+			while(charSets.exhausted()) {
+				if((j - i) < min) {
+					min = (j - i);
+					result = s.substring(i, j);
+				}
+
+				c = s.charAt(i++);
+				charSets.add(c);
+			}
+		}
+		
+		return result;
+	}
+	
+    public String minWindow_(String s, String t) {
     	CharSets charSets = new CharSets(t);
     	String result = s;
     	boolean found = false;
@@ -50,10 +74,12 @@ class CharSets {
 	
 	CharSets(String t) {
 		freqMap = new HashMap<>();
-		for(Character c : t.toCharArray()) {
-			Integer frequency = freqMap.getOrDefault(c, 0);
-			freqMap.put(c, ++frequency);	
-			++elements;
+		while(elements < t.length()) {
+			Character c = t.charAt(elements);
+			int frequency = freqMap.getOrDefault(c, 0);
+			freqMap.put(c, ++frequency);
+			
+			elements++;
 		}
 	}
 	
@@ -70,10 +96,10 @@ class CharSets {
 	void add(Character c) {
 		Integer frequency = freqMap.get(c);
 		if (frequency != null) {
-			if(frequency >= 0)
-				++elements;
-			
 			freqMap.put(c, ++frequency);
+			
+			if(frequency > 0)
+				++elements;
 		}
 	}
 	

@@ -86,6 +86,10 @@ public class MediumSoft {
 		return mem[0][prices.length - 1];
 	}
 	
+	/*
+	Leetcode#221. Maximal Square
+	Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+	*/ 
 	public int maximalSquare(char[][] matrix) {
 		int row = matrix.length;
 		int col = matrix[0].length;
@@ -120,12 +124,9 @@ public class MediumSoft {
 	}
 	
 	public int combinations(int n) {
-		if(n == 0 || n == 1 || n == 2)
+		if(n < 3)
 			return 1;
-		
-		if(n == 3)
-			return 2;
-		
+
 		int[] memory = new int[n + 1];
 
 		memory[0] = memory[1] = memory[2] = 1;

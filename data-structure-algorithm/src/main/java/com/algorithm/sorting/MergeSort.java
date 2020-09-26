@@ -23,8 +23,8 @@ public class MergeSort extends AbstractSort{
 	private void merge(int left, int middle, int right) {
 		int[] leftTmp = new int[(middle - left) + 2];
 		int[] rightTmp = new int[(right - middle) + 1];
-		for (int i = 0, j = left; j <= middle;) {
-			leftTmp[i++] = elements[j++];
+		for (int i = 0, j = left; j <= middle; i++, j++) {
+			leftTmp[i] = elements[j];
 		}
 		for (int i = 0, j = middle + 1; j <= right;) {
 			rightTmp[i++] = elements[j++];

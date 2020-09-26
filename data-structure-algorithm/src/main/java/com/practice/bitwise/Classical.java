@@ -12,9 +12,9 @@ public class Classical {
             carry = a & b;
             a = sum;
             b = carry << 1;
-        } while(carry != 0);
+        } while(b != 0);
         
-        return sum;
+        return sum; 
     }
     
 	/*

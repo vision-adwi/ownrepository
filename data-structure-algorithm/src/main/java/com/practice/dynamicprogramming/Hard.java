@@ -102,28 +102,27 @@ public class Hard {
 	Given a string s, find the longest palindromic subsequence's length in s. You may assume that the maximum length of s is 1000.
 	*/
 	public int lps(String word) {
-		int[][] mem = new int[word.length()][word.length()];
+		int len = word.length();
+		int[][] mem = new int[len][len];
 
-		for(int column = 0; column < word.length(); column++) {
-			for(int row = word.length() - 1; row >= 0; row--) {
-				if( row == column) {
-					mem[row][column] = 1;
-				}
-				else if( row > column) {
-					mem[row][column] = 0;
-				}
-				else {
-					if(word.charAt(row) == word.charAt(column)) {
-						mem[row][column] = 2 + mem[row + 1][column - 1];
-					}
-					else {
-						mem[row][column] = Math.max(mem[row][column - 1], mem[row + 1][column]);
+		for (int j = 0; j < len; j++) {
+			for (int i = len - 1; i >= 0; i--) {
+				if (i == j) {
+					mem[i][j] = 1;
+				} else if (i > j) {
+					mem[i][j] = 0;
+				} else {
+					if (word.charAt(i) == word.charAt(j)) {
+						if (mem[i + 1][j - 1] == (j - i - 1))
+							mem[i][j] = 2 + mem[i + 1][j - 1];
+					} else {
+						mem[i][j] = Math.max(mem[i][j - 1], mem[i + 1][j]);
 					}
 				}
 			}
 		}
-		
-		return mem[0][word.length() - 1];
+
+		return mem[0][len - 1];
 	}
 	
 	/*

@@ -14,6 +14,27 @@ public class IntersectionArrays {
 		Arrays.sort(nums1);
 		Arrays.sort(nums2);
 		
+		List<Integer> intersection = new ArrayList<>();
+		int i = 0, j = 0;
+		while(i < nums1.length && j < nums2.length) {
+			if(nums1[i] == nums2[j]) {
+				if(intersection.isEmpty() || intersection.get(intersection.size() - 1) != nums1[i]) {
+					intersection.add(nums1[i]);
+				}
+
+				++i; ++j;
+			}
+			else if(nums1[i] > nums2[j]) {
+				++j;
+			}
+			else {
+				++i;
+			}
+		}
+		
+		return intersection.stream()
+				.mapToInt(p -> p.intValue()).toArray();
+/*		
 		List<Integer> result = new ArrayList<>();
 		for(int i = 0, j = 0; i < nums1.length && j < nums2.length;) {
 			while(i < (nums1.length - 1) && nums1[i] == nums1[i+1])
@@ -36,7 +57,7 @@ public class IntersectionArrays {
 		
 		return result.stream()
 	        	.mapToInt(a -> a.intValue())
-	        	.toArray();
+	        	.toArray();*/
 	}
 	
     public int[] intersection(int[] nums1, int[] nums2) {

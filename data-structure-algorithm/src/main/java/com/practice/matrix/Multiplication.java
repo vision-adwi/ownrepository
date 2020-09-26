@@ -15,7 +15,7 @@ public class Multiplication {
 		
 		int[][] matrixA = new int[m][n];
 		int[][] matrixB = new int[n][p];
-		int[][] product = new int[m][p];
+		//int[][] product = new int[m][p];
 		
 		System.out.println("Enter the elements of Matrix A");
 		Util.takeMatrixInput(matrixA, scanner);
@@ -30,16 +30,22 @@ public class Multiplication {
 		Util.display(matrixB);
 		
 		System.out.println("Product");
-		product(matrixA, matrixB, product);
+		int[][] product = product(matrixA, matrixB);
 		Util.display(product);
 	}
 
-	private static void product(int[][] matrixA, int[][] matrixB, int[][] product) {
-		for(int row = 0; row < product.length; row++) {
-			for(int column = 0; column < product[0].length; column++) {
+	private static int[][] product(int[][] matrixA, int[][] matrixB) {
+		int rows = matrixA.length;
+		int cols = matrixB[0].length;
+		
+		int[][] product = new int[rows][cols];
+		for(int row = 0; row < rows; row++) {
+			for(int column = 0; column < cols; column++) {
 				product[row][column] = calculate(matrixA, matrixB, row, column);
 			}
 		}
+		
+		return product;
 	}
 	
 	private static int calculate(int[][] matrixA, int[][] matrixB, int row, int column) {
@@ -48,5 +54,5 @@ public class Multiplication {
 			sum = sum + (matrixA[row][i] * matrixB[i][column]); 
 		}
 		return sum;
-	}
+	} 
 }

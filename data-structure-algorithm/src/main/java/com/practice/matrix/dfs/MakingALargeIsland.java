@@ -1,27 +1,11 @@
-package com.practice.matrix;
+package com.practice.matrix.dfs;
 
 /* Leetcode #827. Making A Large Island
 In a 2D grid of 0s and 1s, we change at most one 0 to a 1.
 After, what is the size of the largest island? (An island is a 4-directionally connected group of 1s).
  */
 public class MakingALargeIsland {
-	public static void main(String[] args) {
-		/*int[][] input = { 	{ 1, 1, 0, 1, 0 }, 
-							{ 1, 1, 0, 1, 0 }, 
-							{ 1, 1, 0, 0, 0 }, 
-							{ 0, 0, 0, 0, 0 }, 
-							{ 0, 0, 1, 0, 1 },
-							{ 1, 1, 1, 0, 0 } };*/
-		
-		int[][] input = { 	{1, 1}, 
-				           { 1, 0 } };
-
-		// Apply modified DFS
-		int areaOfBiggestIsland = largestIsland(input);
-		System.out.println("Area of biggest island = " + areaOfBiggestIsland);
-	}
-
-	private static int largestIsland(int[][] grid) {
+	public static int largestIsland(int[][] grid) {
 		int max = 0;
 		int marker = 2;
 		boolean allOnes = true;
@@ -58,4 +42,18 @@ public class MakingALargeIsland {
 		return 1 + count;
 	}
 
+	public static void main(String[] args) {
+		/*int[][] input = { 	{ 1, 1, 0, 1, 0 }, 
+							{ 1, 1, 0, 1, 0 }, 
+							{ 1, 1, 0, 0, 0 }, 
+							{ 0, 0, 0, 0, 0 }, 
+							{ 0, 0, 1, 0, 1 },
+							{ 1, 1, 1, 0, 0 } };*/
+		
+		int[][] input = { 	{1, 1}, 
+				           { 1, 0 } };
+
+		int areaOfBiggestIsland = largestIsland(input);
+		System.out.println("Area of biggest island = " + areaOfBiggestIsland);
+	}
 }

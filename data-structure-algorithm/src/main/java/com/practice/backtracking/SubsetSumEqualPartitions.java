@@ -13,7 +13,7 @@ public class SubsetSumEqualPartitions {
 		//int[] data = {7, 6, 9, 5, 19, 33, 104};
 		
 		SubsetSumEqualPartitions subset = new SubsetSumEqualPartitions();
-		System.out.println("Is subset sum can be equally paritioned - " + subset.canPartition(data));
+		System.out.println("Is subset sum can be equally paritioned - " + subset.canPartition_dc(data));
 	}
 	private boolean subset(int[] input, int sum, int index, int check) {
 		if(sum > check || index >= input.length)

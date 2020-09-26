@@ -1,58 +1,57 @@
 package com.practice.matrix;
+
 /*
 Leetcode#885. Spiral Matrix III
 */
 public class SpiralMatrix3 {
     public int[][] spiralMatrixIII(int R, int C, int r0, int c0) {
-    	int[][] coordinates = new int[R*C][2];
+    	int[][] coordinates = new int[R * C][2];
     	int index = 0;
     	
-    	int right = c0 + 1;
-    	int bottom = r0 + 1;
-    	int left = c0 - 1;
-    	int top = r0 - 1;
+    	int right = c0;
+    	int bottom = r0;
+    	int left = c0;
+    	int top = r0;
     	
-    	int row = r0;
-    	int column = c0 - 1;
+    	c0--;
     	while(true) {
-      		while(++column <= right) {
-    			if(row >= 0 && row < R && column >= 0 && column < C)
-    				coordinates[index++] = new int[] {row, column};
-    		}
-    		if(index == coordinates.length) break;
-    		
-    		--column;
-    		while(++row <= bottom) {
-    			if(row >= 0 && row < R && column >= 0 && column < C)
-    				coordinates[index++] = new int[] {row, column};
-    		}
-    		if(index == coordinates.length) break;
-    		
-    		--row;
-    		while(--column >= left) {
-    			if(row >= 0 && row < R && column >= 0 && column < C)
-    				coordinates[index++] = new int[] {row, column};
-    		}
-    		if(index == coordinates.length) break;
-    		
-    		++column;   		
-    		while(--row >= top) {
-    			if(row >= 0 && row < R && column >= 0 && column < C)
-    				coordinates[index++] = new int[] {row, column};
-    		}
-    		if(index == coordinates.length) break;
-    		
-    		++row;
-    		
     		right++; bottom++; left--; top--;
+    		while(++c0 <= right) {
+    			if(r0 >= 0 && r0 < R && c0 >= 0 && c0 < C)
+    				coordinates[index++] = new int[] {r0, c0};
+    		}
+    		if(index == coordinates.length) break;
+    		
+    		c0--;
+    		while(++r0 <= bottom) {
+    			if(r0 >= 0 && r0 < R && c0 >= 0 && c0 < C)
+    				coordinates[index++] = new int[] {r0, c0};
+    		}
+    		if(index == coordinates.length) break;
+    		
+    		r0--;
+    		while(--c0 >= left) {
+    			if(r0 >= 0 && r0 < R && c0 >= 0 && c0 < C)
+    				coordinates[index++] = new int[] {r0, c0};
+    		}
+    		if(index == coordinates.length) break;
+    		
+    		c0++;
+    		while(--r0 >= top) {
+    			if(r0 >= 0 && r0 < R && c0 >= 0 && c0 < C)
+    				coordinates[index++] = new int[] {r0, c0};
+    		}
+    		if(index == coordinates.length) break;
+    		
+    		r0++;
     	}
-        
+    	
     	return coordinates;
     }
-    
-    
+
     public static void main(String[] s) {
     	SpiralMatrix3 matrix = new SpiralMatrix3();
+    	
     	matrix.spiralMatrixIII(1, 4, 0, 0);
     }
     

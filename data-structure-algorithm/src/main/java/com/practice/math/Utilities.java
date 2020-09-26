@@ -5,7 +5,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Utilities {
+public class Utilities {    
+    /*
+    Leetcode#405. Convert a Number to Hexadecimal
+    Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used.
+    */
+    public String toHex(int num) {
+    	int octets = 8;
+    	char[] hex = new char[octets];
+    	
+    	int mask = 0b1111;
+    	while(--octets >= 0) {
+    		int val = num & mask;
+    		hex[octets] = (char)(((val / 10) == 1 ? 97 : 48) + (val % 10));
+    		num = num >> 4;
+    	}
+        
+    	int index = 0;
+    	while(index < 7 && hex[index] == '0') {
+    		index++;
+    	}
+    	
+    	return new String(hex, index, (8 - index));
+    }
+    
     /*
     Leetcode#1344. Angle Between Hands of a Clock
     Given two numbers, hour and minutes. Return the smaller angle (in degrees) formed between the hour and the minute hand.
@@ -15,8 +38,7 @@ public class Utilities {
         double hour_hand_position = ((hour % 12) * DEGREE_IN_AN_HOUR) + (minutes * DEGREE_ADVANCE_PER_MIN);
         
         double angle = Math.abs(min_hand_position - hour_hand_position);
-        double opp_angle = 360 - angle;
-        return Math.min(angle, opp_angle);      		
+        return Math.min(angle, (360 - angle));      		
     }
 	
 	/*
@@ -44,7 +66,7 @@ public class Utilities {
 	public static int dayOfYear(String date) {
 		String[] ymd = date.split("-");
 		return daysOfTheCurrentYear(Integer.parseInt(ymd[2]), Integer.parseInt(ymd[1]), 
-				(isLeapYear(Integer.parseInt(ymd[0]))));
+				(Integer.parseInt(ymd[0])));
     }
 	
 	/*
@@ -62,7 +84,7 @@ public class Utilities {
     		return "";
     	}
         int yearDiff = year - 1971;
-        int currentYearDays = daysOfTheCurrentYear(day, month, isLeapYear(year));
+        int currentYearDays = daysOfTheCurrentYear(day, month, year);
         int leapDays = (yearDiff + 2) / 4;
         
         int totalDays = (yearDiff * 365) + leapDays + currentYearDays;
@@ -71,18 +93,15 @@ public class Utilities {
     }
 	
 	//Leetcode#13. Roman to Integer
-	public static int romanToInt(String s) {
-		int index = 0;
-		Character ch;
-
+	public static int romanToInt(String s) {		
 		int intValue = 0;
-		while (index < s.length()) {
-			ch = s.charAt(index);
+		for (int index = 0; index < s.length();) {
+			Character ch = s.charAt(index);
 			if ((index + 1) < s.length() && predMap.keySet().contains(ch) && isPred(s, index)) {
 				intValue = intValue + (intMap.get(s.charAt(++index)) - intMap.get(ch));
 			} else {
 				intValue = intValue + intMap.get(ch);
-			}
+			}	
 			index++;
 		}
 
@@ -139,12 +158,12 @@ public class Utilities {
 		return false;
 	}
 	
-    private static int daysOfTheCurrentYear(int day, int month, boolean isLeapYear) {
+    private static int daysOfTheCurrentYear(int day, int month, int year) {
     	int totalDays = 0;
         for(int i = 0; i < month - 1; i++) {
         	totalDays = totalDays + monthDays[i];
         }
-        if(isLeapYear && (month > 2))
+        if(isLeapYear(year) && (month > 2))
         	totalDays++;
         
         return totalDays + day;
